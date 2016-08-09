@@ -1,8 +1,7 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_initArray = _this select 3;
 	_delivery = _this select 1;
 	_pickup = _this select 2;
@@ -28,7 +27,7 @@
 				playsound "watchdog_word_over";sleep 0.5;
 				LHD_RadioInUse = false;
 
-				onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\land_transport_air.sqf'; onMapSingleClick ''; true;";
+				onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;";
 		};
 
 		if (_type == 1) exitwith {//Land base player has listed location for pickup
@@ -71,7 +70,7 @@
 				playsound "watchdog_word_over";sleep 0.5;
 				LHD_RadioInUse = false;
 
-				onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
+				onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
 		};
 
 		if (_type == 2) exitwith {//Land base player has listed location for delivery

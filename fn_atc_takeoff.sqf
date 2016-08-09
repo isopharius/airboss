@@ -1,15 +1,14 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_array = _this select 3;
 	_type = _array select 0;
 
 //Add Actions
 	player removeaction LHD_Action_Takeoff;
 	player removeaction LHD_Action_Takeoff_Priority;
-	call airboss_fnc_atc_takeoffcancel;
+	LHD_Action_Takeoff_Cancel = player addAction ["FLYCO > Cancel Takeoff", airboss_fnc_atc_takeoff_cancel,[],10,false];
 
 //Script Settings
 	_digitDelay = 0.4;
@@ -52,14 +51,15 @@
 		//Priority
 		if ((count LHDPattern) > 0) then {
 			_PatternCurrent = LHDPattern select 0;
-			_NewLHDPattern = [_PatternCurrent] + [_vehicle];
+			[_PatternCurrent] pushback _vehicle;
+			_NewLHDPattern = [_PatternCurrent];
 			if ((count LHDPattern) > 1) then {
-				_PatternOthers = LHDPattern - [_PatternCurrent];
-				_NewLHDPattern = _NewLHDPattern + _PatternOthers;
+				LHDPattern deleteAt 0;
+				_NewLHDPattern append LHDPattern;
 			};
 			LHDPattern = _NewLHDPattern;
 		} else {
-			LHDPattern = [_vehicle]
+			LHDPattern = [_vehicle];
 		};
 		LHD_Emergency_Call = [ATC_callsign,ATC_callsignNo];
 		publicVariable "LHD_Emergency_Call";
@@ -70,7 +70,6 @@
 	publicVariable "LHDPattern";
 	LHD_TakeoffRequest = true;
 	_Position = LHDPattern find _vehicle;
-
 
 	if (_Position > 1) then {
 		//Wait for clearance, will be a while

@@ -1,8 +1,7 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_siren = _this select 0; //0 = , //1 =
 
 //Script Settings

@@ -1,10 +1,9 @@
 //Input Variables
 	_windDirection = ((((wind select 0) atan2 (wind select 1)) + 360) mod 360);
 	_windSpeed = sqrt ( ( (wind select 0)*(wind select 0) ) + ( (wind select 1)*(wind select 1) ) + ( (wind select 2)*(wind select 2) ) ) * 1.94384449;
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 
 //Script Settings
 	_digitDelay = 0.3;

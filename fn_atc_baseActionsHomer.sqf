@@ -4,6 +4,8 @@
 		ATC_ChangeIntentions = player addAction ["HOMER > Change Intentions", airboss_fnc_atc_controller, [4], 18, false, true];
 	//};
 	ATC_Homer_AirSitrep = player addAction ["HOMER > Request Air Sitrep", airboss_fnc_atc_controller, [5], 17, false, true];
+
+	/*
 	if ((LHD_Intention == 2) and (_targets == 0)) then {
 		ATC_Homer_TrgAerial = player addAction ["HOMER > Aerial Training Target", airboss_fnc_atc_controller, [7,"aerial"], 17, false, true];
 		ATC_Homer_TrgGround = player addAction ["HOMER > Ground Training Target", airboss_fnc_atc_controller, [7,"ground"], 17, false, true];
@@ -20,3 +22,4 @@
 		_baseNo = _baseNo + 1;
 		ATC_Action_VectorBase set [count ATC_Action_VectorBase,_action];
 	} forEach Bases;
+	*/

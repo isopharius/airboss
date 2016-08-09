@@ -1,8 +1,7 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_loon1 = position lhd;
 	_loon2 = position _vehicle;
 	_dir = direction _vehicle;
@@ -13,7 +12,7 @@
 	player removeaction LHD_Action_Landing;
 	player removeaction LHD_Action_Landing_Priority;
 	player removeaction ATC_TransferToHomer;
-	_vehicle call airboss_fnc_atc_landingcancel;
+	LHD_Action_Landing_Cancel = player addAction ["FLYCO > Cancel Landing", airboss_fnc_atc_landing_cancel,[],10,false];
 
 //Script Settings
 	_digitDelay = 0.4;
@@ -59,10 +58,11 @@ if ((_inPattern < _maxVehicles) or (_type == 1)) then {
 		//Priority
 		if ((count LHDPattern) > 0) then {
 			_PatternCurrent = LHDPattern select 0;
-			_NewLHDPattern = [_PatternCurrent] + [_vehicle];
+			[_PatternCurrent] pushback _vehicle;
+			_NewLHDPattern = [_PatternCurrent];
 			if ((count LHDPattern) > 1) then {
-				_PatternOthers = LHDPattern - [_PatternCurrent];
-				_NewLHDPattern = _NewLHDPattern + _PatternOthers;
+				LHDPattern deleteAt 0;
+				_NewLHDPattern append LHDPattern;
 			};
 			LHDPattern = _NewLHDPattern;
 		} else {
@@ -203,7 +203,7 @@ if ((_inPattern < _maxVehicles) or (_type == 1)) then {
 		};
 
 		//Perform post-landing actions to return to normal state
-			LHDPattern = LHDPattern - [(vehicle player)];
+			LHDPattern = LHDPattern - [_vehicle];
 			publicVariable "LHDPattern";
 		//Reset LHD Vehicle Variables
 			LHD_PatternWaypointComp = false;

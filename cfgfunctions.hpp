@@ -6,6 +6,7 @@ class airboss
             file = "\airboss";
 
             class GridToStr {};
+            class lhd_checkpos {};
             class lhdinit {};
             class lhdmarkers;
             class lhdsiren {};
@@ -28,14 +29,13 @@ class airboss
             class atc_landing {};
             class atc_landing_cancel {};
             class atc_landingapproach {};
-            class atc_landingcancel {};
             class atc_nearestVector {};
             class atc_position_base {};
             class atc_position_ship {};
             class atc_removePilotActions {};
+            class atc_safetakeoff {};
             class atc_takeoff {};
             class atc_takeoff_cancel {};
-            class atc_takeoffcancel {};
             class atc_taskalive {};
             class atc_taskalivetask {};
             class atc_tasking_closeairsupport {};

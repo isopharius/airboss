@@ -1,8 +1,7 @@
 	private["_vehicle","_isOnDeck"];
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	ATC_TransferToHomer = player addAction ["FLYCO > Transfer to HOMER", airboss_fnc_atc_controller, [3], 20, false, true];
 	ATC_TransferToWatchdog = player addAction ["FLYCO > Transfer to WATCHDOG", airboss_fnc_land_controller, [1], 19, false, true];
 	LHD_Action_Weather = player addAction ["FLYCO > Request Weather Report", airboss_fnc_atc_weather,[],18,false];

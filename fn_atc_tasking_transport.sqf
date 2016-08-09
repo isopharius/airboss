@@ -1,15 +1,17 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_loon1 = position lhd;
 	_loon2 = position _vehicle;
 	_dir = direction _vehicle;
 	_initArray = _this select 3;
 	_type = _initArray select 0; //0 = Inital Contact //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
-	player removeaction LHD_Action_ContactControl;
+	if (!isnil "LHD_Action_ContactControl") then {
+		player removeaction LHD_Action_ContactControl;
+		LHD_Action_ContactControl = nil;
+	};
 
 //Script Settings
 	_digitDelay = 0.4;

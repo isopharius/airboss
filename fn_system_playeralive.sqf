@@ -1,9 +1,6 @@
 		if (alive player) then {
 			//init
-			_vehicle = objectParent player;
-			if (_vehicle == objNull) then {
-				_vehicle = player;
-			};
+			_vehicle = vehicle player;
 
 			if((_vehicle != player) and (player == driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
 

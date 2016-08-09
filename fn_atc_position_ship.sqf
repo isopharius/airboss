@@ -1,10 +1,9 @@
 //Get Variables
 	_loon1 = position lhd;
 	_loon2 = position player;
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_dir = direction _vehicle;
 
 //Script Settings

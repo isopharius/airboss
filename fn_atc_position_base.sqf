@@ -4,10 +4,9 @@
 	_baseName = BaseNames select _baseNo;
 
 	_loon1 = (Bases select _BaseNo) select 0;
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_dir = direction _vehicle;
 
 //Script Settings

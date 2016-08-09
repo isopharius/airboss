@@ -1,8 +1,7 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_initArray = _this select 3;
 	_delivery = _this select 1;
 	_pickup = _this select 2;

@@ -41,5 +41,5 @@
 							};
 							//hintsilent format ["%1",_distance];
 							sleep 0.5;
-							call airboss_fnc_landingapproach;
+							call airboss_fnc_atc_landingapproach;
 						};

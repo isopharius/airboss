@@ -1,8 +1,6 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
 	_loon1 = position lhd;
 	_loon2 = position _vehicle;
 	_dir = direction _vehicle;
@@ -10,7 +8,10 @@
 	_id = _this select 2;
 	_type = _initArray select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
-	player removeaction LHD_Action_ContactControl;
+	if (!isnil "LHD_Action_ContactControl") then {
+		player removeaction LHD_Action_ContactControl;
+		LHD_Action_ContactControl = nil;
+	};
 
 //Script Settings
 	_digitDelay = 0.4;
@@ -47,7 +48,7 @@
 					_callsignVehicles = _callsignArray select 2;
 					_callsignPos = (count _callsignVehicles);
 					ATC_callsignNo = _callsignPos + 1;
-					_callsignVehicles = _callsignVehicles +  [_vehicle];
+					_callsignVehicles pushback _vehicle;
 					_callsignArrayNew = [(_callsignArray select 0),(_callsignArray select 1),_callsignVehicles];
 					ATC_Callsigns set [_callsignNo,_callsignArrayNew];
 					publicVariable "ATC_Callsigns";
@@ -96,7 +97,7 @@
 			_intention = _initArray select 1;
 			_intentionArray = ATC_Intentions select _intention;
 			_VehiclesArray = _intentionArray select 1;
-			_VehiclesArray = _VehiclesArray + [_vehicle];
+			_VehiclesArray pushback _vehicle;
 			_NewATC_Intentions = ATC_Intentions;
 
 			//Remove any old intentions for the vehicle
@@ -105,8 +106,10 @@
 				//Cycle through intention listings and make sure vehicle is removed
 				_intentionChange = _x;
 				_VehiclesChange = _intentionChange select 1;
-				_VehiclesChange = _VehiclesChange - [_vehicle];
-				_intentionChange set [1,_VehiclesChange];
+				if (_vehicle in _VehiclesChange) then {
+					_VehiclesChange = _VehiclesChange - [_vehicle];
+					_intentionChange set [1,_VehiclesChange];
+				};
 				_NewATC_Intentions set [_cursor,_intentionChange];
 				_cursor = _cursor + 1;
 			} foreach ATC_Intentions;
@@ -273,6 +276,7 @@
 			_vehicle vehicleRadio "flyco_word_out";sleep 0.1;
 			LHD_RadioInUse = false;
 		};
+/*
 		if (_type == 7) exitwith {//Request an aerial training target
 			//Pick a target start
 			_numTargets = count LHD_TrainingTargetMarkers;
@@ -297,7 +301,7 @@
 				_wp = _group addWaypoint [_targetPos, 10];
 				_wp setWaypointType "HOLD";
 			};
-			LHD_TrgTargets = LHD_TrgTargets + [_target];
+			LHD_TrgTargets pushback _target;
 
 			//add watch to the target
 			//_eh = _target addEventHandler ["killed", {}];
@@ -377,7 +381,6 @@
 			deletevehicle _target;
 		};
 
-/*
 		if (_type == 8) exitwith {//Load Cargo
 			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 			_vehicle vehicleRadio "flyco_msg_cargoload_1";sleep 0.3;

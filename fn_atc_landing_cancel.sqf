@@ -1,8 +1,7 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 
 //Add Actions
 	player removeaction LHD_Action_Landing_Cancel;

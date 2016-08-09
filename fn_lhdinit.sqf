@@ -135,7 +135,7 @@ if (!isdedicated) then {
 		ATC_Intentions = [
 			["Unknown",[],"unknown"],
 			["Unavailable",[],"unavailable"],
-			//["Training",[],"training"],
+			["Training",[],"training"],
 			["Transport",[],"transport"],
 			["Cargo Supply",[],"cargosupply"],
 			["Gunship Support",[],"gunshipsupport"],
@@ -185,7 +185,10 @@ if (!isdedicated) then {
 			"Land_Cargo40_military_green_F",
 			"Land_FMradio_F"
 		];
-		LHD_SpawnableVehicles = _lhdvehicles + _lhdcrates;
+
+		_lhdvehicles append _lhdcrates;
+
+		LHD_SpawnableVehicles = _lhdvehicles;
 
 	call airboss_fnc_lhdmarkers; //LHD markers
 	call airboss_fnc_system_controlRoom; //for pilots

@@ -1,7 +1,6 @@
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	if ((LHD_Controlled) and (alive _vehicle)) then { //Player is controlled
 
 		// --- EMERGENCY NOTIFICATION --- //

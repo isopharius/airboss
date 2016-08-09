@@ -1,8 +1,7 @@
 //Get Variables
-	_vehicle = objectParent player;
-	if (_vehicle == objNull) then {
-		_vehicle = player;
-	};
+_vehicle = vehicle player;
+
+
 	_initArray = _this select 3;
 	_id = _this select 2;
 	_type = _initArray select 0; //0 = Inital Contact
@@ -41,7 +40,7 @@
 						_callsignVehicles = _callsignArray select 2;
 						_callsignPos = (count _callsignVehicles);
 						callsignNo = _callsignPos + 1;
-						_callsignVehicles = _callsignVehicles +  [_vehicle];
+						_callsignVehicles pushback [_vehicle];
 						_callsignArrayNew = [(_callsignArray select 0),(_callsignArray select 1),_callsignVehicles];
 						Callsigns set [_callsignNo,_callsignArrayNew];
 						publicVariable "Callsigns";
