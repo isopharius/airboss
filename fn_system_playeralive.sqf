@@ -36,7 +36,7 @@
 					LHD_Intention = 0;
 					call airboss_fnc_atc_removePilotActions;
 
-			} else { //Player is not driver of vehicle
+			} else { //Player is not driver
 
 				//ground action
 				if (isnil "Action_ContactControl") then {
