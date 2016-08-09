@@ -2,6 +2,7 @@
 ArmA3 LHD airboss
 
 //spawnable vehicles example
+
 LHD_SpawnableVehicles = [
 	"CUP_B_AV8B_LGB",
 	"CUP_B_AV8B_Hydra19",
