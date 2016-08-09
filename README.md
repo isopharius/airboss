@@ -1,5 +1,5 @@
 # airboss
-an ArmA3 LHD airboss mod
+ArmA3 LHD airboss ported from http://www.armaholic.com/page.php?id=24631
 
 CUP LHD required
 
