@@ -1,5 +1,7 @@
 # airboss
-ArmA3 LHD airboss
+an ArmA3 LHD airboss mod
+
+CUP LHD required
 
 //spawnable vehicles example
 
