@@ -1,7 +1,7 @@
 //Get Variables
-	_loon1 = position lhd;
-	_loon2 = position player;
-_vehicle = vehicle player;
+	_loon1 = getPosWorld lhd;
+	_loon2 = getPosWorld player;
+	_vehicle = vehicle player;
 
 
 	_dir = direction _vehicle;

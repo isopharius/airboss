@@ -1,9 +1,7 @@
 //Get Variables
 _vehicle = vehicle player;
-
-
-	_loon1 = position lhd;
-	_loon2 = position _vehicle;
+	_loon1 = getPosWorld lhd;
+	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
 	_initArray = _this select 3;
 	_type = _initArray select 0; //0 = Inital Contact //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
@@ -17,14 +15,13 @@ _vehicle = vehicle player;
 	_digitDelay = 0.4;
 	_sentenceDelay = 1;
 	_maxDigit = ATC_maxDigit;
-	_pickup = position player;
-	_delivery = position player;
+	_pickup = getPosWorld player;
+	_delivery = _pickup;;
 	_pax = 0;
 	_LandCallsign = [];
 	_newTask = [];
 	_nearDistance = 100;
 	_distanceR = 0;
-
 	_WithinRange = 2000;
 
 		if (_type == 0) then { // Action Air Strike Tasking
@@ -109,7 +106,7 @@ _vehicle = vehicle player;
 
 						//Give Bearing
 						_loon1 = _pickup;
-						_loon2 = position _vehicle;
+						_loon2 = getPosWorld _vehicle;
 						_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
 						_hdg = round((_hdg + 360) mod 360);
 
@@ -184,8 +181,8 @@ _vehicle = vehicle player;
 			ATC_CancelTask = true;
 			_cursor = 0;
 			_raisedBy = player;
-			_pickup = position player;
-			_delivery = position player;
+			_pickup = getPosWorldgetPosWorld player;
+			_delivery = getPosWorld player;
 			_pax = 0;
 			_LandCallsign = [];
 			_newTask = [];

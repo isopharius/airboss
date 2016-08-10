@@ -41,9 +41,9 @@
 				};
 
 				//debarkation action
-				if ((!acemod) and (position player in LHD_Location)) then {
+				if ((!acemod) and (getPosWorld player in LHD_Location)) then {
 					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, [], 7, false, true];
-					waitUntil{!(getPos player in LHA_Location)};
+					waitUntil{!(getPosWorld player in LHA_Location)};
 					player removeAction LHD_Action_DebarkationControl;
 				};
 			};

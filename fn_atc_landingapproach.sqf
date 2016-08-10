@@ -35,8 +35,7 @@
 								LHD_RadioInUse = false;
 							};
 							//Check to see if landed
-							_vehpos = getPosASL _vehicle;
-							if ((speed _vehicle < 1) and (getPos player in LHD_Deck) and LHD_IsLanding) then {
+							if ((speed _vehicle < 1) and (getPosWorld player in LHD_Deck) and LHD_IsLanding) then {
 								LHD_HasLanded = true;
 							};
 							//hintsilent format ["%1",_distance];

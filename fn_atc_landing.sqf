@@ -1,9 +1,8 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
-	_loon1 = position lhd;
-	_loon2 = position _vehicle;
+	_loon1 = getPosWorld lhd;
+	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
 	_initArray = _this select 3;
 	_type = _initArray select 0; //0 = Priority landing
@@ -145,7 +144,7 @@ if ((_inPattern < _maxVehicles) or (_type == 1)) then {
 
 		//calc heading to ship
 			_loon1 = _curVector;
-			_loon2 = position player;
+			_loon2 = getPosWorld player;
 			_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
 			_hdg = round((_hdg + 360) mod 360);
 
@@ -229,7 +228,7 @@ if ((_inPattern < _maxVehicles) or (_type == 1)) then {
 };
 //Remove all old waypoints
 	{
-		_x setWPpos (position player);
+		_x setWPpos (getPosWorld player);
 		sleep 1;
 		deletewaypoint _x;
 	} foreach waypoints (group player);

@@ -83,7 +83,7 @@
 
 				//calc heading to ship
 					_loon1 = _curVector;
-					_loon2 = position player;
+					_loon2 = getPosWorld player;
 					_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
 					_hdg = round((_hdg + 360) mod 360);
 
@@ -100,10 +100,10 @@
 
 					//Set New position
 					_loon1 =_curVector;
-					_loon2 = position player;
+					_loon2 = getPosWorld player;
 
 					//Set New Distance
-					_distance = round((_curVector distance (position _vehicle)) / 100) * 100;
+					_distance = round((_curVector distance _loon2) / 100) * 100;
 
 					//Set New Heading
 					_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
@@ -194,16 +194,16 @@
 
 					//Set New position
 					_loon1 = _curVector;
-					_loon2 = position player;
+					_loon2 = getPosWorld player;
 
 					//Set New Distance
-					_distance = round((_curVector distance (position _vehicle)) / 100) * 100;
+					_distance = round((_curVector distance (getPosWorld _vehicle)) / 100) * 100;
 
 				if ((LHD_IsLanding) and (_distance < 400)) then {
 					LHD_OnFinals = true;
 					//Is at gate, advise
-					_loon1 = position lhd;
-					_loon2 = position player;
+					_loon1 = getPosWorld lhd;
+					_loon2 = getPosWorld player;
 					//Set New Heading
 					_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
 					_hdg = round((_hdg + 360) mod 360);
@@ -213,9 +213,9 @@
 					_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
 
 					//Set New Distance
-					_distance = round((position lhd distance (position _vehicle)) / 100) * 100;
+					_distance = round((_loon1 distance _loon2) / 100) * 100;
 
-					_wp = group player addWaypoint [position lhd,_nearDistance];
+					_wp = group player addWaypoint [_loon1,_nearDistance];
 
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 					_vehicle vehicleRadio "flyco_word_atthegate";sleep 0.8;

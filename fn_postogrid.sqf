@@ -25,8 +25,8 @@ switch (typename _this) do
 	};
 	//--- Unit
 	case "OBJECT": {
-		_x = position _this select 0;
-		_y = position _this select 1;
+		_x = getPosWorld _this select 0;
+		_y = getPosWorld _this select 1;
 	};
 	//--- Marker
 	case "STRING": {

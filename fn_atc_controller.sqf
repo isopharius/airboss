@@ -1,8 +1,8 @@
 //Get Variables
 _vehicle = vehicle player;
 
-	_loon1 = position lhd;
-	_loon2 = position _vehicle;
+	_loon1 = getPosWorld lhd;
+	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
 	_initArray = _this select 3;
 	_id = _this select 2;
@@ -66,7 +66,7 @@ _vehicle = vehicle player;
 			_vehicle vehicleRadio format ["homer_callsign_%1",ATC_callsign];
 			_vehicle vehicleRadio format ["homer_digit_%1",ATC_callsignNo];sleep 0.5;
 
-			_isOnDeck = getPos _vehicle in LHD_Deck;
+			_isOnDeck = getPosWorld _vehicle in LHD_Deck;
 
 			//if player on deck, transfer to FLYCO
 			if (!_isOnDeck) then {
