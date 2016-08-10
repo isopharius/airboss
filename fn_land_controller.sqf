@@ -40,7 +40,7 @@ _vehicle = vehicle player;
 						_callsignVehicles = _callsignArray select 2;
 						_callsignPos = (count _callsignVehicles);
 						callsignNo = _callsignPos + 1;
-						_callsignVehicles pushback [_vehicle];
+						_callsignVehicles pushback _vehicle;
 						_callsignArrayNew = [(_callsignArray select 0),(_callsignArray select 1),_callsignVehicles];
 						Callsigns set [_callsignNo,_callsignArrayNew];
 						publicVariable "Callsigns";
