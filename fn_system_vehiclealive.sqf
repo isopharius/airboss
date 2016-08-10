@@ -14,7 +14,7 @@
 								_vehicle vehicleRadio "homer_word_over";sleep 0.1;
 								LHD_RadioInUse = false;
 								LHD_ControlWarning = LHD_ControlWarning + 1;
-								sleep 15;
+								sleep 20;
 							} else {
 								waitUntil{!LHD_RadioInUse};
 								LHD_RadioInUse = true;
@@ -23,7 +23,7 @@
 								_vehicle vehicleRadio "homer_word_over";sleep 0.1;
 								LHD_RadioInUse = false;
 								LHD_ControlWarning = LHD_ControlWarning + 1;
-								sleep 25;
+								sleep 30;
 							};
 						};
 
