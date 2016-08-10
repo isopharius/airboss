@@ -18,7 +18,7 @@ if (!isdedicated) then {
 	if (acemod) then {
 		LHD_radio = false;
 
-		_lhdradio = ["lhdradio","Airboss radio ON/OFF","",{if (LHD_radio = false) then {LHD_radio = true; hint "RADIO ON"} else {LHD_radio = false; hint "RADIO OFF"}},true] call ace_interact_menu_fnc_createAction;
+		_lhdradio = ["lhdradio","Airboss radio ON/OFF","",{if (!LHD_radio) then {LHD_radio = true; hint "RADIO ON"} else {LHD_radio = false; hint "RADIO OFF"}},true] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lhdradio] call ace_interact_menu_fnc_addActionToObject;
 
 		_landcontrol = ["landcontrol","Contact Land Controller","",{[0] spawn airboss_fnc_land_controller},{(LHD_radio) and (ControllerActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
