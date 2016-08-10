@@ -13,6 +13,20 @@ if (isserver) then {
 
 if (!isdedicated) then {
 	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));
+	if (acemod) then {
+		LHD_radio = false;
+
+		_lhdradio = ["lhdradio","Airboss radio ON/OFF","",{if (LHD_radio = false) then {LHD_radio = true} else {LHD_radio =false}},true] call ace_interact_menu_fnc_createAction;
+		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lhdradio] call ace_interact_menu_fnc_addActionToObject;
+
+		_landcontrol = ["landcontrol","Contact Land Controller","",{[0] spawn airboss_fnc_land_controller},{LHD_radio and ControllerActionAdded and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
+		_aircontrol = ["aircontrol","Contact Controller","",{[0] spawn airboss_fnc_atc_controller},{LHD_radio and ATC_ControllerActionAdded}] call ace_interact_menu_fnc_createAction;
+		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{LHD_radio and (getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
+
+		{
+			[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
+		} foreach [_landcontrol,_aircontrol,_lhdcontrol];
+	};
 	_lhddir = getdir lhd;
 
 	//Land Variables
@@ -96,6 +110,7 @@ if (!isdedicated) then {
 		ATC_callsign = "falcon"; //Callsign Aircraft
 		ATC_callsignNo = 1; //Callsign number
 		ATC_ControllerActionAdded = false;
+		ControllerActionAdded = false;
 		ATC_Action_VectorBase =[];
 		ATC_Callsigns = [
 			// --- Aircraft ---

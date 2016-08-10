@@ -6,11 +6,6 @@
 	LHD_Location setText "USX Syed";
     ["controlarea", _PosControl, "RECTANGLE", [5,9.5], "COLOR:", "ColorWhite", "BRUSH:", "Border"] call CBA_fnc_createMarker;
 
-    if (acemod) then {
-		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{getPosWorld player in LHD_Location}] call ace_interact_menu_fnc_createAction;
-		[player, 1, ["ACE_SelfActions"], _lhdcontrol] call ace_interact_menu_fnc_addActionToObject;
-	};
-
 //Create deck location (used to check when landed)
 	LHD_Deck = createLocation ["NameLocal", _lhdpos, 30, 125];
 	LHD_Deck setRectangular true;

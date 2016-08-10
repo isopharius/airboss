@@ -22,9 +22,11 @@
 		player removeaction LHD_Action_Weather;
 		LHD_Action_Weather = nil;
 	};
-	if (!isnil "LHD_Action_ContactControl") then {
-		player removeaction LHD_Action_ContactControl;
-		LHD_Action_ContactControl = nil;
+	if (ATC_ControllerActionAdded) then {
+		LHD_Action_ContactControl = false;
+		if (!acemod) then {
+			player removeaction LHD_Action_ContactControl;
+		};
 	};
 	if (!isnil "LHD_Action_VectorShip") then {
 		player removeaction LHD_Action_VectorShip;

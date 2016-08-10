@@ -6,9 +6,11 @@ _vehicle = vehicle player;
 	_initArray = _this select 3;
 	_type = _initArray select 0; //0 = Inital Contact //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
-	if (!isnil "LHD_Action_ContactControl") then {
-		player removeaction LHD_Action_ContactControl;
-		LHD_Action_ContactControl = nil;
+	if (ATC_ControllerActionAdded) then {
+		LHD_Action_ContactControl = false;
+		if (!acemod) then {
+			player removeaction LHD_Action_ContactControl;
+		};
 	};
 
 //Script Settings

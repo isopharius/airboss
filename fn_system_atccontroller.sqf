@@ -1,6 +1,5 @@
 _vehicle = vehicle player;
 
-
 	if ((LHD_Controlled) and (alive _vehicle)) then { //Player is controlled
 
 		// --- EMERGENCY NOTIFICATION --- //

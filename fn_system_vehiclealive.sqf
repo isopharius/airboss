@@ -3,7 +3,7 @@
 						_isOnDeck = getPosWorld _vehicle in LHD_Deck;
 						_isInRestricted = getPosWorld _vehicle in LHD_RestrictedArea;
 
-						if ((_isInRestricted) and (!LHD_Controlled) and (!_isOnDeck)) then {
+						if ((_isInRestricted) and (!LHD_Controlled) and (!_isOnDeck) and (LHD_radio)) then {
 							if (LHD_ControlWarning < LHD_MaxWarnings) then {
 								//Vehicle has entered the LHD restricted area, and is not currently controlled
 								waitUntil{!LHD_RadioInUse};
@@ -28,9 +28,11 @@
 						};
 
 						if ((!LHD_Controlled) and (!ATC_ControllerActionAdded)) then {
-							//Add option to contact controller
-							LHD_Action_ContactControl = player addAction ["Contact Controller", airboss_fnc_atc_controller, [0], 7, false,true];
 							ATC_ControllerActionAdded = true;
+							if (!acemod) then {
+								//Add option to contact controller
+								LHD_Action_ContactControl = player addAction ["Contact Controller", airboss_fnc_atc_controller, [0], 7, false,true];
+							};
 						};
 
 						sleep 1;

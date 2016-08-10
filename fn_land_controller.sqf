@@ -13,7 +13,12 @@ _vehicle = vehicle player;
 
 		if (_type isEqualTo 0) exitwith {//Player is making initial contact with controller, assign callsign
 
-				player removeaction Action_ContactControl;
+				if (ControllerActionAdded) then {
+					ControllerActionAdded = false;
+					if (!acemod) then {
+						player removeaction Action_ContactControl;
+					};
+				};
 				_cursor = 0;
 				_typeOf = TypeOf _vehicle;
 				_callsignNo = 0;

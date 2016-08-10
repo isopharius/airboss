@@ -4,12 +4,14 @@
 
 			if((!isNull objectParent player) and (player isEqualTo driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
 
-				if (!isnil "Action_ContactControl") then {
-					player removeaction Action_ContactControl;
-					Action_ContactControl = nil;
+				if (ControllerActionAdded) then {
+					ControllerActionAdded = false;
+					if (!acemod) then {
+						player removeaction Action_ContactControl;
+					};
 				};
-				call airboss_fnc_land_RemoveActionsWatchdog;
 
+				call airboss_fnc_land_RemoveActionsWatchdog;
 				call airboss_fnc_system_vehiclealive;
 
 				//Remove any targets
@@ -36,14 +38,17 @@
 			} else { //Player is not driver
 
 				//ground action
-				if (isnil "Action_ContactControl") then {
-					Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'"];
+				if (!ControllerActionAdded) then {
+					ControllerActionAdded = true;
+					if (!acemod) then {
+						Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'"];
+					};
 				};
 
 				//debarkation action
 				if ((!acemod) and (getPosWorld player in LHD_Location)) then {
 					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, [], 7, false, true];
-					waitUntil{!(getPosWorld player in LHA_Location)};
+					waitUntil{!(getPosWorld player in LHD_Location)};
 					player removeAction LHD_Action_DebarkationControl;
 				};
 			};
