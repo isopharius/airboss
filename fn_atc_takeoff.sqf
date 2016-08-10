@@ -8,7 +8,7 @@ _vehicle = vehicle player;
 //Add Actions
 	player removeaction LHD_Action_Takeoff;
 	player removeaction LHD_Action_Takeoff_Priority;
-	LHD_Action_Takeoff_Cancel = player addAction ["FLYCO > Cancel Takeoff", airboss_fnc_atc_takeoff_cancel,[],10,false];
+	LHD_Action_Takeoff_Cancel = player addAction ["FLYCO > Cancel Takeoff", airboss_fnc_atc_takeoff_cancel,[],10,false,true, "", "true", -1];
 
 //Script Settings
 	_digitDelay = 0.4;

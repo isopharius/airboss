@@ -41,13 +41,13 @@
 				if (!ControllerActionAdded) then {
 					ControllerActionAdded = true;
 					if (!acemod) then {
-						Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'"];
+						Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'", -1];
 					};
 				};
 
 				//debarkation action
 				if ((!acemod) and (getPosWorld player in LHD_Location)) then {
-					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, [], 7, false, true];
+					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, [], 7, false, true, "", "true", -1];
 					waitUntil{!(getPosWorld player in LHD_Location)};
 					player removeAction LHD_Action_DebarkationControl;
 				};

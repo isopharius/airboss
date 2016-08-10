@@ -137,7 +137,7 @@ _vehicle = vehicle player;
 
 			if (ATC_onTask) then {
 
-				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_transport, [1], 18, false, true];
+				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_transport, [1], 18, false, true, "", "true", -1];
 
 				//Create Waypoint Pickup
 				_wp1 = group player addWaypoint [_pickup, _nearDistance];

@@ -4,7 +4,7 @@ _vehicle = vehicle player;
 	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
 	_initArray = _this select 3;
-	_type = _initArray select 0; //0 = Inital Contact //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
+	_type = _initArray select 0;  //0 = Inital Contact //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
 	if (ATC_ControllerActionAdded) then {
 		LHD_Action_ContactControl = false;
@@ -138,7 +138,7 @@ _vehicle = vehicle player;
 
 			if (ATC_onTask) then {
 
-				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_closeairsupport, [1], 18, false, true];
+				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_closeairsupport, [1], 18, false, true, "", "true", -1];
 
 				//Create Waypoint Pickup
 				_wp1 = group player addWaypoint [_pickup, _nearDistance];

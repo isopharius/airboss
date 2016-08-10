@@ -6,16 +6,16 @@ _vehicle = vehicle player;
 	_dir = direction _vehicle;
 
 	if (acemod) then {
+		if (ATC_ControllerActionAdded) then {
+			LHD_Action_ContactControl = false;
+		};
 		_type = _this select 0;
 	} else {
-		_type = (_this select 3) select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
-	};
-
-	if (ATC_ControllerActionAdded) then {
-		LHD_Action_ContactControl = false;
-		if (!acemod) then {
+		if (ATC_ControllerActionAdded) then {
 			player removeaction LHD_Action_ContactControl;
+			LHD_Action_ContactControl = false;
 		};
+		_type = (_this select 3) select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 	};
 
 //Script Settings
@@ -81,7 +81,7 @@ _vehicle = vehicle player;
 				_cursor = 0;
 				{
 					if (_cursor > 0) then {
-						call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 20, false, true];",_cursor,(_x select 0)];
+						call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 20, false, true, '', 'true', -1];",_cursor,(_x select 0)];
 					};
 					_cursor = _cursor + 1;
 				} foreach ATC_Intentions;
@@ -203,7 +203,7 @@ _vehicle = vehicle player;
 			_cursor = 0;
 			{
 				if (_cursor > 0) then {
-					call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 7, false, true];",_cursor,(_x select 0)];
+					call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 7, false, true, '', 'true', -1];",_cursor,(_x select 0)];
 				};
 				_cursor = _cursor + 1;
 			} foreach ATC_Intentions;
