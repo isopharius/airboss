@@ -1,10 +1,11 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
-	_initArray = _this select 3;
-	_id = _this select 2;
-	_type = _initArray select 0; //0 = Inital Contact
+if (acemod) then {
+	_type = _this select 0;
+} else {
+	_type = (_this select 3) select 0; //0 = Inital Contact
+};
 
 //Script Settings
 	_digitDelay = 0.4;

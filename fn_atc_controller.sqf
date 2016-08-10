@@ -4,9 +4,12 @@ _vehicle = vehicle player;
 	_loon1 = getPosWorld lhd;
 	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
-	_initArray = _this select 3;
-	_id = _this select 2;
-	_type = _initArray select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
+
+	if (acemod) then {
+		_type = _this select 0;
+	} else {
+		_type = (_this select 3) select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
+	};
 
 	if (ATC_ControllerActionAdded) then {
 		LHD_Action_ContactControl = false;
