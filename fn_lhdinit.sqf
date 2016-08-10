@@ -1,22 +1,18 @@
 if ((!isnil "lhd") or isHC) exitwith {};
 
 lhd = _this select 0;
+_lhdpos = getpos lhd;
 
 //add respawn at box
 if (isserver) then {
-	_posatl = getposatl lhd;
-	_spawnpos = [(_posatl select 0), (_posatl select 1), (_posatl select 2) - 42];
-	_crate = "B_CargoNet_01_ammo_F" createvehicle [(_spawnpos select 0) + 7, (_spawnpos select 1) - 15];
+	_crate = "B_CargoNet_01_ammo_F" createvehicle [0,0,0];
 	_crate allowdamage false;
-	_cratepos = getpos _crate;
-	_crate setposasl [_cratepos select 0, _cratepos select 1, 16.9];
+	_crate setposasl [[(_spawnpos select 0) + 7, (_spawnpos select 1) - 15, 16.9];
 	[missionnamespace, _crate, "USX Syed"] call BIS_fnc_addRespawnPosition;
 };
 
 if (!isdedicated) then {
 	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));
-
-	_lhdpos = getpos lhd;
 	_lhddir = getdir lhd;
 
 	//Land Variables
