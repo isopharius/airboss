@@ -1,4 +1,4 @@
-					if ((alive _vehicle) and (objectparent player == _vehicle)) then {
+					if ((alive _vehicle) and (vehicle player == _vehicle)) then {
 						// Player is in a vehicle, check if the vehicle is in a restricted area and not controlled
 						_isOnDeck = getPos _vehicle in LHD_Deck;
 						_isInRestricted = getPos _vehicle in LHD_RestrictedArea;
