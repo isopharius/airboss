@@ -5,10 +5,11 @@ disableSerialization;
 	{
 		_CheckPos = (lhd modeltoworld _x);
 		_bayStatus = LHD_BayStatus select (_bay - 1);
-		_NearObjectsAir = (_CheckPos nearObjects ["Air",_radius]);
+		_allObjects = (_CheckPos nearObjects ["Air",_radius]);
 		_NearObjectsLand = ( nearestObjects [ _CheckPos, ["Land","WeaponHolder","ReammoBox_F","Cargo_base_F","StaticWeapon"],_radius]);
-		_NearObjectsSea = (nearestObjects[_CheckPos,["Ship"],_radius]);
-		_allObjects = _NearObjectsAir + _NearObjectsLand + _NearObjectsSea;
+		_NearObjectsSea = (_CheckPos nearObjects ["Ship",_radius]);
+		_allObjects append _NearObjectsLand;
+		_allObjects append _NearObjectsSea;
 		_pic = 1100 + _bay;
 		_picture = (_display displayCtrl _pic);
 
