@@ -18,7 +18,7 @@
 	_clock = (_hdg) - (_dir);
 	_clock = (_clock + 360) mod 360;
 	_clock = round(_clock / 30);
-	if (_clock == 0) then {_clock = 12};
+	if (_clock isEqualTo 0) then {_clock = 12};
 	_wD1 = floor(_hdg / 100);
 	_wD2 = floor((_hdg - (_wD1 * 100)) / 10);
 	_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
@@ -47,7 +47,7 @@
 		//Over a kilometer
 			_distance = floor(_distance / 1000);
 			_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;
-			if (_distance == 1) then {
+			if (_distance isEqualTo 1) then {
 				_vehicle vehicleRadio "flyco_word_kilometer";sleep 0.3;
 			} else {
 				_vehicle vehicleRadio "flyco_word_kilometers";sleep 0.3;

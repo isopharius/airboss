@@ -11,7 +11,7 @@ _vehicle = vehicle player;
 	_sentenceDelay = 1;
 	_maxDigit = ATC_maxDigit;
 
-		if (_type == 0) exitwith {//Player is making initial contact with controller, assign callsign
+		if (_type isEqualTo 0) exitwith {//Player is making initial contact with controller, assign callsign
 
 				player removeaction Action_ContactControl;
 				_cursor = 0;
@@ -61,7 +61,7 @@ _vehicle = vehicle player;
 
 				call airboss_fnc_land_baseActionsWatchdog;
 		};
-		if (_type == 1) exitwith {//Player has transferred to this controller in an AIRCRAFT
+		if (_type isEqualTo 1) exitwith {//Player has transferred to this controller in an AIRCRAFT
 			//Remove Actions
 			call airboss_fnc_atc_removePilotActions;
 
@@ -78,7 +78,7 @@ _vehicle = vehicle player;
 			call airboss_fnc_atc_removePilotActions;
 			call airboss_fnc_atc_baseActionsWatchdog;
 		};
-		if (_type == 2) exitwith {//Land base player is requesting a fix on their current location
+		if (_type isEqualTo 2) exitwith {//Land base player is requesting a fix on their current location
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
 

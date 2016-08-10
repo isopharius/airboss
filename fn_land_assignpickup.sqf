@@ -13,7 +13,7 @@
 							_CallsignNo = _CallsignArray select 1;
 							_AirCallsign = _x select 5;
 
-							if ((_Callsign == callsign) and (_CallsignNo == callsignNo)) then {
+							if ((_Callsign isEqualTo callsign) and (_CallsignNo isEqualTo callsignNo)) then {
 								//Have right one!
 									//hint "horray!";
 								//Check if been assigned

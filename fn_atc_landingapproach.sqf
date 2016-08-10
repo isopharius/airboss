@@ -14,7 +14,7 @@
 									//Over a kilometer
 										_distance = floor(_distance / 1000);
 										_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;
-										if (_distance == 1) then {
+										if (_distance isEqualTo 1) then {
 											_vehicle vehicleRadio "flyco_word_kilometer";sleep 0.3;
 										} else {
 											_vehicle vehicleRadio "flyco_word_kilometers";sleep 0.3;

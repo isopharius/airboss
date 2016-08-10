@@ -7,7 +7,7 @@
 
 				// ### Check if at correct altitude ###
 				_curalt = position _vehicle select 2;
-				if ((((_curalt < (_alt - LHD_WarnAltitude)) or ( _curalt > (_alt + LHD_WarnAltitude))) and (!LHD_IsLanding)) and (_alt == LHD_CurrentFlyAlt)) then {
+				if ((((_curalt < (_alt - LHD_WarnAltitude)) or ( _curalt > (_alt + LHD_WarnAltitude))) and (!LHD_IsLanding)) and (_alt isEqualTo LHD_CurrentFlyAlt)) then {
 					//At wrong altitude, get angry
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 					_vehicle vehicleRadio "flyco_word_watchyouraltitude";sleep 0.9;
@@ -21,13 +21,13 @@
 					sleep 5;
 				};
 
-				if (!(_alt == LHD_CurrentFlyAlt)) then {
+				if (!(_alt isEqualTo LHD_CurrentFlyAlt)) then {
 					//Altitude has change, advise new change
 					_oldPattern = _pattern;
 					_cursor = 0;
 					{
 						_cursor =  _cursor + (_x select 1);
-						if (((_Position) < _cursor) and (_pattern == _oldPattern)) then {_pattern = _x select 0};
+						if (((_Position) < _cursor) and (_pattern isEqualTo _oldPattern)) then {_pattern = _x select 0};
 					} foreach LHDPatternLayout;
 					_alt1 = floor(_alt / 100) * 100;
 					_alt2 = (_alt - _alt1);
@@ -116,7 +116,7 @@
 					//hint format ["%1 %2",[_wD1,_wD2,_wD3],_hdg];
 
 					//Check if vehicle is on 3rd Waypoint of First Pattern, if so, then guide to land
-					if ((_pattern == _landingPattern) and (_curVectorNum == (LHDLandingTurnNum + 1))) then {
+					if ((_pattern isEqualTo _landingPattern) and (_curVectorNum isEqualTo (LHDLandingTurnNum + 1))) then {
 						//Set Next Waypoint
 						_curVector = _finals;
 						_wp = group player addWaypoint [_curVector,_nearDistance];
@@ -178,7 +178,7 @@
 							//Over a kilometer
 								_distance = floor(_distance / 1000);
 								_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;
-								if (_distance == 1) then {
+								if (_distance isEqualTo 1) then {
 									_vehicle vehicleRadio "flyco_word_kilometer";sleep 0.3;
 								} else {
 									_vehicle vehicleRadio "flyco_word_kilometers";sleep 0.3;
@@ -234,7 +234,7 @@
 						//Over a kilometer
 							_distance = floor(_distance / 1000);
 							_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;
-							if (_distance == 1) then {
+							if (_distance isEqualTo 1) then {
 								_vehicle vehicleRadio "flyco_word_kilometer";sleep 0.3;
 							} else {
 								_vehicle vehicleRadio "flyco_word_kilometers";sleep 0.3;

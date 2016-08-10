@@ -12,7 +12,7 @@ _vehicle = vehicle player;
 	_sentenceDelay = 1;
 	_maxDigit = ATC_maxDigit;
 
-		if (_type == 0) exitwith {//Land base player is requesting an air pickup (Phase Zero)
+		if (_type isEqualTo 0) exitwith {//Land base player is requesting an air pickup (Phase Zero)
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
 
@@ -30,7 +30,7 @@ _vehicle = vehicle player;
 				onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;";
 		};
 
-		if (_type == 1) exitwith {//Land base player has listed location for pickup
+		if (_type isEqualTo 1) exitwith {//Land base player has listed location for pickup
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
 
@@ -73,7 +73,7 @@ _vehicle = vehicle player;
 				onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
 		};
 
-		if (_type == 2) exitwith {//Land base player has listed location for delivery
+		if (_type isEqualTo 2) exitwith {//Land base player has listed location for delivery
 
 				//Create Marker
 				Land_AirPickup_marker2 = createMarkerLocal ["Land_AirPickup_marker2", _delivery];
@@ -118,7 +118,7 @@ _vehicle = vehicle player;
 				} foreach units group player;
 		};
 
-		if (_type == 3) exitwith {//Land base player has advised number of passengers
+		if (_type isEqualTo 3) exitwith {//Land base player has advised number of passengers
 
 				_pax = _initArray select 1;
 				_pickup = _initArray select 2;
@@ -178,7 +178,7 @@ _vehicle = vehicle player;
 					_CallsignArray = _x select 4;
 					_Callsign = _CallsignArray select 0;
 					_CallsignNo = _CallsignArray select 1;
-					if ((_Callsign == callsign) and (_CallsignNo == callsignNo)) then {
+					if ((_Callsign isEqualTo callsign) and (_CallsignNo isEqualTo callsignNo)) then {
 						//Have right one!
 						// Publish Task Cancel
 						ATC_Tasks_Transport set [_cursor,"deleteme"];
@@ -200,6 +200,6 @@ _vehicle = vehicle player;
 				call airboss_fnc_land_baseActionsWatchdog;
 		};
 
-		if (_type == 4) exitwith {
+		if (_type isEqualTo 4) exitwith {
 			Land_AwaitingDelivery = false;
 		};

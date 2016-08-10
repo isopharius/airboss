@@ -18,7 +18,7 @@ _vehicle = vehicle player;
 	_sentenceDelay = 1;
 	_maxDigit = ATC_maxDigit;
 
-		if (_type == 0) exitwith {//Player is making initial contact with controller, assign callsign
+		if (_type isEqualTo 0) exitwith {//Player is making initial contact with controller, assign callsign
 			//Variable Reset
 				LHD_Intention = 0; //Reset intentions, god knows what happened to the last vehicle player was in
 				_cursor = 0;
@@ -93,7 +93,7 @@ _vehicle = vehicle player;
 			_ControlerVM = call airboss_fnc_system_atccontroller;
 		};
 
-		if (_type == 1) exitwith {//Player has advised new intention
+		if (_type isEqualTo 1) exitwith {//Player has advised new intention
 			_intention = _initArray select 1;
 			_intentionArray = ATC_Intentions select _intention;
 			_VehiclesArray = _intentionArray select 1;
@@ -145,7 +145,7 @@ _vehicle = vehicle player;
 			call airboss_fnc_atc_baseActionsHomer;
 		};
 
-		if (_type == 2) exitwith {//Player requested transfer to FLYCO
+		if (_type isEqualTo 2) exitwith {//Player requested transfer to FLYCO
 			//Remove Actions
 			player removeaction ATC_TransferToFlyco;
 			player removeaction ATC_ChangeIntentions;
@@ -164,7 +164,7 @@ _vehicle = vehicle player;
 			call airboss_fnc_atc_baseActionsFlyco;
 		};
 
-		if (_type == 3) exitwith {
+		if (_type isEqualTo 3) exitwith {
 			//Remove Actions
 			call airboss_fnc_atc_removePilotActions;
 
@@ -181,7 +181,7 @@ _vehicle = vehicle player;
 			call airboss_fnc_atc_baseActionsHomer;
 		};
 
-		if (_type == 4) exitwith {//Player is changing their intentions
+		if (_type isEqualTo 4) exitwith {//Player is changing their intentions
 			LHD_Controlled = true; //Vehicle is now controlled (just in case!)
 			//Remove Actions
 			call airboss_fnc_atc_removePilotActions;
@@ -204,7 +204,7 @@ _vehicle = vehicle player;
 			} foreach ATC_Intentions;
 		};
 
-		if (_type == 5) exitwith {//Player has requested an air situation report
+		if (_type isEqualTo 5) exitwith {//Player has requested an air situation report
 
 			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 			_vehicle vehicleRadio "homer_msg_airsitrep_1";sleep 2.5;
@@ -223,7 +223,7 @@ _vehicle = vehicle player;
 					_vehicle vehicleRadio "homer_word_duties"; sleep 0.5;
 				};
 			} foreach ATC_Intentions;
-			if (_counter == 0) then {
+			if (_counter isEqualTo 0) then {
 				_vehicle vehicleRadio "homer_msg_airsitrep_2"; sleep 1;
 			};
 			_vehicle vehicleRadio "homer_callsign_homer";sleep 0.5;
@@ -231,7 +231,7 @@ _vehicle = vehicle player;
 			LHD_RadioInUse = false;
 		};
 
-		if (_type == 6) exitwith {//Player has requested a traffic pattern report
+		if (_type isEqualTo 6) exitwith {//Player has requested a traffic pattern report
 			//Load in pattern Information
 			_numPatterns = count LHDPatternLayout;
 			_inPattern = count LHDPattern;
@@ -277,14 +277,14 @@ _vehicle = vehicle player;
 			LHD_RadioInUse = false;
 		};
 /*
-		if (_type == 7) exitwith {//Request an aerial training target
+		if (_type isEqualTo 7) exitwith {//Request an aerial training target
 			//Pick a target start
 			_numTargets = count LHD_TrainingTargetMarkers;
 			_tgtNum = floor(random _numTargets);
 			_targetPos = LHD_TrainingTargetMarkers select _tgtNum;
 			_targetType = _initArray select 1;
 			_class = "TargetDrone";
-			if(_targetType == "ground") then {
+			if(_targetType isEqualTo "ground") then {
 				_class = "TargetTank";
 			} else {
 				_class = "TargetDrone";
@@ -292,7 +292,7 @@ _vehicle = vehicle player;
 
 			//create the target
 			_target = createVehicle [_class, _targetPos, [], 0, "FLY"];
-			if(_targetType == "aerial") then {
+			if(_targetType isEqualTo "aerial") then {
 				_group = creategroup East;
 				_unit =  _group createUnit ["RU_Soldier_Pilot", _targetPos, [], 0, "NONE"];
 				removeallweapons _unit;
@@ -316,7 +316,7 @@ _vehicle = vehicle player;
 			_clock = (_hdg) - (_dir);
 			_clock = (_clock + 360) mod 360;
 			_clock = round(_clock / 30);
-			if (_clock == 0) then {_clock = 12};
+			if (_clock isEqualTo 0) then {_clock = 12};
 			_wD1 = floor(_hdg / 100);
 			_wD2 = floor((_hdg - (_wD1 * 100)) / 10);
 			_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
@@ -340,7 +340,7 @@ _vehicle = vehicle player;
 				//Over a kilometer
 					_distance = floor(_distance / 1000);
 					_vehicle vehicleRadio format["homer_digit_%1",_distance];sleep 0.4;
-					if (_distance == 1) then {
+					if (_distance isEqualTo 1) then {
 						_vehicle vehicleRadio "homer_word_kilometer";sleep 0.3;
 					} else {
 						_vehicle vehicleRadio "homer_word_kilometers";sleep 0.3;
@@ -381,7 +381,7 @@ _vehicle = vehicle player;
 			deletevehicle _target;
 		};
 
-		if (_type == 8) exitwith {//Load Cargo
+		if (_type isEqualTo 8) exitwith {//Load Cargo
 			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 			_vehicle vehicleRadio "flyco_msg_cargoload_1";sleep 0.3;
 			LHD_RadioInUse = false;
@@ -414,19 +414,19 @@ _vehicle = vehicle player;
 		};
 */
 
-		if (_type == 9) exitwith {//Cancel targets
+		if (_type isEqualTo 9) exitwith {//Cancel targets
 			//acknowledge player
 			//delete targets
 			{deleteVehicle _x} forEach LHD_TrgTargets;
 			LHD_TrgTargets = [];
 		};
-		if (_type == 10) exitwith {//Request Vector
+		if (_type isEqualTo 10) exitwith {//Request Vector
 			//Calc pos
 			_loon1 = LHD_TrgTargets select 0;
 			_clock = (_hdg) - (_dir);
 			_clock = (_clock + 360) mod 360;
 			_clock = round(_clock / 30);
-			if (_clock == 0) then {_clock = 12};
+			if (_clock isEqualTo 0) then {_clock = 12};
 			_wD1 = floor(_hdg / 100);
 			_wD2 = floor((_hdg - (_wD1 * 100)) / 10);
 			_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
@@ -450,7 +450,7 @@ _vehicle = vehicle player;
 				//Over a kilometer
 					_distance = floor(_distance / 1000);
 					_vehicle vehicleRadio format["homer_digit_%1",_distance];sleep 0.4;
-					if (_distance == 1) then {
+					if (_distance isEqualTo 1) then {
 						_vehicle vehicleRadio "homer_word_kilometer";sleep 0.3;
 					} else {
 						_vehicle vehicleRadio "homer_word_kilometers";sleep 0.3;
@@ -464,7 +464,7 @@ _vehicle = vehicle player;
 			_vehicle vehicleRadio "homer_word_out";sleep 0.3;
 			LHD_RadioInUse = false;
 		};
-		if (_type == 11) exitwith {//Service Aircraft
+		if (_type isEqualTo 11) exitwith {//Service Aircraft
 			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 			_vehicle vehicleRadio "flyco_msg_vehicleservice_1";sleep 0.3;
 			LHD_RadioInUse = false;

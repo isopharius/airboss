@@ -40,13 +40,13 @@ _vehicle = vehicle player;
 	{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHDPatternLayout;
 
 //### CHECK IF ROOM IN PATTERN ###
-if ((_inPattern < _maxVehicles) or (_type == 1)) then {
+if ((_inPattern < _maxVehicles) or (_type isEqualTo 1)) then {
 	_array = LHDPattern;
-	if (_type == 0) then {
+	if (_type isEqualTo 0) then {
 		//Standard Pattern Entry
 		{
 			_cursor =  _cursor + (_x select 1);
-			if (((_inPattern) < _cursor) and (_pattern == "alpha")) then {_pattern = _x select 0};
+			if (((_inPattern) < _cursor) and (_pattern isEqualTo "alpha")) then {_pattern = _x select 0};
 		} foreach LHDPatternLayout;
 		_alt = (_inPattern * LHDAlt) + LHDAlt; //this sets the next vehicles altitude
 		_alt1 = floor(_alt / 100) * 100;
@@ -105,7 +105,7 @@ if ((_inPattern < _maxVehicles) or (_type == 1)) then {
 		_clock = (_hdg) - (_dir);
 		_clock = (_clock + 360) mod 360;
 		_clock = round(_clock / 30);
-		if (_clock == 0) then {_clock = 12};
+		if (_clock isEqualTo 0) then {_clock = 12};
 
 	//Calc Distance
 		_distance = round((_loon1 distance _loon2) / 100) * 100;

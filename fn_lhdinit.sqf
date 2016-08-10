@@ -39,11 +39,11 @@ if (!isdedicated) then {
 	/*
 		MapY = 5120;
 		call {
-			if (worldname == "Altis") exitwith { MapY = 40000 };
-			if (worldname == "pja306") exitwith { MapY = 20480 };
-			if (worldname == "chernarus") exitwith { MapY = 20480 };
-			if (worldname == "Napf") exitwith { MapY = 20480 };
-			if (worldname == "stratis") exitwith { MapY = 10200 };
+			if (worldname isEqualTo "Altis") exitwith { MapY = 40000 };
+			if (worldname isEqualTo "pja306") exitwith { MapY = 20480 };
+			if (worldname isEqualTo "chernarus") exitwith { MapY = 20480 };
+			if (worldname isEqualTo "Napf") exitwith { MapY = 20480 };
+			if (worldname isEqualTo "stratis") exitwith { MapY = 10200 };
 		};
 	*/
 		LHDAlive = true;
@@ -163,7 +163,7 @@ if (!isdedicated) then {
 	LHD_BayPositions = [[13.5543,-103.426,1],[-13.5212,-111.941,1],[-13.5967,-77.292,1],[13.5216,-61.5732,1],[13.5376,-20.1221,1],[13.621,21.5298,1],[13.6259,63.6804,1],[-13.4215,71.6892,1],[13.5995,100.681,1]];
 
 	//supplies
-		_westvehicles = "(getNumber (_x >> 'side') == 1) and (getNumber (_x >> 'scope') == 2) and (((configName _x) isKindOf 'Car') or ((configName _x) isKindOf 'Helicopter') or ((configName _x) isKindOf 'Tank'))" configClasses (configFile >> "CfgVehicles");
+		_westvehicles = "(getNumber (_x >> 'side') isEqualTo 1) and (getNumber (_x >> 'scope') isEqualTo 2) and (((configName _x) isKindOf 'Car') or ((configName _x) isKindOf 'Helicopter') or ((configName _x) isKindOf 'Tank'))" configClasses (configFile >> "CfgVehicles");
 		_lhdvehicles = [];
 		{
 			_lhdvehicles pushback (configName _x);

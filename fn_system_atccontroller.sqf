@@ -9,7 +9,7 @@ _vehicle = vehicle player;
 			_em_callsign = LHD_Emergency_Call select 0;
 			_em_callsignNo = LHD_Emergency_Call select 1;
 
-			if !((_em_callsign == ATC_callsign) and (_em_callsignNo == ATC_callsignNo)) then {
+			if !((_em_callsign isEqualTo ATC_callsign) and (_em_callsignNo isEqualTo ATC_callsignNo)) then {
 				//Radio
 				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 				_vehicle vehicleRadio "flyco_word_alltraffic";sleep 0.3;
@@ -35,11 +35,11 @@ _vehicle = vehicle player;
 
 		// --- TASK CHECKING NOTIFICATION --- //
 		if (!ATC_onTask) then {
-			if (LHD_Intention == 3) then {
+			if (LHD_Intention isEqualTo 3) then {
 				sleep (ATC_callsignNo / 4); //So not everyone responds at the same time!
 				_taskingRequest = [0,0,0,[0]] call airboss_fnc_atc_tasking_transport;
 			};
-			if (LHD_Intention == 6) then {
+			if (LHD_Intention isEqualTo 6) then {
 				sleep (ATC_callsignNo / 4);
 				_taskingRequest = [0,0,0,[0]] execVM airboss_fnc_atc_tasking_closeairsupport;
 			};

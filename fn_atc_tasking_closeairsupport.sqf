@@ -24,14 +24,14 @@ _vehicle = vehicle player;
 	_distanceR = 0;
 	_WithinRange = 2000;
 
-		if (_type == 0) then { // Action Air Strike Tasking
+		if (_type isEqualTo 0) then { // Action Air Strike Tasking
 			_cursor = 0;
 
 			{
 				_raisedBy = _x select 0;
 				_actionedBy = _x select 5;
 				if (alive _raisedBy) then {
-					if ((count _actionedBy == 0) and (!ATC_onTask)) then {
+					if ((count _actionedBy isEqualTo 0) and (!ATC_onTask)) then {
 						//Task has not been actioned by anyone
 
 						player removeaction ATC_ChangeIntentions;
@@ -190,7 +190,7 @@ _vehicle = vehicle player;
 			//REMOVE FROM TASKING
 			{
 				_AirCallsign2 = _x select 5;
-				if (((_AirCallsign2 select 0) == ATC_callsign) and ((_AirCallsign2 select 1) == ATC_callsignNo)) then {
+				if (((_AirCallsign2 select 0) isEqualTo ATC_callsign) and ((_AirCallsign2 select 1) isEqualTo ATC_callsignNo)) then {
 					//Have right one!
 					_raisedBy = _x select 0;
 					_pickup = _x select 1;

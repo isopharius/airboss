@@ -25,7 +25,7 @@ disableSerialization;
 		LHD_BayStatus set [(_bay - 1),_IsSafe];
 
 		//Check if bay currently selected, if so, disable issuing
-		if (_bay == LHD_SelectedBay) then {
+		if (_bay isEqualTo LHD_SelectedBay) then {
 			if (_IsSafe) then {
 				_control ctrlEnable true;
 			} else {

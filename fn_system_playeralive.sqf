@@ -2,7 +2,7 @@
 			//init
 			_vehicle = vehicle player;
 
-			if((!isNull objectParent player) and (player == driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
+			if((!isNull objectParent player) and (player isEqualTo driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
 
 				if (!isnil "Action_ContactControl") then {
 					player removeaction Action_ContactControl;

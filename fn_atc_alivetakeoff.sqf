@@ -1,6 +1,6 @@
 		if (LHD_TakeoffRequest and (alive _vehicle)) then {
 			_Position = LHDPattern find _vehicle;
-			if ((_Position == 1) and !LHD_TakeoffStandby) then {
+			if ((_Position isEqualTo 1) and !LHD_TakeoffStandby) then {
 			//Aircraft is next vehicle, get them to prepare
 				LHD_TakeoffStandby = true;
 				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
@@ -8,7 +8,7 @@
 				_vehicle vehicleRadio "flyco_word_over";sleep 0.8;
 				LHD_RadioInUse = false;
 			};
-			if (_Position == 0) then {
+			if (_Position isEqualTo 0) then {
 				//Direct departure, no traffic
 
 				if (_vehicle iskindof "Plane") then { // This section checks if the main bays are free, it will wait until they are before proceeding

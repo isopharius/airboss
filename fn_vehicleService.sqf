@@ -2,7 +2,7 @@ private["_vehicle","_type","_note","_vehName","_turret","_total","_detail"];
 
 _vehicle = _this;
 
-if (local _vehicle or (assignedVehicle player) == _vehicle) then {
+if (local _vehicle or (assignedVehicle player) isEqualTo _vehicle) then {
 
 	player reveal _vehicle;
 	_vehicle setFuel 1;

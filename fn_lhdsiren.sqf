@@ -9,7 +9,7 @@ _vehicle = vehicle player;
 	_sentenceDelay = 1;
 	_maxDigit = ATC_maxDigit;
 
-	if (_siren == 0) then {//LAUNCH SIREN
+	if (_siren isEqualTo 0) then {//LAUNCH SIREN
 		_soundSource = createSoundSource ["Alarm_Launch", position lhd, [], 0];
 
 		call airboss_fnc_atc_alivepattern;

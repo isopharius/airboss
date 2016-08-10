@@ -12,7 +12,7 @@ _vehicle = vehicle player;
 	_sentenceDelay = 1;
 	_maxDigit = ATC_maxDigit;
 
-		if (_type == 0) exitwith {//Land base player is requesting an air pickup (Phase Zero)
+		if (_type isEqualTo 0) exitwith {//Land base player is requesting an air pickup (Phase Zero)
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
 
@@ -21,7 +21,7 @@ _vehicle = vehicle player;
 
 				onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\fn_land_closeairsupport.sqf'; onMapSingleClick ''; true;";
 		};
-		if (_type == 1) exitwith {//Land base player has listed location for pickup
+		if (_type isEqualTo 1) exitwith {//Land base player has listed location for pickup
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
 
@@ -48,7 +48,7 @@ _vehicle = vehicle player;
 
 				onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_closeairsupport.sqf'; onMapSingleClick ''; true;",_pickup];
 		};
-		if (_type == 2) exitwith {//Land base player has listed location for delivery
+		if (_type isEqualTo 2) exitwith {//Land base player has listed location for delivery
 
 				//Create Marker
 				Land_CloseAirSupport_marker2 = createMarkerLocal ["Land_CloseAirSupport_marker2", _delivery];
@@ -87,7 +87,7 @@ _vehicle = vehicle player;
 				call compile format ["Land_RequestCAS_Confirm = player addAction ['WATCHDOG > Confirm Request', airboss_fnc_land_closeairsupport, [3,%1,%2,True], 8, false, true];",_pickup,_delivery];
 				call compile format ["Land_RequestCAS_Cancel = player addAction ['WATCHDOG > Cancel Request', airboss_fnc_land_closeairsupport, [3,%1,%2,false], 7, false, true];",_pickup,_delivery];
 		};
-		if (_type == 3) exitwith {//Land base player has confirmed target
+		if (_type isEqualTo 3) exitwith {//Land base player has confirmed target
 
 			_confirm = _initArray select 3;
 				if (_confirm) then {
@@ -140,7 +140,7 @@ _vehicle = vehicle player;
 						_CallsignArray = _x select 4;
 						_Callsign = _CallsignArray select 0;
 						_CallsignNo = _CallsignArray select 1;
-						if ((_Callsign == callsign) and (_CallsignNo == callsignNo)) then {
+						if ((_Callsign isEqualTo callsign) and (_CallsignNo isEqualTo callsignNo)) then {
 							//Have right one!
 							// Publish Task Cancel
 							ATC_Tasks_CloseAirSupport set [_cursor,"deleteme"];
@@ -172,7 +172,7 @@ _vehicle = vehicle player;
 					deletemarkerlocal Land_CloseAirSupport_marker2;
 				};
 		};
-		if (_type == 4) exitwith {
+		if (_type isEqualTo 4) exitwith {
 			Land_AwaitingCASAssign = false;
 			Land_AwaitingCASRun = false;
 		};

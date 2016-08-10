@@ -17,7 +17,7 @@ disableSerialization;
 			if (_bayStatus) then {
 				[_bay,false] call airboss_fnc_ui_BayStatusUpdate;
 			};
-			if (LHD_SelectedBay == _bay) then {
+			if (LHD_SelectedBay isEqualTo _bay) then {
 				LHD_ActiveObject = _allObjects select 0;
 			};
 			_icon = getText (configfile >> "CfgVehicles" >> (TypeOf (_allObjects select 0)) >> "Picture");
