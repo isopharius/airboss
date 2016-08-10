@@ -5,7 +5,7 @@ _lhdpos = getpos lhd;
 
 //add respawn at box
 if (isserver) then {
-	_crate = "B_CargoNet_01_ammo_F" createvehicle [0,0,0];
+	_crate = createvehicle ["B_CargoNet_01_ammo_F", [0,0,0], [], 0, "NONE"];
 	_crate allowdamage false;
 	_crate setposasl [[(_spawnpos select 0) + 7, (_spawnpos select 1) - 15, 16.9];
 	[missionnamespace, _crate, "USX Syed"] call BIS_fnc_addRespawnPosition;

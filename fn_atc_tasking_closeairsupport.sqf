@@ -153,8 +153,8 @@ _vehicle = vehicle player;
 
 				//Vehicle is now close to the target location
 					//Drop smokes
-					_smoke1 = "SmokeShellRed" createvehicle _pickup;
-					_smoke2 = "SmokeShellRed" createvehicle _delivery;
+					_smoke1 = createvehicle ["SmokeShellRed", _pickup, [], 0, "NONE"];
+					_smoke2 = createvehicle ["SmokeShellRed", _delivery, [], 0, "NONE"];
 
 					//Clear player to engage
 						//Warn of friendlies
