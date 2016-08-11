@@ -7,8 +7,8 @@ _vehicle = vehicle player;
 
 	_type = 0;
 	if ((count _this) > 1) then {
-		_initarray = _this select 3;
-		_type = _initarray select 0;
+		_initArray = _this select 3;
+		_type = _initArray select 0;
 	};
 
 	if (ATC_ControllerActionAdded) then {
