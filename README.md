@@ -1,7 +1,23 @@
 # airboss
-ArmA3 LHD airboss ported from http://www.armaholic.com/page.php?id=24631
+ArmA3 LHD airboss - CUP LHD required
 
-CUP LHD required
+Airboss adds LHD Logistics and Radio controllers for Air/Ground coordination and traffic
+
+HOMER controls LHD airspace
+- initial contact with aircraft within airspace
+- coordinates aircraft intentions with WATCHDOG
+
+FLYCO controls LHD traffic
+- traffic report
+- weather forecast
+- takeoff and landing clearance
+- assign traffic patterns
+
+WATCHDOG controls Air/Ground support
+- initial contact with Land controllers
+- coordinates Transport/CAS requests
+
+Logistics Control available inside LHD Control Room
 
 //spawnable vehicles example
 
