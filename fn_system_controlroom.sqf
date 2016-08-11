@@ -1,4 +1,4 @@
-	if (LHD_radio) then {
+
 		call airboss_fnc_system_playeralive;
 
 		//Player has died!
@@ -20,7 +20,6 @@
 			if (!isnil "Air_TaskMarker2") then {
 				deletemarkerlocal Air_TaskMarker2;
 			};
-	};
 
 	sleep 1;
 	call airboss_fnc_system_controlroom;
