@@ -1,7 +1,6 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
 	_array = _this select 3;
 	_type = _array select 0;
 

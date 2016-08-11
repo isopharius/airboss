@@ -1,12 +1,10 @@
 //Get Variables
+_vehicle = vehicle player;
 	_initArray = _this select 3;
 	_BaseNo = _initArray select 0;
 	_baseName = BaseNames select _baseNo;
 
 	_loon1 = (Bases select _BaseNo) select 0;
-_vehicle = vehicle player;
-
-
 	_dir = direction _vehicle;
 
 //Script Settings

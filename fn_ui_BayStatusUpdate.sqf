@@ -1,24 +1,23 @@
 disableSerialization;
 		//Sets visual status of a bay on dialog
-		private["_IsSafe","_bay","_ctrl","_pic","_control","_display","_baySelected","_button","_r","_g","_b"];
-		_bay = _this select 0;
-		_IsSafe = _this select 1;
-		_ctrl = 1200 + _bay;
-		_pic = 1100 + _bay;
-		_display = (findDisplay 50001);
-		_control = (_display displayCtrl _ctrl);
-		_picture = (_display displayCtrl _pic);
-		_button = (_display displayCtrl 1007);
-		_baySelected = LHD_SelectedBay > 0;
+		private _bay = _this select 0;
+		private _IsSafe = _this select 1;
+		private _ctrl = 1200 + _bay;
+		private _pic = 1100 + _bay;
+		private _display = (findDisplay 50001);
+		private _control = (_display displayCtrl _ctrl);
+		private _picture = (_display displayCtrl _pic);
+		private _button = (_display displayCtrl 1007);
+		private _baySelected = LHD_SelectedBay > 0;
 
 		if (_IsSafe) then {
-			_r = 0.60;
-			_g = 0.84;
-			_b = 0.47;
+			private _r = 0.60;
+			private _g = 0.84;
+			private _b = 0.47;
 		} else {
-			_r = 1;
-			_g = 0;
-			_b = 0;
+			private _r = 1;
+			private _g = 0;
+			private _b = 0;
 		};
 		_control ctrlSetTextColor [_r,_g,_b,1.0];
 		_picture ctrlSetTextColor [_r,_g,_b,1.0];

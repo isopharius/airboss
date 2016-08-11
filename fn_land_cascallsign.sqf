@@ -1,9 +1,10 @@
 						if (Land_AwaitingCASAssign and (alive player) and (Land_AwaitingCASRun)) then {
-							_cursor = 0;
+							private _counter = _this;
+							private _cursor = 0;
 							//How long has it been?
 							if (_counter > 20) then {
 								player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Still trying to locate aircraft for air strike. Please Standby. Over",toUpper(callsign),callsignNo];
-								_counter = 0;
+								private _counter = 0;
 							};
 
 							//Make sure its same task
@@ -28,7 +29,7 @@
 								_cursor = _cursor + 1;
 
 							} forEach ATC_Tasks_CloseAirSupport;
-							_counter = _counter + 1;
+							private _counter = _counter + 1;
 							sleep 1;
-							call airboss_fnc_land_cascallsign;
+							_counter call airboss_fnc_land_cascallsign;
 						};

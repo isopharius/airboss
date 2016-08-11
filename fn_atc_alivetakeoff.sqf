@@ -1,5 +1,5 @@
 		if (LHD_TakeoffRequest and (alive _vehicle)) then {
-			_Position = LHDPattern find _vehicle;
+			private _Position = LHDPattern find _vehicle;
 			if ((_Position isEqualTo 1) and !LHD_TakeoffStandby) then {
 			//Aircraft is next vehicle, get them to prepare
 				LHD_TakeoffStandby = true;
@@ -12,29 +12,28 @@
 				//Direct departure, no traffic
 
 				if (_vehicle iskindof "Plane") then { // This section checks if the main bays are free, it will wait until they are before proceeding
-					_sirenVM = [0] spawn airboss_fnc_lhdsiren;
+					[0] spawn airboss_fnc_lhdsiren;
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 					_vehicle vehicleRadio "flyco_msg_takeoff_standby_plane";
 					LHD_RadioInUse = false;
 
 					sleep 3;
-					_notsafe = true;
-					_counter = 0;
-					_deckClearFail = false;
-					_deckClearMsg = false;
-
-					call seven_fnc_atc_safetakeoff;
+					private _notsafe = true;
+					private _deckClearFail = false;
+					private _deckClearMsg = false;
+					private _counter = 0;
+					_counter call seven_fnc_atc_safetakeoff;
 
 				} else {
-					_sirenVM = [1] spawn airboss_fnc_lhdsiren;
+					[1] spawn airboss_fnc_lhdsiren;
 				};
 
 				//Set New Heading
-				_hdg = getdir lhd;
+				private _hdg = getdir lhd;
 
-				_wD1 = floor(_hdg / 100);
-				_wD2 = floor((_hdg - (_wD1 * 100)) / 10);
-				_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
+				private _wD1 = floor(_hdg / 100);
+				private _wD2 = floor((_hdg - (_wD1 * 100)) / 10);
+				private _wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
 
 				if (LHD_TakeoffRequest) then {
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;

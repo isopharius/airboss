@@ -1,11 +1,10 @@
-	private["_vehicle","_isOnDeck"];
-_vehicle = vehicle player;
+private _vehicle = vehicle player;
 
 	ATC_TransferToHomer = player addAction ["FLYCO > Transfer to HOMER", airboss_fnc_atc_controller, [3], 20, false, true, "", "(LHD_radio)", -1];
 	ATC_TransferToWatchdog = player addAction ["FLYCO > Transfer to WATCHDOG", airboss_fnc_land_controller, [1], 19, false, true, "", "(LHD_radio)", -1];
 	LHD_Action_Weather = player addAction ["FLYCO > Request Weather Report", airboss_fnc_atc_weather,[],18,false, "", "(LHD_radio)", -1];
 	ATC_Flyco_TrafficSitrep = player addAction ["FLYCO > Request Traffic Report", airboss_fnc_atc_controller, [6], 17, false, true, "", "(LHD_radio)", -1];
-	_isOnDeck = getPosWorld _vehicle in LHD_Deck;
+	private _isOnDeck = getPosWorld _vehicle in LHD_Deck;
 
 	if (_isOnDeck) then {
 		LHD_Action_Takeoff = player addAction ["FLYCO > Request Takeoff Clearance", airboss_fnc_atc_takeoff,[0],15,false, "", "(LHD_radio)", -1];

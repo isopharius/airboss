@@ -3,7 +3,6 @@
 	_loon2 = getPosWorld player;
 	_vehicle = vehicle player;
 
-
 	_dir = direction _vehicle;
 
 //Script Settings

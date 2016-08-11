@@ -1,10 +1,10 @@
 disableSerialization;
-	_position = _this select 0;
-	_hdg = _this select 1;
-	_display = (findDisplay 50001);
-	_control = (_display displayCtrl 1006);
-	_index = lbCurSel _control;
-	_type = _control lbData _index;
+	private _position = _this select 0;
+	private _hdg = _this select 1;
+	private _display = (findDisplay 50001);
+	private _control = (_display displayCtrl 1006);
+	private _index = lbCurSel _control;
+	private _type = _control lbData _index;
 
 	if (LHD_SelectedBay isEqualTo 1) then {_position = "fd_cargo_pos_19"};
 	if (LHD_SelectedBay isEqualTo 2) then {_position = "fd_cargo_pos_18"};

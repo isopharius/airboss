@@ -1,7 +1,6 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
 	_initArray = _this select 3;
 	_delivery = _this select 1;
 	_pickup = _this select 2;
@@ -111,16 +110,13 @@ _vehicle = vehicle player;
 					Land_RequestCloseAirSupport_Cancel = player addAction ["WATCHDOG > Cancel Air Strike", airboss_fnc_land_closeairsupport, [4], 19, false, true, "", "(LHD_radio)", -1];
 
 					Land_AwaitingCASAssign = true;
-					_counter = 0;
-
 					Land_AwaitingCASRun = true;
-					call airboss_fnc_land_cascallsign;
+					_counter = 0;
+					_counter call airboss_fnc_land_cascallsign;
 
 					if (Land_AwaitingCASRun) then {
 						//Heading to Waypoint
-						_distanceR = (player distance _delivery);
 						_IsThere = false;
-
 						call airboss_fnc_land_aliveplayer;
 					};
 
@@ -132,7 +128,6 @@ _vehicle = vehicle player;
 
 						deletemarkerlocal Land_CloseAirSupport_marker1;
 						deletemarkerlocal Land_CloseAirSupport_marker2;
-
 
 					//CLOSE TASKING COMPLETELY
 					_cursor = 0;

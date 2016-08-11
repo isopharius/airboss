@@ -1,7 +1,6 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
 	_initArray = _this select 3;
 	_delivery = _this select 1;
 	_pickup = _this select 2;
@@ -152,17 +151,13 @@ _vehicle = vehicle player;
 				Land_RequestAirPickup_Cancel = player addAction ["WATCHDOG > Cancel Air Transport Request", airboss_fnc_land_transport_air, [4], 19, false, true, "", "(LHD_radio)", -1];
 
 				Land_AwaitingPickupAssign = true;
-				_counter = 0;
-
 				Land_AwaitingDelivery = true;
-
-				call airboss_fnc_land_assignpickup;
+				_counter = 0;
+				_counter call airboss_fnc_land_assignpickup;
 
 				if (Land_AwaitingDelivery) then {
 					//Heading to Waypoint
-					_distanceR = (player distance _delivery);
 					_IsThere = false;
-
 					call airboss_fnc_land_alivedelivery;
 				};
 
