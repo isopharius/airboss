@@ -40,7 +40,7 @@ _vehicle = vehicle player;
 			};
 			if (LHD_Intention isEqualTo 6) then {
 				sleep (ATC_callsignNo / 4);
-				_taskingRequest = [0,0,0,[0]] execVM airboss_fnc_atc_tasking_closeairsupport;
+				_taskingRequest = [0,0,0,[0]] call airboss_fnc_atc_tasking_closeairsupport;
 			};
 		};
 		sleep 1;
