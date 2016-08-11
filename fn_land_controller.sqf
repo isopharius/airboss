@@ -1,10 +1,8 @@
 //Get Variables
 _vehicle = vehicle player;
 
-	_type = 0;
-	if ((count _this) > 1) then {
-		_type = (_this select 3) select 0;
-	};
+_initArray = _this select 3;
+_type = _initArray select 0;
 
 //Script Settings
 	_digitDelay = 0.4;

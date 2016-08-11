@@ -5,11 +5,8 @@ _vehicle = vehicle player;
 	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
 
-	_type = 0;
-	if ((count _this) > 1) then {
-		_initArray = _this select 3;
-		_type = _initArray select 0;
-	};
+	_initArray = _this select 3;
+	_type = _initArray select 0;
 
 	if (ATC_ControllerActionAdded) then {
 		ATC_ControllerActionAdded = false;
