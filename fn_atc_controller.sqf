@@ -92,7 +92,7 @@ _vehicle = vehicle player;
 			};
 
 			//spawn controller monitor
-			_ControlerVM = call airboss_fnc_system_atccontroller;
+			call airboss_fnc_system_atccontroller;
 		};
 
 		if (_type isEqualTo 1) exitwith {//Player has advised new intention
