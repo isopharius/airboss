@@ -97,6 +97,7 @@ if (!isdedicated) then {
 		ATC_callsignNo = 1; //Callsign number
 		ATC_ControllerActionAdded = false;
 		ControllerActionAdded = false;
+		ACEActionAdded = false;
 		ATC_Action_VectorBase =[];
 		ATC_Callsigns = [
 			// --- Aircraft ---
@@ -192,10 +193,10 @@ if (!isdedicated) then {
 	if (acemod) then {
 		LHD_radio = false;
 
-		_lhdradio = ["lhdradio","Airboss radio ON/OFF","",{if (!LHD_radio) then {LHD_radio = true; hint "RADIO ON"} else {LHD_radio = false; hint "RADIO OFF"}},{true}] call ace_interact_menu_fnc_createAction;
+		_lhdradio = ["lhdradio","Here Be Dolphins","",{if (!LHD_radio) then {LHD_radio = true; hint "TURBO AIRBOSS ACTIVATE!"} else {LHD_radio = false; hint "AIRBOSS OFF"}},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lhdradio] call ace_interact_menu_fnc_addActionToObject;
 
-		_landcontrol = ["landcontrol","Contact Land Controller","",{[0] spawn airboss_fnc_land_controller},{(LHD_radio) and (ControllerActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
+		_landcontrol = ["landcontrol","Contact Land Controller","",{[0] spawn airboss_fnc_land_controller},{(LHD_radio) and (ACEActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
 		_aircontrol = ["aircontrol","Contact Controller","",{[0] spawn airboss_fnc_atc_controller},{(LHD_radio) and (ATC_ControllerActionAdded)}] call ace_interact_menu_fnc_createAction;
 		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(LHD_radio) and (getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
 

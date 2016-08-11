@@ -5,17 +5,16 @@ _vehicle = vehicle player;
 	_loon2 = getPosWorld _vehicle;
 	_dir = direction _vehicle;
 
-	if (acemod) then {
-		if (ATC_ControllerActionAdded) then {
-			LHD_Action_ContactControl = false;
-		};
-		_type = _this select 0;
-	} else {
-		if (ATC_ControllerActionAdded) then {
+	_type = 0;
+	if ((count _this) > 1) then {
+		_type = (_this select 3) select 0;
+	};
+
+	if (ATC_ControllerActionAdded) then {
+		ATC_ControllerActionAdded = false;
+		if (!acemod) then {
 			player removeaction LHD_Action_ContactControl;
-			LHD_Action_ContactControl = false;
 		};
-		_type = (_this select 3) select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 	};
 
 //Script Settings

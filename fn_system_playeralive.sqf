@@ -4,11 +4,10 @@
 
 			if((!isNull objectParent player) and (player isEqualTo driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
 
-				if (ControllerActionAdded) then {
-					ControllerActionAdded = false;
-					if (!acemod) then {
-						player removeaction Action_ContactControl;
-					};
+				if (!acemod) then {
+					player removeaction Action_ContactControl;
+				} else {
+					ACEActionAdded = false;
 				};
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
@@ -39,10 +38,12 @@
 
 				//ground action
 				if (!ControllerActionAdded) then {
-					ControllerActionAdded = true;
 					if (!acemod) then {
 						Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'", -1];
+					} else {
+						ACEActionAdded = true;
 					};
+					ControllerActionAdded = true;
 				};
 
 				//debarkation action

@@ -1,11 +1,10 @@
 //Get Variables
 _vehicle = vehicle player;
 
-if (acemod) then {
-	_type = _this select 0;
-} else {
-	_type = (_this select 3) select 0; //0 = Inital Contact
-};
+	_type = 0;
+	if ((count _this) > 1) then {
+		_type = (_this select 3) select 0;
+	};
 
 //Script Settings
 	_digitDelay = 0.4;
@@ -14,12 +13,12 @@ if (acemod) then {
 
 		if (_type isEqualTo 0) exitwith {//Player is making initial contact with controller, assign callsign
 
-				if (ControllerActionAdded) then {
-					ControllerActionAdded = false;
-					if (!acemod) then {
-						player removeaction Action_ContactControl;
-					};
+				if (!acemod) then {
+					player removeaction Action_ContactControl;
+				} else {
+					ACEActionAdded = false;
 				};
+
 				_cursor = 0;
 				_typeOf = TypeOf _vehicle;
 				_callsignNo = 0;

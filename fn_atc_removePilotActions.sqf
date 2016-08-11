@@ -23,7 +23,7 @@
 		LHD_Action_Weather = nil;
 	};
 	if (ATC_ControllerActionAdded) then {
-		LHD_Action_ContactControl = false;
+		ATC_ControllerActionAdded = false;
 		if (!acemod) then {
 			player removeaction LHD_Action_ContactControl;
 		};
