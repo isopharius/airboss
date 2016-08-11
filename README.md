@@ -19,7 +19,7 @@ WATCHDOG controls Air/Ground support
 - assigns ground callsigns
 - coordinates Transport/CAS requests
 
-Logistics Control available inside LHD Control Room
+Logistics Control available inside LHD Control Room to spawn vehicles on LHD deck
 
 //spawnable vehicles example
 
