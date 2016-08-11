@@ -5,6 +5,7 @@ Airboss adds LHD Logistics and Radio controllers for Air/Ground coordination and
 
 HOMER controls LHD airspace
 - initial contact with aircraft within airspace
+- assigns aircraft callsigns
 - coordinates aircraft intentions with WATCHDOG
 
 FLYCO controls LHD traffic
@@ -15,6 +16,7 @@ FLYCO controls LHD traffic
 
 WATCHDOG controls Air/Ground support
 - initial contact with Land controllers
+- assigns ground callsigns
 - coordinates Transport/CAS requests
 
 Logistics Control available inside LHD Control Room
