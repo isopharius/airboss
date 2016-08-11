@@ -11,7 +11,7 @@ _vehicle = vehicle player;
 	player removeaction LHD_Action_Landing;
 	player removeaction LHD_Action_Landing_Priority;
 	player removeaction ATC_TransferToHomer;
-	LHD_Action_Landing_Cancel = player addAction ["FLYCO > Cancel Landing", airboss_fnc_atc_landing_cancel,[],10,false,true, "", "true", -1];
+	LHD_Action_Landing_Cancel = player addAction ["FLYCO > Cancel Landing", airboss_fnc_atc_landing_cancel,[],10,false,true, "", "(LHD_radio)", -1];
 
 //Script Settings
 	_digitDelay = 0.4;
@@ -131,7 +131,7 @@ if ((_inPattern < _maxVehicles) or (_type isEqualTo 1)) then {
 			_curVector = markerpos format ["LHD_%1_%2",_pattern,_curVectorNum];
 
 			_wp = group player addWaypoint [_curVector, _nearDistance];
-			_wp setWaypointStatements ["true", "LHD_PatternWaypointComp = true;"];
+			_wp setWaypointStatements ["(LHD_radio)", "LHD_PatternWaypointComp = true;"];
 
 	//Clear for approach into Pattern
 		waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;

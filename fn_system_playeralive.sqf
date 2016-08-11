@@ -9,6 +9,7 @@
 				} else {
 					ACEActionAdded = false;
 				};
+				ControllerActionAdded = false;
 
 				call airboss_fnc_land_RemoveActionsWatchdog;
 				call airboss_fnc_system_vehiclealive;
@@ -48,7 +49,7 @@
 
 				//debarkation action
 				if ((!acemod) and (getPosWorld player in LHD_Location)) then {
-					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, [], 7, false, true, "", "true", -1];
+					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, [], 7, false, true, "", "(LHD_radio)", -1];
 					waitUntil{!(getPosWorld player in LHD_Location)};
 					player removeAction LHD_Action_DebarkationControl;
 				};

@@ -84,8 +84,8 @@ _vehicle = vehicle player;
 
 				player groupchat format["WATCHDOG: Roger, Fire Location start at Grid Figures %1%2%3 %4%5%6. Confirm Request. Over",_x1,_x2,_x3,_y1,_y2,_y3];
 
-				call compile format ["Land_RequestCAS_Confirm = player addAction ['WATCHDOG > Confirm Request', airboss_fnc_land_closeairsupport, [3,%1,%2,True], 8, false, true, '', 'true', -1];",_pickup,_delivery];
-				call compile format ["Land_RequestCAS_Cancel = player addAction ['WATCHDOG > Cancel Request', airboss_fnc_land_closeairsupport, [3,%1,%2,false], 7, false, true, '', 'true', -1];",_pickup,_delivery];
+				call compile format ["Land_RequestCAS_Confirm = player addAction ['WATCHDOG > Confirm Request', airboss_fnc_land_closeairsupport, [3,%1,%2,True], 8, false, true, '', '(LHD_radio)', -1];",_pickup,_delivery];
+				call compile format ["Land_RequestCAS_Cancel = player addAction ['WATCHDOG > Cancel Request', airboss_fnc_land_closeairsupport, [3,%1,%2,false], 7, false, true, '', '(LHD_radio)', -1];",_pickup,_delivery];
 		};
 		if (_type isEqualTo 3) exitwith {//Land base player has confirmed target
 
@@ -108,7 +108,7 @@ _vehicle = vehicle player;
 					publicVariable "ATC_Tasks_CloseAirSupport";
 
 					player removeaction Land_RequestCAS;
-					Land_RequestCloseAirSupport_Cancel = player addAction ["WATCHDOG > Cancel Air Strike", airboss_fnc_land_closeairsupport, [4], 19, false, true, "", "true", -1];
+					Land_RequestCloseAirSupport_Cancel = player addAction ["WATCHDOG > Cancel Air Strike", airboss_fnc_land_closeairsupport, [4], 19, false, true, "", "(LHD_radio)", -1];
 
 					Land_AwaitingCASAssign = true;
 					_counter = 0;

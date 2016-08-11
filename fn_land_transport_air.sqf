@@ -114,7 +114,7 @@ _vehicle = vehicle player;
 				_cursor = 0;
 				{
 					_cursor = _cursor + 1;
-					call compile format ["Land_RequestAirPickup_Pax%1 = player addAction ['WATCHDOG > %1 x Passenger', airboss_fnc_land_transport_air, [3,%1,%2,%3,%4], 7, false, true, '', 'true', -1];",_cursor,_pickup,_delivery,(count units group player)];
+					call compile format ["Land_RequestAirPickup_Pax%1 = player addAction ['WATCHDOG > %1 x Passenger', airboss_fnc_land_transport_air, [3,%1,%2,%3,%4], 7, false, true, '', '(LHD_radio)', -1];",_cursor,_pickup,_delivery,(count units group player)];
 				} foreach units group player;
 		};
 
@@ -149,7 +149,7 @@ _vehicle = vehicle player;
 				publicVariable "ATC_Tasks_Transport";
 
 				player removeaction Land_RequestAirPickup;
-				Land_RequestAirPickup_Cancel = player addAction ["WATCHDOG > Cancel Air Transport Request", airboss_fnc_land_transport_air, [4], 19, false, true, "", "true", -1];
+				Land_RequestAirPickup_Cancel = player addAction ["WATCHDOG > Cancel Air Transport Request", airboss_fnc_land_transport_air, [4], 19, false, true, "", "(LHD_radio)", -1];
 
 				Land_AwaitingPickupAssign = true;
 				_counter = 0;

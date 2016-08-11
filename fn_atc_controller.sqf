@@ -7,7 +7,8 @@ _vehicle = vehicle player;
 
 	_type = 0;
 	if ((count _this) > 1) then {
-		_type = (_this select 3) select 0;
+		_initarray = _this select 3;
+		_type = _initarray select 0;
 	};
 
 	if (ATC_ControllerActionAdded) then {
@@ -80,7 +81,7 @@ _vehicle = vehicle player;
 				_cursor = 0;
 				{
 					if (_cursor > 0) then {
-						call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 20, false, true, '', 'true', -1];",_cursor,(_x select 0)];
+						call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 20, false, true, '', '(LHD_radio)', -1];",_cursor,(_x select 0)];
 					};
 					_cursor = _cursor + 1;
 				} foreach ATC_Intentions;
@@ -202,7 +203,7 @@ _vehicle = vehicle player;
 			_cursor = 0;
 			{
 				if (_cursor > 0) then {
-					call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 7, false, true, '', 'true', -1];",_cursor,(_x select 0)];
+					call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 7, false, true, '', '(LHD_radio)', -1];",_cursor,(_x select 0)];
 				};
 				_cursor = _cursor + 1;
 			} foreach ATC_Intentions;
