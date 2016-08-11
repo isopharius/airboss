@@ -191,9 +191,7 @@ if (!isdedicated) then {
 	//check ACE, add toggle and actions
 	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));
 	if (acemod) then {
-		LHD_radio = false;
-
-		_lhdradio = ["lhdradio","Here Be Dolphins","",{if (!LHD_radio) then {LHD_radio = true; hint "TURBO AIRBOSS ACTIVATE!"} else {LHD_radio = false; hint "AIRBOSS OFF"}},{true}] call ace_interact_menu_fnc_createAction;
+		_lhdradio = ["lhdradio","Here Be Dolphins","",{if (isnil "LHD_radio") exitwith {LHD_radio = true; call airboss_fnc_lhdmarkers; [] spawn airboss_fnc_system_controlRoom; hint "TURBO AIRBOSS ACTIVATE!"}; if (LHD_radio) exitwith {LHD_radio = false; hint "TURBO AIRBOSS DEACTIVATE!"}; if (!LHD_radio) then {LHD_radio = true; hint "TURBO AIRBOSS ACTIVATE!"}},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lhdradio] call ace_interact_menu_fnc_addActionToObject;
 
 		_landcontrol = ["landcontrol","Contact Land Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_land_controller},{(LHD_radio) and (ACEActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
@@ -204,11 +202,9 @@ if (!isdedicated) then {
 			[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
 		} foreach [_landcontrol,_aircontrol,_lhdcontrol];
 
-	//no ACE
-	} else {
+	} else { //no ACE
 		LHD_radio = true;
+		call airboss_fnc_lhdmarkers; //LHD markers
+		call airboss_fnc_system_controlRoom; //for pilots
 	};
-
-	call airboss_fnc_lhdmarkers; //LHD markers
-	call airboss_fnc_system_controlRoom; //for pilots
 };
