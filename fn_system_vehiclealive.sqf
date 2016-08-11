@@ -31,7 +31,7 @@
 							ATC_ControllerActionAdded = true;
 							if (!acemod) then {
 								//Add option to contact controller
-								LHD_Action_ContactControl = player addAction ["Contact Controller", airboss_fnc_atc_controller, [0], 7, false, true, "", "true", -1];
+								LHD_Action_ContactControl = player addAction ["Contact Controller", airboss_fnc_atc_controller, [0], 7, false, true, "", "(LHD_radio)", -1];
 							};
 						};
 
