@@ -1,6 +1,5 @@
 disableSerialization;
-	_position = _this select 0;
-	_hdg = _this select 1;
+	_position = _this;
 	_display = (findDisplay 50001);
 	_control = (_display displayCtrl 1006);
 	_index = lbCurSel _control;

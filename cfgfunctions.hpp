@@ -24,7 +24,14 @@ class airboss
             class atc_baseActionsHomer {};
             class atc_baseActionsFlyco {};
             class atc_baseActionsWatchdog {};
-            class atc_controller {};
+            class atc_controller_contact {};
+            class atc_controller_newintentions {};
+            class atc_controller_changeintentions {};
+            class atc_controller_airtransfer {};
+            class atc_controller_lhdtransfer {};
+            class atc_controller_sitrep {};
+            class atc_controller_traffic {};
+            class atc_controller_service {};
             class atc_distancetakeoff {};
             class atc_landing {};
             class atc_landing_cancel {};
@@ -47,7 +54,9 @@ class airboss
             class land_baseActionsWatchdog {};
             class land_cascallsign {};
             class land_closeairsupport {};
-            class land_controller {};
+            class land_controller_contact {};
+            class land_controller_transfer {};
+            class land_controller_position {};
             class land_RemoveActionsWatchdog {};
             class land_transport_air {};
             class ui_BayOver {};

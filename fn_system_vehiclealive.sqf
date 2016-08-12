@@ -31,7 +31,7 @@
 							//Add option to contact controller
 							ATC_ControllerActionAdded = true;
 							if (!acemod) then {
-								LHD_Action_ContactControl = player addAction ["Contact Controller", airboss_fnc_atc_controller, [0], 7, false, true, "", "true", -1];
+								LHD_Action_ContactControl = player addAction ["Contact Controller", airboss_fnc_atc_controller_contact, [0], 7, false, true, "", "true", -1];
 							};
 						};
 

@@ -1,4 +1,4 @@
-Land_CurrentPosition = player addAction ["WATCHDOG > Request Current Position", airboss_fnc_land_controller, [2], 20, false, true, "", "true", -1];
+Land_CurrentPosition = player addAction ["WATCHDOG > Request Current Position", airboss_fnc_land_controller_position, nil, 20, false, true, "", "true", -1];
 	if (!Land_AwaitingDelivery) then {
 		Land_RequestAirPickup = player addAction ["WATCHDOG > Request Air Transport", airboss_fnc_land_transport_air, [0], 19, false, true, "", "true", -1];
 	};

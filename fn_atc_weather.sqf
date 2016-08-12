@@ -3,8 +3,6 @@
 	_windSpeed = sqrt ( ( (wind select 0)*(wind select 0) ) + ( (wind select 1)*(wind select 1) ) + ( (wind select 2)*(wind select 2) ) ) * 1.94384449;
 	_vehicle = vehicle player;
 
-
-
 //Script Settings
 	_digitDelay = 0.3;
 	_sentenceDelay = 0.7;
@@ -20,8 +18,6 @@
 	_t2 = floor((daytime - _t1) * 60);
 
 //Initial Message
-	//_vehicle vehicleRadio "flyco_word_thisis";sleep 0.3;
-	//_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.5;
 	waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 	_vehicle vehicleRadio "flyco_msg_weather_1";sleep 1;
 
