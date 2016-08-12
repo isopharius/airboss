@@ -199,7 +199,7 @@ if (!isdedicated) then {
 
 		_landcontrol = ["landcontrol","Contact Land Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_land_controller_contact},{(LHD_radio) and (ACEActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
 		_aircontrol = ["aircontrol","Contact Controller","",{[] spawn airboss_fnc_atc_controller_contact},{(LHD_radio) and (ATC_ControllerActionAdded)}] call ace_interact_menu_fnc_createAction;
-		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(LHD_radio) and (getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
+		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
 
 		{
 			[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
