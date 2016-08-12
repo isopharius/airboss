@@ -157,7 +157,7 @@
 					} else {
 						//Set Next Waypoint
 						private _wp = group player addWaypoint [_curVector, _nearDistance];
-						private _wp setWaypointStatements ["(LHD_radio)", "LHD_PatternWaypointComp = true;"];
+						private _wp setWaypointStatements ["true", "LHD_PatternWaypointComp = true;"];
 
 						//Not on final waypoint, so just transmit new direction
 						waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;

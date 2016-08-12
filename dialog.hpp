@@ -118,7 +118,7 @@ class Bay_RscShortcutButton
 		font = "PuristaMedium";
 		color = "#E5E5E5";
 		align = "left";
-		shadow = "(LHD_radio)";
+		shadow = "true";
 	};
 	class AttributesImage
 	{
