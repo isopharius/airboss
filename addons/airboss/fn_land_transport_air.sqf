@@ -70,7 +70,7 @@ _vehicle = vehicle player;
 				playsound "watchdog_word_over";sleep 0.5;
 				LHD_RadioInUse = false;
 
-				call compile format ["clickdeliver = addMissionEventHandler [['MapSingleClick',{[0, (_this select 1), %1, [2]] spawn airboss_fnc_land_transport_air; removeMissionEventHandler ['MapSingleClick', clickdeliver]}], _pickup"];
+				call compile format ["clickdeliver = addMissionEventHandler [['MapSingleClick',{[0, (_this select 1), %1, [2]] spawn airboss_fnc_land_transport_air; removeMissionEventHandler ['MapSingleClick', clickdeliver]}]", _pickup];
 				//onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
 		};
 
