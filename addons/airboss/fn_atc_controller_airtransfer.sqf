@@ -12,6 +12,7 @@ _vehicle = vehicle player;
 			//Remove Actions
 			player removeaction ATC_TransferToFlyco;
 			player removeaction ATC_ChangeIntentions;
+			call airboss_fnc_atc_removePilotActions;
 
 			//Initial Message
 			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
@@ -23,5 +24,4 @@ _vehicle = vehicle player;
 			_vehicle vehicleRadio "flyco_word_over";sleep 0.5;
 			LHD_RadioInUse = false;
 
-			call airboss_fnc_atc_removePilotActions;
 			call airboss_fnc_atc_baseActionsFlyco;
