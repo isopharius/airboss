@@ -193,12 +193,12 @@ if (!isdedicated) then {
 	//check ACE, add toggle and actions
 	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));
 	if (acemod) then {
-		_lhdradio = ["lhdradio","Here Be Dolphins","",{if (isnil "LHD_radio") exitwith {LHD_radio = true; [] spawn airboss_fnc_system_controlRoom; hint "TURBO AIRBOSS ACTIVATE!"}; if (LHD_radio) exitwith {LHD_radio = false; hint "TURBO AIRBOSS DEACTIVATE!"}; if (!LHD_radio) then {LHD_radio = true; hint "TURBO AIRBOSS ACTIVATE!"}},{true}] call ace_interact_menu_fnc_createAction;
+		_lhdradio = ["lhdradio","Here Be Dolphins","",{if (isnil "LHD_radio") exitwith {LHD_radio = true; [] spawn airboss_fnc_system_controlRoom; hint "TURBO AIRBOSS ACTIVATE!"}; if ((LHD_radio) exitwith {LHD_radio = false; hint "TURBO AIRBOSS DEACTIVATE!"}; if (!LHD_radio) then {LHD_radio = true; hint "TURBO AIRBOSS ACTIVATE!"}},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lhdradio] call ace_interact_menu_fnc_addActionToObject;
 
-		_landcontrol = ["landcontrol","Contact Land Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_land_controller},{(LHD_radio) and (ACEActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
-		_aircontrol = ["aircontrol","Contact Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_atc_controller},{(LHD_radio) and (ATC_ControllerActionAdded)}] call ace_interact_menu_fnc_createAction;
-		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(LHD_radio) and (getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
+		_landcontrol = ["landcontrol","Contact Land Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_land_controller},{(!isnil "LHD_radio") and (LHD_radio) and (ACEActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
+		_aircontrol = ["aircontrol","Contact Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_atc_controller},{(!isnil "LHD_radio") and (LHD_radio) and (ATC_ControllerActionAdded)}] call ace_interact_menu_fnc_createAction;
+		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(!isnil "LHD_radio") and (LHD_radio) and (getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
 
 		{
 			[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
