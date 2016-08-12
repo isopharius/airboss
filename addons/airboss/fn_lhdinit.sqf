@@ -184,7 +184,8 @@ if (!isdedicated) then {
 			"Land_FMradio_F"
 		];
 
-		_lhdvehicles append _lhdcrates;
+		_lhdvehicles append ["Box_NATO_AmmoVeh_F", "B_supplyCrate_F", "B_CargoNet_01_ammo_F", "CargoNet_01_box_F", "CargoNet_01_barrels_F", "Land_Pod_Heli_Transport_04_bench_F", "Land_Cargo10_military_green_F", "Land_Cargo20_military_green_F", "Land_Cargo40_military_green_F", "Land_FMradio_F"
+		];
 
 		LHD_SpawnableVehicles = _lhdvehicles;
 
