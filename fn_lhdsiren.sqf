@@ -1,7 +1,6 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
 	_siren = _this select 0; //0 = , //1 =
 
 //Script Settings

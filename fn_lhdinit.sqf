@@ -184,9 +184,7 @@ if (!isdedicated) then {
 			"Land_FMradio_F"
 		];
 
-		_lhdvehicles append _lhdcrates;
-
-		LHD_SpawnableVehicles = _lhdvehicles;
+		LHD_SpawnableVehicles = _lhdvehicles append _lhdcrates;
 
 		call airboss_fnc_lhdmarkers; //LHD markers
 
