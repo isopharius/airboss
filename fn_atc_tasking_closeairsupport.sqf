@@ -202,7 +202,7 @@ private _vehicle = vehicle player;
 					ATC_Tasks_CloseAirSupport set [_cursor,_newTask];
 					publicVariable "ATC_Tasks_CloseAirSupport";
 				};
-				_cursor = _cursor + 1;
+				private _cursor = _cursor + 1;
 			} forEach ATC_Tasks_CloseAirSupport;
 
 			//ATC_onTask = false;

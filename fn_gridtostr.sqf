@@ -35,4 +35,4 @@ private _ycoord =
 		};
 	};
 private _result = _xcoord + " " + _ycoord;
-_result;
+private _result;

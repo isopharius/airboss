@@ -44,6 +44,6 @@ private _xcoord = _xgrid;
 private _ycoord = _ygrid;
 
 private _result = [_xcoord,_ycoord];
-_result;
+private _result;
 
 //99.747604,-71.310097,5020.0483

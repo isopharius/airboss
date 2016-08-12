@@ -193,7 +193,7 @@ private _vehicle = vehicle player;
 					ATC_Tasks_Transport set [_cursor,_newTask];
 					publicVariable "ATC_Tasks_Transport";
 				};
-				_cursor = _cursor + 1;
+				private _cursor = _cursor + 1;
 			} forEach ATC_Tasks_Transport;
 
 			//ATC_onTask = false;

@@ -9,10 +9,10 @@
 
 							//Make sure its same task
 							{
-								_CallsignArray = _x select 4;
-								_Callsign = _CallsignArray select 0;
-								_CallsignNo = _CallsignArray select 1;
-								_AirCallsign = _x select 5;
+								private _CallsignArray = _x select 4;
+								private _Callsign = _CallsignArray select 0;
+								private _CallsignNo = _CallsignArray select 1;
+								private _AirCallsign = _x select 5;
 
 								if ((_Callsign isEqualTo callsign) and (_CallsignNo isEqualTo callsignNo)) then {
 									//Have right one!
@@ -26,7 +26,7 @@
 										Land_CloseAirSupport_marker2 setMarkerTextLocal format ["STRIKE END : %1 %2",toUpper(_AirCallsign select 0),(_AirCallsign select 1)];
 									};
 								};
-								_cursor = _cursor + 1;
+								private _cursor = _cursor + 1;
 
 							} forEach ATC_Tasks_CloseAirSupport;
 							private _counter = _counter + 1;

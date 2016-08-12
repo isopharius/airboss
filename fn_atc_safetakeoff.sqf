@@ -49,7 +49,7 @@
 									private _isVeh = _arraySelect select 1;
 									if (_isVeh) then {_stopDel = true;};
 									if (!_stopDel) then {_x call seven_fnc_lhd_deletepos};
-									_cursor = _cursor + 1;
+									private _cursor = _cursor + 1;
 								} foreach _baylist;
 								private _deckClearFail = true;
 								sleep 2;
