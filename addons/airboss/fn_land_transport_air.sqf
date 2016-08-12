@@ -26,7 +26,8 @@ _vehicle = vehicle player;
 				playsound "watchdog_word_over";sleep 0.5;
 				LHD_RadioInUse = false;
 
-				onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;";
+				clickpickup = addMissionEventHandler ["MapSingleClick",{[0, 0, (_this select 1), [1]] spawn airboss_fnc_land_transport_air; removeMissionEventHandler ["MapSingleClick", clickpickup]}];
+				//onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;";
 		};
 
 		if (_type isEqualTo 1) exitwith {//Land base player has listed location for pickup
@@ -69,7 +70,8 @@ _vehicle = vehicle player;
 				playsound "watchdog_word_over";sleep 0.5;
 				LHD_RadioInUse = false;
 
-				onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
+				call compile format ["clickdeliver = addMissionEventHandler [['MapSingleClick',{[0, (_this select 1), %1, [2]] spawn airboss_fnc_land_transport_air; removeMissionEventHandler ['MapSingleClick', clickdeliver]}], _pickup"];
+				//onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
 		};
 
 		if (_type isEqualTo 2) exitwith {//Land base player has listed location for delivery
