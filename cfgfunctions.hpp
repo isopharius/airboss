@@ -10,7 +10,6 @@ class airboss
             class lhdinit {};
             class lhdmarkers {};
             class lhdsiren {};
-            class object_create {};
             class PosToGrid {};
             class VehicleReturn {};
             class VehicleService {};
