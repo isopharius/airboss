@@ -9,7 +9,7 @@ _vehicle = vehicle player;
 	};
 
 //Player has advised new intention
-			_intention = _initArray select 1;
+			_intention = (_this select 3) select 1;
 			_intentionArray = ATC_Intentions select _intention;
 			_VehiclesArray = _intentionArray select 1;
 			_VehiclesArray pushback _vehicle;

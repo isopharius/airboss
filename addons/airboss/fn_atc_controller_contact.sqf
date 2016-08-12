@@ -66,7 +66,7 @@ _vehicle = vehicle player;
 				_cursor = 0;
 				{
 					if (_cursor > 0) then {
-						call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller, [1,%1], 20, false, true, '', 'true', -1];",_cursor,(_x select 0)];
+						call compile format ["ATC_Intention_Orders%1 = player addAction ['HOMER > Intention: %2', airboss_fnc_atc_controller_newintentions, [nil,%1], 20, false, true, '', 'true', -1];",_cursor,(_x select 0)];
 					};
 					_cursor = _cursor + 1;
 				} foreach ATC_Intentions;
