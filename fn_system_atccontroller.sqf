@@ -1,12 +1,12 @@
-private _vehicle = vehicle player;
+_vehicle = vehicle player;
 
 	if ((LHD_Controlled) and (alive _vehicle)) then { //Player is controlled
 
 		// --- EMERGENCY NOTIFICATION --- //
 		if (((LHD_Emergency_Call select 1) != 0) and (getPosWorld player in LHD_ControlArea)) then {
 			//Someone has declared an emergency, let's face it, its probably Walker
-			private _em_callsign = LHD_Emergency_Call select 0;
-			private _em_callsignNo = LHD_Emergency_Call select 1;
+			_em_callsign = LHD_Emergency_Call select 0;
+			_em_callsignNo = LHD_Emergency_Call select 1;
 
 			if !((_em_callsign isEqualTo ATC_callsign) and (_em_callsignNo isEqualTo ATC_callsignNo)) then {
 				//Radio

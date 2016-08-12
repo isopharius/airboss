@@ -1,5 +1,5 @@
 //Set Control Room marker
-	private _PosControl = lhd modeltoworld [-6.91016,15.4805,16];
+	_PosControl = lhd modeltoworld [-6.91016,15.4805,16];
 	LHD_Location = createLocation ["NameLocal", _PosControl, 5, 9.5];
 	LHD_Location setDirection _lhddir;
 	LHD_Location setRectangular true;
@@ -26,31 +26,31 @@
 
 //Place markers for each pattern
 {
-	private _cursor = 0;
-	private _patternArray = _x;
-	private _pattern = _patternArray select 0;
-	private _xRadius = _patternArray select 2; _yRadius = _patternArray select 3;
-	private _Processor = [
+	_cursor = 0;
+	_patternArray = _x;
+	_pattern = _patternArray select 0;
+	_xRadius = _patternArray select 2; _yRadius = _patternArray select 3;
+	_Processor = [
 		(lhd modeltoworld [-(_xRadius),(_yRadius)]),
 		(lhd modeltoworld [-(_xRadius),-(_yRadius)]),
 		(lhd modeltoworld [(_xRadius),-(_yRadius)]),
 		(lhd modeltoworld [(_xRadius),(_yRadius)])
 	];
 	{
-		private _cursor = _cursor + 1;
+		_cursor = _cursor + 1;
 
-		private _markerName = format ["LHD_%1_%2",_pattern,_cursor];
-		private _position = [(_x select 0),(_x select 1)];
-		private _marker = createMarkerLocal[_markerName,_position];
+		_markerName = format ["LHD_%1_%2",_pattern,_cursor];
+		_position = [(_x select 0),(_x select 1)];
+		_marker = createMarkerLocal[_markerName,_position];
 		_marker setMarkerShape "ICON";
 		_marker setMarkerType "EMPTY";
 	} foreach _Processor;
 } forEach LHDPatternLayout;
 
 //Create the Finals marker
-	private _closestPattern = LHDPatternLayout select 0;
-	private _xClosest = _closestPattern select 2;
-	private _position = (lhd modeltoworld [(_xClosest),0]);
-	private _marker = createMarkerLocal["LHD_finals",_position];
+	_closestPattern = LHDPatternLayout select 0;
+	_xClosest = _closestPattern select 2;
+	_position = (lhd modeltoworld [(_xClosest),0]);
+	_marker = createMarkerLocal["LHD_finals",_position];
 	_marker setMarkerShape "ICON";
 	_marker setMarkerType "EMPTY";

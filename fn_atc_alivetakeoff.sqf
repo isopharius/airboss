@@ -1,5 +1,5 @@
 		if (LHD_TakeoffRequest and (alive _vehicle)) then {
-			private _Position = LHDPattern find _vehicle;
+			_Position = LHDPattern find _vehicle;
 			if ((_Position isEqualTo 1) and !LHD_TakeoffStandby) then {
 			//Aircraft is next vehicle, get them to prepare
 				LHD_TakeoffStandby = true;
@@ -18,10 +18,10 @@
 					LHD_RadioInUse = false;
 
 					sleep 3;
-					private _notsafe = true;
-					private _deckClearFail = false;
-					private _deckClearMsg = false;
-					private _counter = 0;
+					_notsafe = true;
+					_deckClearFail = false;
+					_deckClearMsg = false;
+					_counter = 0;
 					_counter call seven_fnc_atc_safetakeoff;
 
 				} else {
@@ -29,11 +29,11 @@
 				};
 
 				//Set New Heading
-				private _hdg = getdir lhd;
+				_hdg = getdir lhd;
 
-				private _wD1 = floor(_hdg / 100);
-				private _wD2 = floor((_hdg - (_wD1 * 100)) / 10);
-				private _wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
+				_wD1 = floor(_hdg / 100);
+				_wD2 = floor((_hdg - (_wD1 * 100)) / 10);
+				_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
 
 				if (LHD_TakeoffRequest) then {
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;

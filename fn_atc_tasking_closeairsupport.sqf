@@ -1,10 +1,10 @@
 //Get Variables
-private _vehicle = vehicle player;
-	private _loon1 = getPosWorld lhd;
-	private _loon2 = getPosWorld _vehicle;
-	private _dir = direction _vehicle;
-	private _initArray = _this select 3;
-	private _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
+_vehicle = vehicle player;
+	_loon1 = getPosWorld lhd;
+	_loon2 = getPosWorld _vehicle;
+	_dir = direction _vehicle;
+	_initArray = _this select 3;
+	_type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
 	if (ATC_ControllerActionAdded) then {
 		ATC_ControllerActionAdded = false;
@@ -14,24 +14,24 @@ private _vehicle = vehicle player;
 	};
 
 //Script Settings
-	private _digitDelay = 0.4;
-	private _sentenceDelay = 1;
-	private _maxDigit = ATC_maxDigit;
-	private _pickup = getPosWorld player;
-	private _delivery = _pickup;;
-	private _pax = 0;
-	private _LandCallsign = [];
-	private _newTask = [];
-	private _nearDistance = 100;
-	private _distanceR = 0;
-	private _WithinRange = 2000;
+	_digitDelay = 0.4;
+	_sentenceDelay = 1;
+	_maxDigit = ATC_maxDigit;
+	_pickup = getPosWorld player;
+	_delivery = _pickup;;
+	_pax = 0;
+	_LandCallsign = [];
+	_newTask = [];
+	_nearDistance = 100;
+	_distanceR = 0;
+	_WithinRange = 2000;
 
 		if (_type isEqualTo 0) then { // Action Air Strike Tasking
-			private _cursor = 0;
+			_cursor = 0;
 
 			{
-				private _raisedBy = _x select 0;
-				private _actionedBy = _x select 5;
+				_raisedBy = _x select 0;
+				_actionedBy = _x select 5;
 				if (alive _raisedBy) then {
 					if ((count _actionedBy isEqualTo 0) and (!ATC_onTask)) then {
 						//Task has not been actioned by anyone
@@ -41,11 +41,11 @@ private _vehicle = vehicle player;
 						// Get Variables
 						ATC_CancelTask = false;
 
-						private _pickup = _x select 1;
-						private _delivery = _x select 2;
-						private _pax = _x select 3;
-						private _LandCallsign = _x select 4;
-						private _newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[ATC_callsign,ATC_callsignNo,_vehicle]];
+						_pickup = _x select 1;
+						_delivery = _x select 2;
+						_pax = _x select 3;
+						_LandCallsign = _x select 4;
+						_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[ATC_callsign,ATC_callsignNo,_vehicle]];
 						ATC_onTask = true;
 
 						// Publish Task Taken
@@ -68,10 +68,10 @@ private _vehicle = vehicle player;
 						Air_TaskMarker2 setMarkerTextLocal format ["STRIKE END : %1 %2",toUpper(_LandCallsign select 0),(_LandCallsign select 1)];
 
 						//Orientate Markers
-						private _loon1 = markerpos Air_TaskMarker1;
-						private _loon2 = markerpos Air_TaskMarker2;
-						private _hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
-						private _hdg = ((_hdg + 360) mod 360) + 180;
+						_loon1 = markerpos Air_TaskMarker1;
+						_loon2 = markerpos Air_TaskMarker2;
+						_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
+						_hdg = ((_hdg + 360) mod 360) + 180;
 
 						Air_TaskMarker1 setMarkerDirLocal _hdg;
 						Air_TaskMarker2 setMarkerDirLocal _hdg;
@@ -87,17 +87,17 @@ private _vehicle = vehicle player;
 						_vehicle vehicleRadio "homer_word_proceedtoGF";sleep 1.3;
 
 						//Reformat Pickup
-						private _mapGrid = _pickup call airboss_fnc_PosToGrid;
-						private _mapGridX = _mapGrid select 0;
-						private _mapGridY = _mapGrid select 1;
+						_mapGrid = _pickup call airboss_fnc_PosToGrid;
+						_mapGridX = _mapGrid select 0;
+						_mapGridY = _mapGrid select 1;
 
-						private _x1 = floor(_mapGridX / 100);
-						private _x2 = floor((_mapGridX - (_x1 * 100)) / 10);
-						private _x3 = floor(_mapGridX - (_x2 * 10) - (_x1 * 100));
+						_x1 = floor(_mapGridX / 100);
+						_x2 = floor((_mapGridX - (_x1 * 100)) / 10);
+						_x3 = floor(_mapGridX - (_x2 * 10) - (_x1 * 100));
 
-						private _y1 = floor(_mapGridY / 100);
-						private _y2 = floor((_mapGridY - (_y1 * 100)) / 10);
-						private _y3 = floor(_mapGridY - (_y2 * 10) - (_y1 * 100));
+						_y1 = floor(_mapGridY / 100);
+						_y2 = floor((_mapGridY - (_y1 * 100)) / 10);
+						_y3 = floor(_mapGridY - (_y2 * 10) - (_y1 * 100));
 
 						_vehicle vehicleRadio format ["homer_digit_%1",_x1];sleep 0.5;
 						_vehicle vehicleRadio format ["homer_digit_%1",_x2];sleep 0.5;
@@ -107,14 +107,14 @@ private _vehicle = vehicle player;
 						_vehicle vehicleRadio format ["homer_digit_%1",_y3];sleep 1;
 
 						//Give Bearing
-						private _loon1 = _pickup;
-						private _loon2 = getPosWorld _vehicle;
-						private _hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
-						private _hdg = round((_hdg + 360) mod 360);
+						_loon1 = _pickup;
+						_loon2 = getPosWorld _vehicle;
+						_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
+						_hdg = round((_hdg + 360) mod 360);
 
-						private _wD1 = floor(_hdg / 100);
-						private _wD2 = floor((_hdg - (_wD1 * 100)) / 10);
-						private _wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
+						_wD1 = floor(_hdg / 100);
+						_wD2 = floor((_hdg - (_wD1 * 100)) / 10);
+						_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
 						_vehicle vehicleRadio "homer_word_bearing";sleep 0.8;
 						_vehicle vehicleRadio format ["homer_digit_%1",_wD1];sleep 0.5;
 						_vehicle vehicleRadio format ["homer_digit_%1",_wD2];sleep 0.5;
@@ -125,7 +125,7 @@ private _vehicle = vehicle player;
 						_vehicle vehicleRadio "homer_word_over";sleep 0.5;
 						LHD_RadioInUse = false;
 					};
-					private _cursor = _cursor + 1;
+					_cursor = _cursor + 1;
 				} else {
 					//The creator is dead!  Remove the tasking
 					ATC_Tasks_CloseAirSupport set [_cursor,"deleteme"];
@@ -141,11 +141,11 @@ private _vehicle = vehicle player;
 				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_closeairsupport, [1], 18, false, true, "", "true", -1];
 
 				//Create Waypoint Pickup
-				private _wp1 = group player addWaypoint [_pickup, _nearDistance];
+				_wp1 = group player addWaypoint [_pickup, _nearDistance];
 				_wp1 setWaypointType "DESTROY";
 
 				//Heading to Waypoint
-				private _IsThere = false;
+				_IsThere = false;
 				call airboss_fnc_atc_taskalivetask;
 
 				//Vehicle is now close to the target location
@@ -160,8 +160,8 @@ private _vehicle = vehicle player;
 					//Detect weapon firing, if not, drop more smokes
 
 					//When ordinance complete, cancel task
-				private _cursor = 0;
-				call airboss_fnc_atc_ammovehicle;
+				_cursor = 0;
+				_cursor call airboss_fnc_atc_ammovehicle;
 
 				player vehiclechat "HOMER: This is HOMER. Confirming Attach complete. HOMER Out";
 
@@ -179,30 +179,30 @@ private _vehicle = vehicle player;
 		} else { //Task Cancellation
 			player removeaction ATC_Action_CancelTask;
 			ATC_CancelTask = true;
-			private _cursor = 0;
-			private _raisedBy = player;
-			private _pickup = getPosWorld player;
-			private _delivery = getPosWorld player;
-			private _pax = 0;
-			private _LandCallsign = [];
-			private _newTask = [];
+			_cursor = 0;
+			_raisedBy = player;
+			_pickup = getPosWorld player;
+			_delivery = getPosWorld player;
+			_pax = 0;
+			_LandCallsign = [];
+			_newTask = [];
 
 			//REMOVE FROM TASKING
 			{
-				private _AirCallsign2 = _x select 5;
+				_AirCallsign2 = _x select 5;
 				if (((_AirCallsign2 select 0) isEqualTo ATC_callsign) and ((_AirCallsign2 select 1) isEqualTo ATC_callsignNo)) then {
 					//Have right one!
-					private _raisedBy = _x select 0;
-					private _pickup = _x select 1;
-					private _delivery = _x select 2;
-					private _pax = _x select 3;
-					private _LandCallsign = _x select 4;
-					private _newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[]];
+					_raisedBy = _x select 0;
+					_pickup = _x select 1;
+					_delivery = _x select 2;
+					_pax = _x select 3;
+					_LandCallsign = _x select 4;
+					_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[]];
 					// Publish Task Cancel
 					ATC_Tasks_CloseAirSupport set [_cursor,_newTask];
 					publicVariable "ATC_Tasks_CloseAirSupport";
 				};
-				private _cursor = _cursor + 1;
+				_cursor = _cursor + 1;
 			} forEach ATC_Tasks_CloseAirSupport;
 
 			//ATC_onTask = false;

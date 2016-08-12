@@ -1,6 +1,6 @@
 		if (alive player) then {
 			//init
-			private _vehicle = vehicle player;
+			_vehicle = vehicle player;
 
 			if((!isNull objectParent player) and (player isEqualTo driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
 
@@ -19,10 +19,10 @@
 					LHD_TrgTargets = [];
 
 				//Remove from intentions
-					private _intention = LHD_Intention;
-					private _intentionArray = ATC_Intentions select _intention;
-					private _VehiclesArray = _intentionArray select 1;
-					private _VehiclesArray = _VehiclesArray - [_vehicle];
+					_intention = LHD_Intention;
+					_intentionArray = ATC_Intentions select _intention;
+					_VehiclesArray = _intentionArray select 1;
+					_VehiclesArray = _VehiclesArray - [_vehicle];
 					_intentionArray set [1,_VehiclesArray];
 					ATC_Intentions set [_intention,_intentionArray];
 					publicVariable "ATC_Intentions";

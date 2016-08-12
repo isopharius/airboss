@@ -1,4 +1,4 @@
-private _vehicle = _this;
+_vehicle = _this;
 
 if (local _vehicle or (assignedVehicle player) isEqualTo _vehicle) then {
 
@@ -7,16 +7,16 @@ if (local _vehicle or (assignedVehicle player) isEqualTo _vehicle) then {
 	_vehicle setDamage 0;
 	_vehicle setVehicleAmmo 1;
 
-	private _type = typeOf _vehicle;
-	private _turretcount = count (configFile >> "CfgVehicles" >> _type >> "Turrets");
+	_type = typeOf _vehicle;
+	_turretcount = count (configFile >> "CfgVehicles" >> _type >> "Turrets");
 
 	if (_turretcount > 0) then {
 		for "_i" from 0 to (_turretcount-1) do {
 
-			private _thisturret = (configFile >> "CfgVehicles" >> _type >> "Turrets") select _i;
+			_thisturret = (configFile >> "CfgVehicles" >> _type >> "Turrets") select _i;
 
-			private _mags = getArray(_thisturret >> "magazines");
-			private _removed = [];
+			_mags = getArray(_thisturret >> "magazines");
+			_removed = [];
 			{
 				if (!(_x in _removed)) then {
 					_vehicle removeMagazinesTurret [_x,[_i]];

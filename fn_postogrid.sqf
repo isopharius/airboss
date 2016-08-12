@@ -12,38 +12,38 @@
 	Array in format ["X","Y"]
 */
 
-private _x = -1;
-private _y = -1;
+_x = -1;
+_y = -1;
 
 switch (typename _this) do
 {
 	//--- Coordinates
 	case "ARRAY": {
-		private _x = _this select 0;
-		private _y = _this select 1;
+		_x = _this select 0;
+		_y = _this select 1;
 	};
 	//--- Unit
 	case "OBJECT": {
-		private _x = getPosWorld _this select 0;
-		private _y = getPosWorld _this select 1;
+		_x = getPosWorld _this select 0;
+		_y = getPosWorld _this select 1;
 	};
 	//--- Marker
 	case "STRING": {
-		private _x = markerpos _this select 0;
-		private _y = markerpos _this select 1;
+		_x = markerpos _this select 0;
+		_y = markerpos _this select 1;
 	};
 	default {
 		if (true) exitwith {hintc format ["Bad input in ""PosToGrid.sqf"" - %1.",typename _this]};
 	};
 };
 
-private _xgrid = floor (_x / 100);
-private _ygrid = floor (/*(MapY - _y)*/ _y / 100); //15360
+_xgrid = floor (_x / 100);
+_ygrid = floor (/*(MapY - _y)*/ _y / 100); //15360
 
-private _xcoord = _xgrid;
-private _ycoord = _ygrid;
+_xcoord = _xgrid;
+_ycoord = _ygrid;
 
-private _result = [_xcoord,_ycoord];
-private _result;
+_result = [_xcoord,_ycoord];
+_result;
 
 //99.747604,-71.310097,5020.0483

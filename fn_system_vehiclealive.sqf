@@ -1,7 +1,7 @@
 					if ((alive _vehicle) and (vehicle player isEqualTo _vehicle)) then {
 						// Player is in a vehicle, check if the vehicle is in a restricted area and not controlled
-						private _isOnDeck = getPosWorld _vehicle in LHD_Deck;
-						private _isInRestricted = getPosWorld _vehicle in LHD_RestrictedArea;
+						_isOnDeck = getPosWorld _vehicle in LHD_Deck;
+						_isInRestricted = getPosWorld _vehicle in LHD_RestrictedArea;
 
 						if ((_isInRestricted) and (!LHD_Controlled) and (!_isOnDeck)) then {
 							if (LHD_ControlWarning < LHD_MaxWarnings) then {

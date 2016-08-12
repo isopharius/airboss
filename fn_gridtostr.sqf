@@ -11,9 +11,9 @@
 	Returns:
 	Array in format ["X","Y"]
 */
-private _xgrid = _this select 0;
-private _ygrid = _this select 1;
-private _xcoord =
+_xgrid = _this select 0;
+_ygrid = _this select 1;
+_xcoord =
 	if (_xgrid >= 100) then {
 		str _xgrid;
 	} else {
@@ -24,7 +24,7 @@ private _xcoord =
 		};
 	};
 
-private _ycoord =
+_ycoord =
 	if (_ygrid >= 100) then {
 		str _ygrid;
 	} else {
@@ -34,5 +34,5 @@ private _ycoord =
 			"00" + str _ygrid;
 		};
 	};
-private _result = _xcoord + " " + _ycoord;
-private _result;
+_result = _xcoord + " " + _ycoord;
+_result;
