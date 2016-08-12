@@ -14,13 +14,13 @@ _vehicle = vehicle player;
 			call fnc_usec_atc_removePilotActions;
 
 			//Initial Message
-			waitUntil{!LHA_RadioInUse};LHA_RadioInUse = true;
+			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 			_vehicle vehicleRadio format ["watchdog_callsign_%1",ATC_callsign];
 			_vehicle vehicleRadio format ["watchdog_digit_%1",ATC_callsignNo];sleep 0.5;
 			_vehicle vehicleRadio "watchdog_word_thisis";sleep 0.3;
 			_vehicle vehicleRadio "watchdog_callsign_watchdog";sleep 0.5;
 			_vehicle vehicleRadio "watchdog_word_goahead";sleep 0.5;
 			_vehicle vehicleRadio "watchdog_word_over";sleep 0.5;
-			LHA_RadioInUse = false;
+			LHD_RadioInUse = false;
 
 			call fnc_usec_atc_baseActionsWatchdog;
