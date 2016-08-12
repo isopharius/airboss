@@ -40,7 +40,7 @@
 				//ground action
 				if (!ControllerActionAdded) then {
 					if (!acemod) then {
-						Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'", -1];
+						Action_ContactControl = player addAction ["Contact Land Controller", airboss_fnc_land_controller_contact, [0], 7, false, true, "", "(backpack player) iskindof 'TFAR_Bag_Base'", -1];
 					} else {
 						ACEActionAdded = true;
 					};
