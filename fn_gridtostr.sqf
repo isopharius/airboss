@@ -11,6 +11,7 @@
 	Returns:
 	Array in format ["X","Y"]
 */
+private["_xgrid","_ygrid","_xcoord","_ycoord","_result"];
 _xgrid = _this select 0;
 _ygrid = _this select 1;
 _xcoord =
