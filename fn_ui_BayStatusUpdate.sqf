@@ -1,4 +1,5 @@
 disableSerialization;
+		private["_IsSafe","_bay","_ctrl","_pic","_control","_display","_baySelected","_button","_r","_g","_b"];
 		//Sets visual status of a bay on dialog
 		_bay = _this select 0;
 		_IsSafe = _this select 1;

@@ -1,4 +1,5 @@
 disableSerialization;
+		private["_display","_vehicle","_control"];
 		//Run when player selects returning of a vehicle
 		_vehicle = LHD_ActiveObject;
 		_display = (findDisplay 50001);

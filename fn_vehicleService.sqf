@@ -1,3 +1,4 @@
+private["_vehicle","_type"];
 _vehicle = _this;
 
 if (local _vehicle or (assignedVehicle player) isEqualTo _vehicle) then {

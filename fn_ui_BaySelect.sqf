@@ -1,4 +1,5 @@
 disableSerialization;
+		private["_bay","_ctrl","_pic","_control","_display","_baytext","_status","_r","_g","_b","_TextVehicle","_TextDriver","_baySelected","_bayStatus","_vehList","_type","_ctrlSpawn","_ctrlReturn","_ctrlService"];
 		//Run when a player selects a bay
 		_bay = _this select 0;
 		if (LHD_SelectedBay > 0) then {

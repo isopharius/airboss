@@ -1,4 +1,5 @@
 disableSerialization;
+		private["_ctrl","_pic","_isOver","_control","_display","_status","_r","_g","_b"];
 		//Run when player moves mouse over or off a bay
 		_ctrl = _this select 0;
 		_pic = _ctrl - 100;

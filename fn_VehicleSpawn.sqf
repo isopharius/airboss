@@ -1,4 +1,5 @@
 disableSerialization;
+	private["_position","_type","_display","_control","_index"];
 	_display = (findDisplay 50001);
 	_control = (_display displayCtrl 1006);
 	_index = lbCurSel _control;

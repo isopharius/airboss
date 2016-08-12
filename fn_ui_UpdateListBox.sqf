@@ -1,4 +1,5 @@
 disableSerialization;
+		private["_index","_list","_airId","_vehName","_listBox","_list2","_x"];
 		//Run when we need up update the listbox
 		_index = 0;
 		_listBox = _this select 0;
