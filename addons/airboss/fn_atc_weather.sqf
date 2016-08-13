@@ -1,11 +1,12 @@
+//Script Settings
+#define DIGITDELAY 0.3
+#define	SENTENCEDELAY 0.7
+#define	ATCMAXDIGIT 60
+
 //Input Variables
 	_windDirection = ((((wind select 0) atan2 (wind select 1)) + 360) mod 360);
 	_windSpeed = sqrt ( ( (wind select 0)*(wind select 0) ) + ( (wind select 1)*(wind select 1) ) + ( (wind select 2)*(wind select 2) ) ) * 1.94384449;
 	_vehicle = vehicle player;
-
-//Script Settings
-	_digitDelay = 0.3;
-	_sentenceDelay = 0.7;
 
 //Split
 	_wS = round(_windSpeed);
@@ -33,26 +34,26 @@
 		_vehicle vehicleRadio format["flyco_digit_%1",_t2];sleep 0.1;
 	};
 	_vehicle vehicleRadio "flyco_word_hours";sleep 0.7;
-	sleep _sentenceDelay;
+	sleep SENTENCEDELAY;
 
 //Say WindSpeed Result
-	if(_wS > ATC_maxDigit) then {_wS = ATC_maxDigit};
+	if(_wS > ATCMAXDIGIT) then {_wS = ATCMAXDIGIT};
 	_vehicle vehicleRadio "flyco_word_windSpeed";sleep 1;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wS];sleep _digitDelay;
-	_vehicle vehicleRadio "flyco_word_knots";sleep _sentenceDelay;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wS];sleep DIGITDELAY;
+	_vehicle vehicleRadio "flyco_word_knots";sleep SENTENCEDELAY;
 
 //Say windDirection Result
 	_vehicle vehicleRadio "flyco_word_windDirection";sleep 1;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _digitDelay;
-	sleep _sentenceDelay;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep DIGITDELAY;
+	sleep SENTENCEDELAY;
 
 //Sky Condition
 	_condition = overcast;
 	_forecast = overcastForecast;
 
-	_vehicle vehicleRadio "flyco_word_skyconditions";sleep _digitDelay;
+	_vehicle vehicleRadio "flyco_word_skyconditions";sleep DIGITDELAY;
 
 	if(_condition > 0.1) then {
 		if(_condition > 0.5) then {
@@ -67,9 +68,9 @@
 	} else {
 		_vehicle vehicleRadio "flyco_cloud_1";
 	};
-	sleep _sentenceDelay;
+	sleep SENTENCEDELAY;
 
-	_vehicle vehicleRadio "flyco_word_forecast";sleep _digitDelay;
+	_vehicle vehicleRadio "flyco_word_forecast";sleep DIGITDELAY;
 
 	if(_forecast > 0.1) then {
 		if(_forecast > 0.5) then {
@@ -84,7 +85,7 @@
 	} else {
 		_vehicle vehicleRadio "flyco_cloud_1";
 	};
-	sleep _sentenceDelay;
+	sleep SENTENCEDELAY;
 
 //Visibility
 	_condition = fog;
@@ -105,7 +106,7 @@
 	} else {
 		_vehicle vehicleRadio "flyco_word_fine";
 	};
-	sleep _sentenceDelay;
+	sleep SENTENCEDELAY;
 
 	_vehicle vehicleRadio "flyco_word_forecast";sleep 1.2;
 
@@ -122,7 +123,7 @@
 	} else {
 		_vehicle vehicleRadio "flyco_word_fine";
 	};
-	sleep _sentenceDelay;
+	sleep SENTENCEDELAY;
 
 //End Transmission
 	_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.5;

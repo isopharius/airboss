@@ -1,13 +1,13 @@
-//Get Variables
-	_loon1 = getPosWorld lhd;
-	_loon2 = getPosWorld player;
-	_vehicle = vehicle player;
-
-	_dir = direction _vehicle;
-
 //Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
+#define DIGITDELAY 0.4
+#define	SENTENCEDELAY 1
+#define	ATCMAXDIGIT 60
+
+//Get Variables
+_loon1 = getPosWorld lhd;
+_loon2 = getPosWorld player;
+_vehicle = vehicle player;
+_dir = direction _vehicle;
 
 //calc heading to ship
 	_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
@@ -30,14 +30,14 @@
 	waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 	_vehicle vehicleRadio "flyco_word_roger";sleep 0.4;
 	_vehicle vehicleRadio "flyco_word_shipis";sleep 0.4;
-	_vehicle vehicleRadio format["flyco_digit_%1",_clock];sleep _digitDelay;
+	_vehicle vehicleRadio format["flyco_digit_%1",_clock];sleep DIGITDELAY;
 	_vehicle vehicleRadio "flyco_word_oclock";sleep 0.4;
 	_vehicle vehicleRadio "flyco_word_bearing";sleep 0.4;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-	_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _sentenceDelay;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+	_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep SENTENCEDELAY;
 
-	if (_distance < (ATC_maxDigit * 1000)) then {
+	if (_distance < (ATCMAXDIGIT * 1000)) then {
 		if (_distance < 1000) then {
 		//Under a kilometer, report in meters
 			_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;

@@ -15,9 +15,6 @@ _vehicle = vehicle player;
 	};
 
 //Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = ATC_maxDigit;
 	_pickup = getPosWorld player;
 	_delivery = _pickup;
 	_pax = 0;

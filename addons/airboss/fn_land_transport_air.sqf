@@ -1,15 +1,10 @@
 //Get Variables
 _vehicle = vehicle player;
 
-	_initArray = _this select 3;
-	_delivery = _this select 1;
-	_pickup = _this select 2;
-	_type = _initArray select 0; //0 = Inital Contact
-
-//Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = ATC_maxDigit;
+_initArray = _this select 3;
+_delivery = _this select 1;
+_pickup = _this select 2;
+_type = _initArray select 0; //0 = Inital Contact
 
 		if (_type isEqualTo 0) exitwith {//Land base player is requesting an air pickup (Phase Zero)
 

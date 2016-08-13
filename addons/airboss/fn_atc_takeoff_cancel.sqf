@@ -1,15 +1,8 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
-
 //Add Actions
 	player removeaction LHD_Action_Takeoff_Cancel;
-
-//Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = 60;
 
 	//Radio Completed
 		waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;

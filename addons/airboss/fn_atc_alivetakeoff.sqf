@@ -1,3 +1,7 @@
+//Script Settings
+#define DIGITDELAY 0.4
+#define	SENTENCEDELAY 1
+
 		if (LHD_TakeoffRequest and (alive _vehicle)) then {
 			_Position = LHDPattern find _vehicle;
 			if ((_Position isEqualTo 1) and !LHD_TakeoffStandby) then {
@@ -39,17 +43,17 @@
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 					_vehicle vehicleRadio format["flyco_callsign_%1",ATC_callsign];
 					_vehicle vehicleRadio format["flyco_digit_%1",ATC_callsignNo];sleep 0.3;
-					_vehicle vehicleRadio "flyco_msg_takeoff_depart_1";sleep _sentenceDelay;
+					_vehicle vehicleRadio "flyco_msg_takeoff_depart_1";sleep SENTENCEDELAY;
 					_vehicle vehicleRadio "flyco_word_vector";sleep 0.4;
-					_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-					_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-					_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _digitDelay;
-					sleep _sentenceDelay;
+					_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+					_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+					_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep DIGITDELAY;
+					sleep SENTENCEDELAY;
 					_vehicle vehicleRadio "flyco_word_altitude";sleep 0.4;
-					_vehicle vehicleRadio format["flyco_digit_%1",LHDAlt];sleep _digitDelay;
+					_vehicle vehicleRadio format["flyco_digit_%1",LHDAlt];sleep DIGITDELAY;
 					_vehicle vehicleRadio "flyco_word_meters";sleep 0.3;
-					sleep _sentenceDelay;
-					_vehicle vehicleRadio "flyco_msg_takeoff_depart_2";sleep _sentenceDelay;
+					sleep SENTENCEDELAY;
+					_vehicle vehicleRadio "flyco_msg_takeoff_depart_2";sleep SENTENCEDELAY;
 					_vehicle vehicleRadio "flyco_word_over";sleep 0.8;
 					LHD_RadioInUse = false;
 					LHD_TakeoffRequest = false;

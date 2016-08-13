@@ -1,12 +1,7 @@
 //Get Variables
 _vehicle = vehicle player;
 
-	_siren = _this select 0; //0 = , //1 =
-
-//Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = ATC_maxDigit;
+_siren = _this select 0; //0 = , //1 =
 
 	if (_siren isEqualTo 0) then {//LAUNCH SIREN
 		_soundSource = createSoundSource ["Alarm_Launch", position lhd, [], 0];

@@ -92,7 +92,6 @@ if (!isdedicated) then {
 
 	//ATC Variables
 		LHD_MaxWarnings = 2;	//This sets the maximum number of restricted airspace warnings before you get classed as enemy
-		ATC_maxDigit = 60;
 		ATC_callsign = "falcon"; //Callsign Aircraft
 		ATC_callsignNo = 1; //Callsign number
 		ATC_ControllerActionAdded = false;
@@ -171,7 +170,7 @@ if (!isdedicated) then {
 			_lhdvehicles pushback (configName _x);
 		} foreach _westvehicles;
 
-		_lhdcrates = [
+		_lhdvehicles append [
 			"Box_NATO_AmmoVeh_F",
 			"B_supplyCrate_F",
 			"B_CargoNet_01_ammo_F",
@@ -182,9 +181,6 @@ if (!isdedicated) then {
 			"Land_Cargo20_military_green_F",
 			"Land_Cargo40_military_green_F",
 			"Land_FMradio_F"
-		];
-
-		_lhdvehicles append ["Box_NATO_AmmoVeh_F", "B_supplyCrate_F", "B_CargoNet_01_ammo_F", "CargoNet_01_box_F", "CargoNet_01_barrels_F", "Land_Pod_Heli_Transport_04_bench_F", "Land_Cargo10_military_green_F", "Land_Cargo20_military_green_F", "Land_Cargo40_military_green_F", "Land_FMradio_F"
 		];
 
 		LHD_SpawnableVehicles = _lhdvehicles;

@@ -1,3 +1,8 @@
+//Script Settings
+#define DIGITDELAY 0.4
+#define	SENTENCEDELAY 1
+#define	ATCMAXDIGIT 60
+
 			if (LHD_Approach and !LHD_HasLanded and (alive _vehicle) and !LHD_CancelLanding) then {
 
 				// ### Check for New Altitude and Position in Que ###
@@ -126,18 +131,18 @@
 						waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 						_vehicle vehicleRadio "flyco_word_thisis";sleep 0.1;
 						_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.3;
-						_vehicle vehicleRadio "flyco_word_makeleftturnontobase";sleep _sentenceDelay;
+						_vehicle vehicleRadio "flyco_word_makeleftturnontobase";sleep SENTENCEDELAY;
 						_vehicle vehicleRadio "flyco_word_newheading";sleep 0.4;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _sentenceDelay;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep SENTENCEDELAY;
 						_vehicle vehicleRadio "flyco_word_youarecleartolandatbay";sleep 0.4;
-						_vehicle vehicleRadio format["flyco_digit_%1",8];sleep _digitDelay;
-						sleep _sentenceDelay;
+						_vehicle vehicleRadio format["flyco_digit_%1",8];sleep DIGITDELAY;
+						sleep SENTENCEDELAY;
 						_vehicle vehicleRadio "flyco_word_missedapproachpoint";sleep 0.4;
-						_vehicle vehicleRadio format["flyco_digit_%1",LHD_MissedApproach_Dis];sleep _digitDelay;
+						_vehicle vehicleRadio format["flyco_digit_%1",LHD_MissedApproach_Dis];sleep DIGITDELAY;
 						_vehicle vehicleRadio "flyco_word_meters";sleep 0.3;
-						sleep _sentenceDelay;
+						sleep SENTENCEDELAY;
 						_vehicle vehicleRadio "flyco_word_ifnotinsightat";sleep 0.4;
 						_vehicle vehicleRadio "flyco_word_missedapproachpoint";sleep 0.8;
 						_vehicle vehicleRadio "flyco_word_vector";sleep 0.4;
@@ -149,9 +154,9 @@
 						_wD2 = floor((_map - (_wD1 * 100)) / 10);
 						_wD3 = floor(_map - (_wD2 * 10) - (_wD1 * 100));
 
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _digitDelay;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep DIGITDELAY;
 						_vehicle vehicleRadio "flyco_word_over";sleep 0.3;
 						LHD_RadioInUse = false;
 					} else {
@@ -163,13 +168,13 @@
 						waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 						_vehicle vehicleRadio "flyco_word_thisis";sleep 0.1;
 						_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.3;
-						_vehicle vehicleRadio "flyco_word_makeleftturn";sleep _sentenceDelay;
+						_vehicle vehicleRadio "flyco_word_makeleftturn";sleep SENTENCEDELAY;
 						_vehicle vehicleRadio "flyco_word_newheading";sleep 0.4;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-						_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _digitDelay;
-						sleep _sentenceDelay;
-						if (_distance < (ATC_maxDigit * 1000)) then {
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+						_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep DIGITDELAY;
+						sleep SENTENCEDELAY;
+						if (_distance < (ATCMAXDIGIT * 1000)) then {
 							if (_distance < 1000) then {
 							//Under a kilometer, report in meters
 								_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;
@@ -186,7 +191,7 @@
 							};
 						};
 						_vehicle vehicleRadio "flyco_word_tillnextturn";sleep 0.3;
-						sleep _sentenceDelay;
+						sleep SENTENCEDELAY;
 						_vehicle vehicleRadio "flyco_word_over";sleep 0.3;
 						LHD_RadioInUse = false;
 					};
@@ -221,11 +226,11 @@
 					_vehicle vehicleRadio "flyco_word_atthegate";sleep 0.8;
 					_vehicle vehicleRadio "flyco_word_reducespeed";sleep 0.3;
 					_vehicle vehicleRadio "flyco_word_vector";sleep 0.4;
-					_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-					_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-					_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _digitDelay;
-					sleep _sentenceDelay;
-					if (_distance < (ATC_maxDigit * 1000)) then {
+					_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+					_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+					_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep DIGITDELAY;
+					sleep SENTENCEDELAY;
+					if (_distance < (ATCMAXDIGIT * 1000)) then {
 						if (_distance < 1000) then {
 						//Under a kilometer, report in meters
 							_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;

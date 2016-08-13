@@ -1,10 +1,10 @@
 //Get Variables
 _vehicle = vehicle player;
-	_loon1 = getPosWorld lhd;
-	_loon2 = getPosWorld _vehicle;
-	_dir = direction _vehicle;
-	_initArray = _this select 3;
-	_type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
+_loon1 = getPosWorld lhd;
+_loon2 = getPosWorld _vehicle;
+_dir = direction _vehicle;
+_initArray = _this select 3;
+_type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
 	if (ATC_ControllerActionAdded) then {
 		ATC_ControllerActionAdded = false;
@@ -14,9 +14,6 @@ _vehicle = vehicle player;
 	};
 
 //Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = ATC_maxDigit;
 	_pickup = getPosWorld player;
 	_delivery = _pickup;;
 	_pax = 0;

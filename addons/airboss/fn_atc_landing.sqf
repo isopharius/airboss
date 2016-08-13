@@ -1,22 +1,22 @@
+//Script Settings
+#define DIGITDELAY 0.4
+#define	SENTENCEDELAY 1
+
 //Get Variables
 _vehicle = vehicle player;
 
-	_loon1 = getPosWorld lhd;
-	_loon2 = getPosWorld _vehicle;
-	_dir = direction _vehicle;
-	_initArray = _this select 3;
-	_type = _initArray select 0; //0 = Priority landing
+_loon1 = getPosWorld lhd;
+_loon2 = getPosWorld _vehicle;
+_dir = direction _vehicle;
+_initArray = _this select 3;
+_type = _initArray select 0; //0 = Priority landing
 
 //Add Actions
 	player removeaction LHD_Action_Landing;
 	player removeaction LHD_Action_Landing_Priority;
 	player removeaction ATC_TransferToHomer;
-	LHD_Action_Landing_Cancel = player addAction ["FLYCO > Cancel Landing", airboss_fnc_atc_landing_cancel,[],10,false,true, "", "true", -1];
-
-//Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = ATC_maxDigit;
+	call airboss_fnc_atc_removePilotActions;
+	LHD_Action_Landing_Cancel = player addAction ["FLYCO > Cancel Landing", airboss_fnc_atc_landing_cancel,nil,10,false,true, "", "true", -1];
 
 //Defines
 	_alt = 0;
@@ -123,8 +123,6 @@ if ((_inPattern < _maxVehicles) or (_type isEqualTo 1)) then {
 
 		//Script Settings
 			_nearDistance = 100; //How close before next vector
-			_digitDelay = 0.4;
-			_sentenceDelay = 1;
 
 		//Get Nearest Vector
 			_curVectorNum = [_vehicle,_vector1,_vector2,_vector3,_vector4] call airboss_fnc_atc_nearestVector;
@@ -157,9 +155,9 @@ if ((_inPattern < _maxVehicles) or (_type isEqualTo 1)) then {
 		_wD3 = floor(_hdg - (_wD2 * 10) - (_wD1 * 100));
 
 		_vehicle vehicleRadio "flyco_word_bearing";sleep 0.4;
-		_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep _digitDelay;
-		_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep _digitDelay;
-		_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep _sentenceDelay;
+		_vehicle vehicleRadio format["flyco_digit_%1",_wD1];sleep DIGITDELAY;
+		_vehicle vehicleRadio format["flyco_digit_%1",_wD2];sleep DIGITDELAY;
+		_vehicle vehicleRadio format["flyco_digit_%1",_wD3];sleep SENTENCEDELAY;
 
 	//Set Approach Direction
 		_vehicle vehicleRadio format["flyco_cmp_%1",_approach];sleep 0.1;

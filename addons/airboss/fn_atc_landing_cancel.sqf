@@ -1,15 +1,9 @@
 //Get Variables
 _vehicle = vehicle player;
 
-
-
-//Add Actions
+//Remove Actions
 	player removeaction LHD_Action_Landing_Cancel;
-
-//Script Settings
-	_digitDelay = 0.4;
-	_sentenceDelay = 1;
-	_maxDigit = 60;
+	call airboss_fnc_atc_removePilotActions;
 
 	//Radio Completed
 		waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
@@ -37,5 +31,4 @@ _vehicle = vehicle player;
 	LHDPattern = LHDPattern - [_vehicle];
 	publicVariable "LHDPattern";
 
-	call airboss_fnc_atc_removePilotActions;
 	call airboss_fnc_atc_baseActionsFlyco;
