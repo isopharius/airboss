@@ -12,8 +12,8 @@
 	Array in format ["X","Y"]
 */
 
-_x = -1;
-_y = -1;
+private _x = -1;
+private _y = -1;
 
 switch (typename _this) do
 {
@@ -37,13 +37,13 @@ switch (typename _this) do
 	};
 };
 
-_xgrid = floor (_x / 100);
-_ygrid = floor (/*(MapY - _y)*/ _y / 100); //15360
+private _xgrid = floor (_x / 100);
+private _ygrid = floor (/*(MapY - _y)*/ _y / 100); //15360
 
-_xcoord = _xgrid;
-_ycoord = _ygrid;
+private _xcoord = _xgrid;
+private _ycoord = _ygrid;
 
-_result = [_xcoord,_ycoord];
+private _result = [_xcoord,_ycoord];
 _result;
 
 //99.747604,-71.310097,5020.0483
