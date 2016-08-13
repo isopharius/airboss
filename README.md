@@ -3,7 +3,7 @@ ArmA3 LHD airboss - CUP LHD required
 
 Airboss adds LHD Logistics and Radio controllers for Air/Ground coordination and traffic
 
-HOMER controls LHD airspace
+HOMER controls LHD operations
 - initial contact with aircraft within airspace
 - assigns aircraft callsigns
 - coordinates aircraft intentions with WATCHDOG
@@ -12,7 +12,7 @@ FLYCO controls LHD traffic
 - traffic report
 - weather forecast
 - takeoff and landing clearance
-- assign traffic patterns
+- assigns traffic patterns
 
 WATCHDOG controls Air/Ground support
 - initial contact with Land controllers

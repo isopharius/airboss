@@ -1,3 +1,5 @@
+#define ATCMAXDIGIT 60
+
 						if (LHD_IsLanding and !LHD_HasLanded and LHD_Approach and (alive _vehicle)) then {
 						//Aircraft is past finals, heading into land.  Call distances.
 							//Set New Distance
@@ -5,7 +7,7 @@
 							_distance = round(_distanceA / 100) * 100;
 							if ((_distance in LHD_FinalCall) and (_distance != _prevdistance)) then {
 								waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
-								if (_distance < (ATC_maxDigit * 1000)) then {
+								if (_distance < (ATCMAXDIGIT * 1000)) then {
 									if (_distance < 1000) then {
 									//Under a kilometer, report in meters
 										_vehicle vehicleRadio format["flyco_digit_%1",_distance];sleep 0.4;
