@@ -46,7 +46,7 @@ _vehicle = vehicle player;
 				_y2 = floor((_mapGridY - (_y1 * 100)) / 10);
 				_y3 = floor(_mapGridY - (_y2 * 10) - (_y1 * 100));
 
-				call compile format ["clickdeliver = addMissionEventHandler [['MapSingleClick',{[0, (_this select 1), %1, [2]] call airboss_fnc_land_closeairsupport; removeMissionEventHandler ['MapSingleClick', clickdeliver]}]", _pickup];
+				call compile format ["clickdeliver = addMissionEventHandler ['MapSingleClick',{[0, (_this select 1), %1, [2]] call airboss_fnc_land_closeairsupport; removeMissionEventHandler ['MapSingleClick', clickdeliver]}]", _pickup];
 				//onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_closeairsupport.sqf'; onMapSingleClick ''; true;",_pickup];
 		};
 		if (_type isEqualTo 2) exitwith {//Land base player has listed location for delivery
