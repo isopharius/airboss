@@ -1,5 +1,4 @@
-private["_vehicle","_type"];
-_vehicle = _this;
+private _vehicle = _this;
 
 if (local _vehicle or (assignedVehicle player) isEqualTo _vehicle) then {
 
@@ -8,7 +7,7 @@ if (local _vehicle or (assignedVehicle player) isEqualTo _vehicle) then {
 	_vehicle setDamage 0;
 	_vehicle setVehicleAmmo 1;
 
-	_type = typeOf _vehicle;
+	private _type = typeOf _vehicle;
 	_turretcount = count (configFile >> "CfgVehicles" >> _type >> "Turrets");
 
 	if (_turretcount > 0) then {
