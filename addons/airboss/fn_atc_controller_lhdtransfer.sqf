@@ -1,5 +1,5 @@
 //Get Variables
-_vehicle = vehicle player;
+_vehicle = objectParent player;
 
 	if (ATC_ControllerActionAdded) then {
 		ATC_ControllerActionAdded = false;
