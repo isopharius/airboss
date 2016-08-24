@@ -14,27 +14,25 @@
 
 private _x = -1;
 private _y = -1;
+_type = typename _this;
 
-switch (typename _this) do
-{
+call {
 	//--- Coordinates
-	case "ARRAY": {
+	if (_type isEqualTo "ARRAY") exitWith {
 		_x = _this select 0;
 		_y = _this select 1;
 	};
 	//--- Unit
-	case "OBJECT": {
+	if (_type isEqualTo "OBJECT") exitWith {
 		_x = getPosWorld _this select 0;
 		_y = getPosWorld _this select 1;
 	};
 	//--- Marker
-	case "STRING": {
+	if (_type isEqualTo "STRING") exitWith {
 		_x = markerpos _this select 0;
 		_y = markerpos _this select 1;
 	};
-	default {
-		if (true) exitwith {hintc format ["Bad input in ""PosToGrid.sqf"" - %1.",typename _this]};
-	};
+	hintc format["Bad input in ""PosToGrid.sqf"" - %1.",typename _this];
 };
 
 private _xgrid = floor (_x / 100);
