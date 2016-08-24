@@ -28,11 +28,12 @@ call {
 		_y = getPosWorld _this select 1;
 	};
 	//--- Marker
-	if (_type isEqualTo "STRING") exitWith {
+	if (_type isEqualTo "STRING") then {
 		_x = markerpos _this select 0;
 		_y = markerpos _this select 1;
+	} else {
+		hintc format["Bad input in ""PosToGrid.sqf"" - %1.",typename _this];
 	};
-	hintc format["Bad input in ""PosToGrid.sqf"" - %1.",typename _this];
 };
 
 private _xgrid = floor (_x / 100);
