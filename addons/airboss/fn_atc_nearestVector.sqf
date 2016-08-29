@@ -1,9 +1,5 @@
 //Get Closest Vector and direct to that
-	_vehicle = _this select 0;
-	_vector1 = _this select 1;
-	_vector2 = _this select 2;
-	_vector3 = _this select 3;
-	_vector4 = _this select 4;
+params ["_vehicle", "_vector1", "_vector2", "_vector3", "_vector4"];
 
 	_d1 = _vehicle distance _vector1;
 	_d2 = _vehicle distance _vector2;

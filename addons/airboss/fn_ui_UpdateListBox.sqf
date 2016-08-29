@@ -1,7 +1,7 @@
 disableSerialization;
 		//Run when we need up update the listbox
 		private _index = 0;
-		private _listBox = _this select 0;
+		params ["_listBox"];
 		lbClear _listBox;
 
 		//Add stuff to list

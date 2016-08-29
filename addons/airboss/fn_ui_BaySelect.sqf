@@ -1,6 +1,6 @@
 disableSerialization;
 	//Run when a player selects a bay
-		private _bay = _this select 0;
+		params ["_bay"];
 		private _status = false;
 		if (LHD_SelectedBay > 0) then {
 			_status = (LHD_BayStatus select (LHD_SelectedBay - 1));
