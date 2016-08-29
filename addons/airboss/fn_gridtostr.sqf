@@ -11,8 +11,7 @@
 	Returns:
 	Array in format ["X","Y"]
 */
-private _xgrid = _this select 0;
-private _ygrid = _this select 1;
+params ["_xgrid", "_ygrid"];
 private _xcoord =
 	if (_xgrid >= 100) then {
 		str _xgrid;

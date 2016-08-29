@@ -11,9 +11,9 @@
 	Returns:
 	Array in format ["X","Y"]
 */
-
-private _x = -1;
-private _y = -1;
+private ["_x", "_y"];
+_x = -1;
+_y = -1;
 _type = typename _this;
 
 call {

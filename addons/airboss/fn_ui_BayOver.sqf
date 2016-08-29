@@ -1,6 +1,6 @@
 disableSerialization;
 		//Run when player moves mouse over or off a bay
-		private _ctrl = _this select 0;
+		params ["_ctrl"];
 		private _pic = _ctrl - 100;
 
 		if (LHD_SelectedBay != (_ctrl - 1200)) then {
