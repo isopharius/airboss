@@ -141,7 +141,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				call airboss_fnc_land_baseActionsWatchdog;
 
 				//Broadcast updated transport listing
-				ATC_Tasks_Transport = ATC_Tasks_Transport + [[player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]]];
+				ATC_Tasks_Transport pushBack [player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]];
 				publicVariable "ATC_Tasks_Transport";
 
 				player removeaction Land_RequestAirPickup;

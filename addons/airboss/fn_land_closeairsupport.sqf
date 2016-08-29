@@ -100,7 +100,7 @@ _type = _initArray select 0; //0 = Inital Contact
 					call airboss_fnc_land_baseActionsWatchdog;
 
 					//Broadcast updated transport listing
-					ATC_Tasks_CloseAirSupport = ATC_Tasks_CloseAirSupport + [[player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]]];
+					ATC_Tasks_CloseAirSupport pushBack [player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]];
 					publicVariable "ATC_Tasks_CloseAirSupport";
 
 					player removeaction Land_RequestCAS;
