@@ -7,8 +7,6 @@ class airboss
 
             class GridToStr {};
             class lhd_checkpos {};
-            class lhdinit {};
-            class lhdmarkers {};
             class lhdsiren {};
             class PosToGrid {};
             class VehicleReturn {};

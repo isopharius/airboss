@@ -5,7 +5,8 @@ _lhdpos = position lhd;
 
 //add respawn at box
 if (isserver) then {
-	_crate = createvehicle ["B_CargoNet_01_ammo_F", [0,0,0], [], 0, "NONE"];
+	_crate = createvehicle ["B_CargoNet_01_ammo_F", [0,0,0], [], 0, "CAN_COLLIDE"];
+    _crate enableSimulation false;
 	_crate allowdamage false;
 	_crate setposasl [(_lhdpos select 0) + 7, (_lhdpos select 1) - 15, 16.9];
 	[missionnamespace, _crate, "USX Syed"] call BIS_fnc_addRespawnPosition;
@@ -185,7 +186,7 @@ if (!isdedicated) then {
 
 		LHD_SpawnableVehicles = _lhdvehicles;
 
-		call airboss_fnc_lhdmarkers; //LHD markers
+		[] execVM "\airboss\lhdmarkers.sqf"; //LHD markers
 
 	//check ACE, add toggle and actions
 	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));

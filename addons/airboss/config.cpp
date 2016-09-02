@@ -59,6 +59,6 @@ class CfgVehicles
 class Extended_InitPost_EventHandlers {
 	class CUP_B_LHD_WASP_USMC_Empty
 	{
-	  airbossinit = "[(_this select 0)] spawn airboss_fnc_lhdinit;";
+	  airbossinit = "[(_this select 0)] execVM '\airboss\lhdinit.sqf';";
 	};
 };
