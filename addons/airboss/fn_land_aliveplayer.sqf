@@ -1,4 +1,4 @@
-							if ((alive player) and (!_IsThere) and (Land_AwaitingCASRun)) then {
+							if ((!_IsThere) && {(Land_AwaitingCASRun)} && {(alive player)}) then {
 								//Player is in transit to location
 								_distanceR = (player distance _delivery);
 								//hintSilent format ["%1m",_distanceR];

@@ -1,4 +1,4 @@
-					if ((alive _vehicle) and (!_IsThere) and (!ATC_CancelTask)) then {
+					if ((!_IsThere) && (!ATC_CancelTask) && {(alive _vehicle)}) then {
 						//Player is in transit to location
 						_distanceR = (_vehicle distance _delivery);
 						//hintSilent format ["%1m",_distanceR];

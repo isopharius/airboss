@@ -3,7 +3,7 @@
 #define	SENTENCEDELAY 1
 #define	ATCMAXDIGIT 60
 
-			if (LHD_Approach and !LHD_HasLanded and (alive _vehicle) and !LHD_CancelLanding) then {
+			if (LHD_Approach && {!LHD_HasLanded} && {(alive _vehicle)} && {!LHD_CancelLanding}) then {
 
 				// ### Check for New Altitude and Position in Que ###
 				_Position = LHDPattern find _vehicle;
@@ -12,7 +12,7 @@
 
 				// ### Check if at correct altitude ###
 				_curalt = position _vehicle select 2;
-				if ((((_curalt < (_alt - LHD_WarnAltitude)) or ( _curalt > (_alt + LHD_WarnAltitude))) and (!LHD_IsLanding)) and (_alt isEqualTo LHD_CurrentFlyAlt)) then {
+				if ((((_curalt < (_alt - LHD_WarnAltitude)) || {( _curalt > (_alt + LHD_WarnAltitude))}) && {(!LHD_IsLanding)}) && {(_alt isEqualTo LHD_CurrentFlyAlt)}) then {
 					//At wrong altitude, get angry
 					waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 					_vehicle vehicleRadio "flyco_word_watchyouraltitude";sleep 0.9;
@@ -32,7 +32,7 @@
 					_cursor = 0;
 					{
 						_cursor =  _cursor + (_x select 1);
-						if (((_Position) < _cursor) and (_pattern isEqualTo _oldPattern)) then {_pattern = _x select 0};
+						if (((_Position) < _cursor) && {(_pattern isEqualTo _oldPattern)}) then {_pattern = _x select 0};
 					} foreach LHDPatternLayout;
 					_alt1 = floor(_alt / 100) * 100;
 					_alt2 = (_alt - _alt1);
@@ -96,7 +96,7 @@
 					_distance = round((_loon1 distance _loon2) / 100) * 100;
 					//hintsilent format ["%1",_distance];
 				//Check if vehicle is close enough for next vector
-				if ((_distance < 500) and (!LHD_IsLanding)) then {
+				if ((_distance < 500)  {(!LHD_IsLanding)}) then {
 					LHD_PatternWaypointComp = false;
 					//Vehicle is close, select next waypoint
 					_curVectorNum = _curVectorNum + 1;
@@ -121,7 +121,7 @@
 					//hint format ["%1 %2",[_wD1,_wD2,_wD3],_hdg];
 
 					//Check if vehicle is on 3rd Waypoint of First Pattern, if so, then guide to land
-					if ((_pattern isEqualTo _landingPattern) and (_curVectorNum isEqualTo (LHDLandingTurnNum + 1))) then {
+					if ((_pattern isEqualTo _landingPattern) && {(_curVectorNum isEqualTo (LHDLandingTurnNum + 1))}) then {
 						//Set Next Waypoint
 						_curVector = _finals;
 						_wp = group player addWaypoint [_curVector,_nearDistance];
@@ -204,7 +204,7 @@
 					//Set New Distance
 					_distance = round((_curVector distance (getPosWorld _vehicle)) / 100) * 100;
 
-				if ((LHD_IsLanding) and (_distance < 400)) then {
+				if ((LHD_IsLanding) and {(_distance < 400)}) then {
 					LHD_OnFinals = true;
 					//Is at gate, advise
 					_loon1 = getPosWorld lhd;

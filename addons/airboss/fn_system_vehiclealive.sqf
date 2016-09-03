@@ -1,9 +1,9 @@
-					if ((alive _vehicle) and (objectParent player isEqualTo _vehicle)) then {
+					if ((alive _vehicle) && {(objectParent player isEqualTo _vehicle)}) then {
 						// Player is in a vehicle, check if the vehicle is in a restricted area and not controlled
 						_isOnDeck = getPosWorld _vehicle in LHD_Deck;
 						_isInRestricted = getPosWorld _vehicle in LHD_RestrictedArea;
 
-						if ((_isInRestricted) and (!LHD_Controlled) and (!_isOnDeck)) then {
+						if ((_isInRestricted) && (!LHD_Controlled) && (!_isOnDeck)) then {
 							if (LHD_ControlWarning < LHD_MaxWarnings) then {
 								//Vehicle has entered the LHD restricted area, and is not currently controlled
 								waitUntil{!LHD_RadioInUse};
@@ -27,7 +27,7 @@
 							};
 						};
 
-						if ((!LHD_Controlled) and (!ATC_ControllerActionAdded)) then {
+						if ((!LHD_Controlled) && (!ATC_ControllerActionAdded)) then {
 							//Add option to contact controller
 							ATC_ControllerActionAdded = true;
 							if (!acemod) then {

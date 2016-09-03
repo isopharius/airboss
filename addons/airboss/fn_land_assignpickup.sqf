@@ -1,4 +1,4 @@
-					if (Land_AwaitingPickupAssign and (alive player) and (Land_AwaitingDelivery)) then {
+					if (Land_AwaitingPickupAssign && {(Land_AwaitingDelivery)} && {(alive player)}) then {
 						_counter = _this;
 						_cursor = 0;
 						//How long has it been?
@@ -14,7 +14,7 @@
 							_CallsignNo = _CallsignArray select 1;
 							_AirCallsign = _x select 5;
 
-							if ((_Callsign isEqualTo callsign) and (_CallsignNo isEqualTo callsignNo)) then {
+							if ((_Callsign isEqualTo callsign) && {(_CallsignNo isEqualTo callsignNo)}) then {
 								//Have right one!
 									//hint "horray!";
 								//Check if been assigned

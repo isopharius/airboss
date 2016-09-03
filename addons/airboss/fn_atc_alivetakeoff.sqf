@@ -2,7 +2,7 @@
 #define DIGITDELAY 0.4
 #define	SENTENCEDELAY 1
 
-		if (LHD_TakeoffRequest and (alive _vehicle)) then {
+		if (LHD_TakeoffRequest && {(alive _vehicle)}) then {
 			_Position = LHDPattern find _vehicle;
 			if ((_Position isEqualTo 1) and !LHD_TakeoffStandby) then {
 			//Aircraft is next vehicle, get them to prepare

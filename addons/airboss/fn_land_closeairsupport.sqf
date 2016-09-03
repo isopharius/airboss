@@ -132,7 +132,7 @@ _type = _initArray select 0; //0 = Inital Contact
 						_CallsignArray = _x select 4;
 						_Callsign = _CallsignArray select 0;
 						_CallsignNo = _CallsignArray select 1;
-						if ((_Callsign isEqualTo callsign) and (_CallsignNo isEqualTo callsignNo)) then {
+						if ((_Callsign isEqualTo callsign) && {(_CallsignNo isEqualTo callsignNo)}) then {
 							//Have right one!
 							// Publish Task Cancel
 							ATC_Tasks_CloseAirSupport set [_cursor,"deleteme"];

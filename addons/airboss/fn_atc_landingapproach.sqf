@@ -1,11 +1,11 @@
 #define ATCMAXDIGIT 60
 
-						if (LHD_IsLanding and !LHD_HasLanded and LHD_Approach and (alive _vehicle)) then {
+						if (LHD_IsLanding && !LHD_HasLanded && LHD_Approach && {(alive _vehicle)}) then {
 						//Aircraft is past finals, heading into land.  Call distances.
 							//Set New Distance
 							_distanceA = round(position lhd distance (position _vehicle));
 							_distance = round(_distanceA / 100) * 100;
-							if ((_distance in LHD_FinalCall) and (_distance != _prevdistance)) then {
+							if ((_distance in LHD_FinalCall) && {(_distance != _prevdistance)}) then {
 								waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
 								if (_distance < (ATCMAXDIGIT * 1000)) then {
 									if (_distance < 1000) then {
@@ -27,7 +27,7 @@
 								_prevdistance = _distance;
 							};
 
-							if ((_distanceA <= LHD_MissedApproach_Dis) and !LHD_AtMAP) then {
+							if (!LHD_AtMAP && {(_distanceA <= LHD_MissedApproach_Dis)}) then {
 								//At Missed Approach Point
 								LHD_AtMAP = true;
 								waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
@@ -37,7 +37,7 @@
 								LHD_RadioInUse = false;
 							};
 							//Check to see if landed
-							if ((speed _vehicle < 1) and (getPosWorld player in LHD_Deck) and LHD_IsLanding) then {
+							if (LHD_IsLanding && {(speed _vehicle < 1)} && {(getPosWorld player in LHD_Deck)}) then {
 								LHD_HasLanded = true;
 							};
 							//hintsilent format ["%1",_distance];

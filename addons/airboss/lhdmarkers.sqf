@@ -17,12 +17,14 @@
 	LHD_ControlArea setDirection _lhddir;
 	LHD_ControlArea setRectangular false;
     ["flycoarea", _lhdpos, "ELLIPSE", [(LHD_ControlRadius select 0), (LHD_ControlRadius select 1)], "COLOR:", "ColorGreen", "BRUSH:", "Border"] call CBA_fnc_createMarker;
+    "flycoarea" setMarkerAlpha 0.5;
 
 //Set Homer Restricted Area
 	LHD_RestrictedArea = createLocation ["NameLocal", _lhdpos, (LHD_RestrictedRadius select 0), (LHD_RestrictedRadius select 1)];
 	LHD_RestrictedArea setDirection _lhddir;
 	LHD_RestrictedArea setRectangular false;
     ["homerarea", _lhdpos, "ELLIPSE", [(LHD_RestrictedRadius select 0), (LHD_RestrictedRadius select 1)], "COLOR:", "ColorRed", "BRUSH:", "Border"] call CBA_fnc_createMarker;
+    "homerarea" setMarkerAlpha 0.5;
 
 //Place markers for each pattern
 {

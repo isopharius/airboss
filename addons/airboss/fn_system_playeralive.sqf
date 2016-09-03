@@ -2,7 +2,7 @@
 			//init
 			_vehicle = objectParent player;
 
-			if((!isNull _vehicle) and (player isEqualTo driver _vehicle) and (_vehicle isKindOf "Air") and !(_vehicle isKindOf "ParachuteBase")) then {
+			if((!isNull _vehicle) && {(player isEqualTo driver _vehicle)} && {(_vehicle isKindOf "Air")} && {!(_vehicle isKindOf "ParachuteBase")}) then {
 
 				if (!acemod) then {
 					player removeaction Action_ContactControl;
@@ -48,7 +48,7 @@
 				};
 
 				//debarkation action
-				if ((!acemod) and (getPosWorld player in LHD_Location)) then {
+				if ((!acemod) && {(getPosWorld player in LHD_Location)}) then {
 					LHD_Action_DebarkationControl = player addAction ["Access Logistics Control", airboss_fnc_ui_debarkationControl, nil, 7, false, true, "", "true", -1];
 					waitUntil{!(getPosWorld player in LHD_Location)};
 					player removeAction LHD_Action_DebarkationControl;

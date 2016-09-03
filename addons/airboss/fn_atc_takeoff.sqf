@@ -43,7 +43,7 @@ _vehicle = vehicle player;
 		//Standard Takeoff, go to end of que
 		{
 			_cursor =  _cursor + (_x select 1);
-			if (((_inPattern) < _cursor) and (_pattern isEqualTo "alpha")) then {_pattern = _x select 0};
+			if (((_inPattern) < _cursor) && {(_pattern isEqualTo "alpha")}) then {_pattern = _x select 0};
 		} foreach LHDPatternLayout;
 		LHDPattern set [_inPattern,_vehicle];
 	} else {

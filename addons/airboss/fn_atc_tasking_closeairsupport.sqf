@@ -30,7 +30,7 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 				_raisedBy = _x select 0;
 				_actionedBy = _x select 5;
 				if (alive _raisedBy) then {
-					if ((count _actionedBy isEqualTo 0) and (!ATC_onTask)) then {
+					if ((!ATC_onTask) && {(count _actionedBy isEqualTo 0)}) then {
 						//Task has not been actioned by anyone
 
 						player removeaction ATC_ChangeIntentions;
@@ -187,7 +187,7 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 			//REMOVE FROM TASKING
 			{
 				_AirCallsign2 = _x select 5;
-				if (((_AirCallsign2 select 0) isEqualTo ATC_callsign) and ((_AirCallsign2 select 1) isEqualTo ATC_callsignNo)) then {
+				if (((_AirCallsign2 select 0) isEqualTo ATC_callsign) && {((_AirCallsign2 select 1) isEqualTo ATC_callsignNo)}) then {
 					//Have right one!
 					_raisedBy = _x select 0;
 					_pickup = _x select 1;

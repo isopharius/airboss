@@ -1,4 +1,4 @@
-					if ((alive _vehicle) and (someammo _vehicle) and (!ATC_CancelTask)) then {
+					if ((!ATC_CancelTask) && {(alive _vehicle)} && {(someammo _vehicle)}) then {
 						_cursor = _this + 1;
 						if (_cursor isEqualTo 30) then {
 							_cursor = 0;
