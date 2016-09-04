@@ -14,8 +14,6 @@ if (isserver) then {
 
 if (!isdedicated) then {
 
-	_lhddir = getdir lhd;
-
 	//Land Variables
 		Bases = [];
 		BaseNames = ["Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel"];
@@ -33,7 +31,7 @@ if (!isdedicated) then {
 		callsignNo = 1;
 		Callsigns = [
 			// --- Soldiers ---
-			["firefly","Man",[]]
+			["firefly","CAManBase",[]]
 		];
 
 	//LHD Variables

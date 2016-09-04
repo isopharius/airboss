@@ -1,3 +1,5 @@
+_lhddir = getdir lhd;
+
 //Set Control Room marker
 	_PosControl = lhd modeltoworld [-6.91016,15.4805,16];
 	LHD_Location = createLocation ["NameLocal", _PosControl, 5, 9.5];

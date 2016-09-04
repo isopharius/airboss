@@ -96,7 +96,7 @@
 					_distance = round((_loon1 distance _loon2) / 100) * 100;
 					//hintsilent format ["%1",_distance];
 				//Check if vehicle is close enough for next vector
-				if ((_distance < 500)  {(!LHD_IsLanding)}) then {
+				if ((!LHD_IsLanding) && {(_distance < 500)}) then {
 					LHD_PatternWaypointComp = false;
 					//Vehicle is close, select next waypoint
 					_curVectorNum = _curVectorNum + 1;
