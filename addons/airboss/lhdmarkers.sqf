@@ -1,3 +1,4 @@
+params ["_lhdpos"];
 _lhddir = getdir lhd;
 
 //Set Control Room marker
@@ -7,26 +8,28 @@ _lhddir = getdir lhd;
 	LHD_Location setRectangular true;
 	LHD_Location setText "USX Syed";
     ["controlarea", _PosControl, "RECTANGLE", [5,9.5], "COLOR:", "ColorWhite", "BRUSH:", "Border"] call CBA_fnc_createMarker;
+    "controlarea" setMarkerAlpha 0.5;
 
 //Create deck location (used to check when landed)
 	LHD_Deck = createLocation ["NameLocal", _lhdpos, 30, 125];
 	LHD_Deck setRectangular true;
 	LHD_Deck setDirection _lhddir;
     ["deckarea", _lhdpos, "RECTANGLE", [30,125], "COLOR:", "ColorBlue", "BRUSH:", "Border"] call CBA_fnc_createMarker;
+    "deckarea" setMarkerAlpha 0.3;
 
 //Set FlyCo Control Area
 	LHD_ControlArea = createLocation ["NameLocal", _lhdpos, (LHD_ControlRadius select 0), (LHD_ControlRadius select 1)];
 	LHD_ControlArea setDirection _lhddir;
 	LHD_ControlArea setRectangular false;
     ["flycoarea", _lhdpos, "ELLIPSE", [(LHD_ControlRadius select 0), (LHD_ControlRadius select 1)], "COLOR:", "ColorGreen", "BRUSH:", "Border"] call CBA_fnc_createMarker;
-    "flycoarea" setMarkerAlpha 0.5;
+    "flycoarea" setMarkerAlpha 0.2;
 
 //Set Homer Restricted Area
 	LHD_RestrictedArea = createLocation ["NameLocal", _lhdpos, (LHD_RestrictedRadius select 0), (LHD_RestrictedRadius select 1)];
 	LHD_RestrictedArea setDirection _lhddir;
 	LHD_RestrictedArea setRectangular false;
     ["homerarea", _lhdpos, "ELLIPSE", [(LHD_RestrictedRadius select 0), (LHD_RestrictedRadius select 1)], "COLOR:", "ColorRed", "BRUSH:", "Border"] call CBA_fnc_createMarker;
-    "homerarea" setMarkerAlpha 0.5;
+    "homerarea" setMarkerAlpha 0.2;
 
 //Place markers for each pattern
 {
