@@ -184,7 +184,7 @@ if (!isdedicated) then {
 
 		LHD_SpawnableVehicles = _lhdvehicles;
 
-		[] execVM "\airboss\lhdmarkers.sqf"; //LHD markers
+		[_lhdpos] execVM "\airboss\lhdmarkers.sqf"; //LHD markers
 
 	//check ACE, add toggle and actions
 	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));
