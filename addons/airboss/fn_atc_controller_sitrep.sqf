@@ -1,16 +1,16 @@
 //Get Variables
 _vehicle = vehicle player;
 
-	if (ATC_ControllerActionAdded) then {
-		ATC_ControllerActionAdded = false;
-		if (!acemod) then {
+	if (ATC_AA) then {
+		ATC_AA = false;
+		if (!am) then {
 			player removeaction LHD_Action_ContactControl;
 		};
 	};
 
 //Player has requested an air situation report
 
-			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+			waitUntil{!LHD_RU};LHD_RU = true;
 			_vehicle vehicleRadio "homer_msg_airsitrep_1";sleep 2.5;
 			_counter = 0;
 			{
@@ -26,10 +26,10 @@ _vehicle = vehicle player;
 					_vehicle vehicleRadio format ["homer_status_%1",_type];sleep 2;
 					_vehicle vehicleRadio "homer_word_duties"; sleep 0.5;
 				};
-			} foreach ATC_Intentions;
+			} foreach ATC_I;
 			if (_counter isEqualTo 0) then {
 				_vehicle vehicleRadio "homer_msg_airsitrep_2"; sleep 1;
 			};
 			_vehicle vehicleRadio "homer_callsign_homer";sleep 0.5;
 			_vehicle vehicleRadio "homer_word_out";sleep 0.1;
-			LHD_RadioInUse = false;
+			LHD_RU = false;

@@ -7,7 +7,7 @@
 _vehicle = vehicle player;
 _initArray = _this select 3;
 _BaseNo = _initArray select 0;
-_baseName = BaseNames select _baseNo;
+_baseName = BN select _baseNo;
 
 _loon1 = (Bases select _BaseNo) select 0;
 _dir = direction _vehicle;
@@ -32,7 +32,7 @@ _dir = direction _vehicle;
 //	hintsilent format ["Ship is %1 o'clock, %2 meters",_clock,[_km,(_loon1 distance _loon2)]];
 
 //Say it
-	waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+	waitUntil{!LHD_RU};LHD_RU = true;
 	_vehicle vehicleRadio "homer_word_roger";sleep 0.4;
 	_vehicle vehicleRadio "homer_word_base";sleep 0.4;
 	_vehicle vehicleRadio format["homer_ph_%1",_baseName];sleep 0.4;
@@ -65,4 +65,4 @@ _dir = direction _vehicle;
 //End Transmission
 	_vehicle vehicleRadio "homer_callsign_homer";sleep 0.5;
 	_vehicle vehicleRadio "homer_word_out";sleep 0.3;
-	LHD_RadioInUse = false;
+	LHD_RU = false;

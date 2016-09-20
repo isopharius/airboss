@@ -1,4 +1,4 @@
-						if ((!_IsThere) && (Land_AwaitingDelivery) && {(alive player)}) then {
+						if ((!_IsThere) && (Land_AD) && {(alive player)}) then {
 							//Player is in transit to location
 							_distanceR = (player distance _delivery);
 							//hintSilent format ["%1m",_distanceR];

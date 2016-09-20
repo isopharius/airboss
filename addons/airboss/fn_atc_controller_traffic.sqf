@@ -1,26 +1,26 @@
 //Get Variables
 _vehicle = vehicle player;
 
-	if (ATC_ControllerActionAdded) then {
-		ATC_ControllerActionAdded = false;
-		if (!acemod) then {
+	if (ATC_AA) then {
+		ATC_AA = false;
+		if (!am) then {
 			player removeaction LHD_Action_ContactControl;
 		};
 	};
 
 //Player has requested a traffic pattern report
 			//Load in pattern Information
-			_numPatterns = count LHDPatternLayout;
+			_numPatterns = count LHD_PL;
 			_inPattern = count LHDPattern;
 			_remainPattern = _inPattern;
 			_maxVehicles = 0;
-			{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHDPatternLayout;
+			{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHD_PL;
 			_cursor = _inPattern;
 			_patternMaxNo = 0;
 			_patternName = "alpha";
 			_pos = 0;
 
-			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+			waitUntil{!LHD_RU};LHD_RU = true;
 			_vehicle vehicleRadio "flyco_msg_trafficsitrep_1";sleep 2;
 			if (_inPattern > 0) then {
 				{
@@ -36,7 +36,7 @@ _vehicle = vehicle player;
 					_vehicle vehicleRadio format ["flyco_digit_%1",_cursor];
 					_vehicle vehicleRadio "flyco_vehicle_aircraft"; sleep 0.5;
 					_vehicle vehicleRadio format ["flyco_ph_%1",_patternName];sleep 1;
-				} foreach LHDPatternLayout;
+				} foreach LHD_PL;
 
 				if (_vehicle in LHDPattern) then {
 					_pos = (LHDPattern find _vehicle) + 1;
@@ -51,4 +51,4 @@ _vehicle = vehicle player;
 			};
 			_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.5;
 			_vehicle vehicleRadio "flyco_word_out";sleep 0.1;
-			LHD_RadioInUse = false;
+			LHD_RU = false;

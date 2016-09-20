@@ -1,29 +1,29 @@
 if ((!isnil "lhd") or isHC) exitwith {};
 
 lhd = _this select 0;
-_lhdpos = position lhd;
+_lp = position lhd;
 
 //add respawn at box
 if (isserver) then {
-	_crate = createvehicle ["B_CargoNet_01_ammo_F", [0,0,0], [], 0, "CAN_COLLIDE"];
-    _crate enableSimulation false;
-	_crate allowdamage false;
-	_crate setposasl [(_lhdpos select 0) + 7, (_lhdpos select 1) - 15, 16.9];
-	[missionnamespace, _crate, "USX Syed"] call BIS_fnc_addRespawnPosition;
+	_c = createvehicle ["B_CargoNet_01_ammo_F", [0,0,0], [], 0, "CAN_COLLIDE"];	//crate
+  _c enableSimulation false;
+	_c allowdamage false;
+	_c setposasl [(_lp select 0) + 7, (_lp select 1) - 15, 16.9];
+	[missionnamespace, _c, "USX Syed"] call BIS_fnc_addRespawnPosition;
 };
 
 if (!isdedicated) then {
 
 	//Land Variables
 		Bases = [];
-		BaseNames = ["Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel"];
+		BN = ["Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel"];	//base names
 
 		//Task Oriented Variables
-		Land_AwaitingPickupAssign = false;
-		Land_AwaitingDelivery = false;
+		Land_AP = false;	//awaiting pickup
+		Land_AD = false;	//awaiting delivery
 
-		Land_AwaitingCASAssign = false;
-		Land_AwaitingCASRun = false;
+		Land_ACA = false;	//awaiting cas assign
+		Land_ACR = false;	//awaiting cas run
 
 		//Controller Variables
 		Controlled = false;
@@ -45,59 +45,58 @@ if (!isdedicated) then {
 			if (worldname isEqualTo "stratis") exitwith { MapY = 10200 };
 		};
 	*/
-		LHDAlive = true;
-		LHDPattern = [];
-		LHDPatternLayout = [["Charlie",1,500,800],["Delta",4,850,1200]]; //[Name,Positions,xRadius,yRadius]
-		LHD_ControlRadius = [1000,1500];
-		LHD_RestrictedRadius = [2500,2500];
-		LHDLandingTurnNum = 3;
+		//LHDA = true;	//alive
+		LHD_PL = [["Charlie",1,500,800],["Delta",4,850,1200]]; //[Name,Positions,xRadius,yRadius] //pattern layout
+		LHD_CR = [1000,1500];	//control radius
+		LHD_RR = [2500,2500];	//restricted radius
+		LHD_LT = 3;	//landing turn
 		LHDAlt = 50;
-		LHD_WarnAltitude = 40;
-		LHD_MissedApproach_Alt = 50;
-		LHD_MissedApproach_Dis = 100;
-		LHD_DepartureClear_Dis = 600;
-		LHD_FinalCall = [200,400];
-		LHD_height = 16;
-		LHD_Emergency_Call = ["none",0];
-		LHD_TrainingTargetMarkers = [[2446.1873,4590.564],[2244.7249,3816.0708],[4374.0254,2430.033]];	//Used for assigning targets (for aircraft ground/land)
+		LHD_WA = 40;	//Warning Altitude
+		LHD_MAA = 50;	//missed approach alt
+		LHD_MAD = 100;	//missed approach dis
+		LHD_DCD = 600;	//departure clear dis
+		LHD_FC = [200,400];	//final call
+		LHD_EC = ["none",0];	//emergency call
+		//LHD_H = 16;	//height
+		//LHD_TM = [[2446.1873,4590.564],[2244.7249,3816.0708],[4374.0254,2430.033]];	//Used for assigning targets (for aircraft ground/land)
 
 	//Vehicle Variables
 		//Operating
-		LHD_Controlled = false;	//Whether aircraft is under control of the LHD (uncontrolled aircraft cannot operate in restricted area)
-		LHD_ControlWarning = 0;	//Current number of controller warnings
-		LHD_Intention = 0;		//Current aircraft intention
-		LHD_TowingVehicle = false;
+		LHD_C = false;	//Whether aircraft is under control of the LHD (uncontrolled aircraft cannot operate in restricted area)
+		LHD_CW = 0;	//Current number of controller warnings
+		LHD_I = 0;		//Current aircraft intention
+		//LHD_TV = false;	//towing vehicle
 
 		//Training
-		LHD_TrgTargets = []; //PLAYERS training targets.  Not published!
+		LHD_TT = []; //PLAYERS training targets.  Not published!
 
 		//Landing
-		LHD_PatternWaypointComp = false;
-		LHD_Approach = false;
-		LHD_RadioInUse = false;
-		LHD_CurrentFlyAlt = 0; //Current ATC defined flying altitude
-		LHD_CurrentPattern = "alpha";
-		LHD_OnFinals = false;
-		LHD_IsLanding = false; //True when turned on base
-		LHD_HasLanded = false; //True when aircraft has landed
-		LHD_AtMAP = false;
-		LHD_InControlRoom = false;
-		LHD_CancelLanding = false;
+		LHD_PW = false;	//pattern waypoints
+		//LHD_Approach = false;
+		LHD_RU = false;	//radio in use
+		LHD_CFA = 0; //Current ATC defined flying altitude
+		LHD_CP = "alpha";	//current pattern
+		LHD_OF = false;
+		LHD_IL = false; //True when turned on base
+		LHD_HL = false; //True when aircraft has landed
+		LHD_MAP = false;	//at map
+		//LHD_ICR = false;	//in control room
+		LHD_CL = false;	//cancel landing
 
 	//Takeoff
-		LHD_TakeoffRequest =  false;
-		LHD_TakeoffStandby = false;
-		LHD_Takeoff = false;
+		LHD_TR =  false;	//takeoff request
+		LHD_TS = false;	//takeoff standby
+		LHD_TO = false;	//takeoff
 
 	//ATC Variables
-		LHD_MaxWarnings = 2;	//This sets the maximum number of restricted airspace warnings before you get classed as enemy
-		ATC_callsign = "falcon"; //Callsign Aircraft
-		ATC_callsignNo = 1; //Callsign number
-		ATC_ControllerActionAdded = false;
-		ControllerActionAdded = false;
-		ACEActionAdded = false;
-		ATC_Action_VectorBase =[];
-		ATC_Callsigns = [
+		LHD_MW = 2;	//This sets the maximum number of restricted airspace warnings before you get classed as enemy
+		ATC_CS = "falcon"; //Callsign Aircraft
+		ATC_CN = 1; //Callsign number
+		ATC_AA = false;	//ATC action added
+		CAA = false;	//controller action added
+		AAA = false;	//ace action added
+		ATC_AV = [];	//action vector base
+		ATC_CL = [	//callsigns list
 			// --- Aircraft ---
 			["sparrow","All",[]],
 			["falcon","Plane",[]],
@@ -128,7 +127,7 @@ if (!isdedicated) then {
 		//	Medical				starlight
 		//	Commander			sunray
 
-		ATC_Intentions = [
+		ATC_I = [	//intentions
 			["Unknown",[],"unknown"],
 			["Unavailable",[],"unavailable"],
 			["Training",[],"training"],
@@ -140,36 +139,36 @@ if (!isdedicated) then {
 			["Reconnaissance",[],"recon"]
 		];
 
-		ATC_onTask = false;
-		ATC_CancelTask = false;
+		ATC_T = false;	//on task
+		ATC_CT = false;	//cancel task
 
-		ATC_Tasks_Transport = [
+		ATC_TT = [	//tasks transport
 			//[player,(markerpos "x"),(markerpos "y"),2,["firefly",1],[]]
 		];  //[requesting player,pickup,delivery,passengers,[land callsign,land callsignNo],[responding vehicle,callsign,callsignNo]]
-		ATC_Tasks_CloseAirSupport = [];
+		ATC_TC = [];	//tasks close air support
 
-	DebarkDialog="DebarkationControl";
-	DebarkDisplay=50001;
+	DD = 50001;	//debark display
 
-	LHD_BayStatus = [true,true,true,true,true,true,true,true,true];
-	LHD_BayRadius = 18;
-	LHD_SelectedBay = 0;
-	LHD_ActiveObject = player;
+	LHD_BS = [true,true,true,true,true,true,true,true,true];	//bay status
+	LHD_BR = 18;	//bay radius
+	LHD_SB = 0;	//selected bay
+	LHD_AO = player;	//active object
 
 	//_vehicleCargoPos = getArray (configFile >> "CfgVehicles" >> typeOf _lhd >> "FlightDeckAnchorPositions");
 
-	//LHD_BayPositions = [[-13.5543,103.426,1],[13.5212,111.941,1],[13.5967,77.292,1],[-13.5216,61.5732,1],[-13.5376,20.1221,1],[-13.621,-21.5298,1],[-13.6259,-63.6804,1],[13.4215,-71.6892,1],[-13.5995,-100.681,1]];
+	//bay positions
+	LHD_BP = [[13.5543,-103.426,1],[-13.5212,-111.941,1],[-13.5967,-77.292,1],[13.5216,-61.5732,1],[13.5376,-20.1221,1],[13.621,21.5298,1],[13.6259,63.6804,1],[-13.4215,71.6892,1],[13.5995,100.681,1]];
 
-	LHD_BayPositions = [[13.5543,-103.426,1],[-13.5212,-111.941,1],[-13.5967,-77.292,1],[13.5216,-61.5732,1],[13.5376,-20.1221,1],[13.621,21.5298,1],[13.6259,63.6804,1],[-13.4215,71.6892,1],[13.5995,100.681,1]];
+	//LHD_BP = [[-13.5543,103.426,1],[13.5212,111.941,1],[13.5967,77.292,1],[-13.5216,61.5732,1],[-13.5376,20.1221,1],[-13.621,-21.5298,1],[-13.6259,-63.6804,1],[13.4215,-71.6892,1],[-13.5995,-100.681,1]];
 
 	//supplies
-		_westvehicles = "(getNumber (_x >> 'side') isEqualTo 1) and (getNumber (_x >> 'scope') isEqualTo 2) and (((configName _x) isKindOf 'LandVehicle') or ((configName _x) isKindOf 'Helicopter'))" configClasses (configFile >> "CfgVehicles");
-		_lhdvehicles = [];
+		_wv = "(getNumber (_x >> 'side') isEqualTo 1) and (getNumber (_x >> 'scope') isEqualTo 2) and (((configName _x) isKindOf 'LandVehicle') or ((configName _x) isKindOf 'Helicopter'))" configClasses (configFile >> "CfgVehicles");
+		_lv = [];	//LHD vehicles
 		{
-			_lhdvehicles pushback (configName _x);
-		} foreach _westvehicles;
+			_lv pushback (configName _x);
+		} foreach _wv;
 
-		_lhdvehicles append [
+		_lv append [
 			"Box_NATO_AmmoVeh_F",
 			"B_supplyCrate_F",
 			"B_CargoNet_01_ammo_F",
@@ -182,24 +181,24 @@ if (!isdedicated) then {
 			"Land_FMradio_F"
 		];
 
-		LHD_SpawnableVehicles = _lhdvehicles;
+		LHD_SV = _lv;	//spawnable vehicles
 
-		[_lhdpos] execVM "\airboss\lhdmarkers.sqf"; //LHD markers
+		[_lp] execVM "\airboss\lhdmarkers.sqf"; //LHD markers
 
 	//check ACE, add toggle and actions
-	acemod = (isClass(configFile>>"CfgPatches">>"ace_main"));
-	if (acemod) then {
+	am = (isClass(configFile>>"CfgPatches">>"ace_main"));	//acemod
+	if (am) then {
 		LHD_radio = false;
-		_lhdradio = ["lhdradio","Here Be Dolphins","",{LHD_radio = true; [] spawn airboss_fnc_system_controlRoom; hint "TURBO AIRBOSS ACTIVATE!"},{(!LHD_radio)}] call ace_interact_menu_fnc_createAction;
-		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lhdradio] call ace_interact_menu_fnc_addActionToObject;
+		_lr = ["lhdradio","Here Be Dolphins","",{LHD_radio = true; [] spawn airboss_fnc_system_controlRoom; hint "TURBO AIRBOSS ACTIVATE!"},{(!LHD_radio)}] call ace_interact_menu_fnc_createAction;
+		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _lr] call ace_interact_menu_fnc_addActionToObject;
 
-		_landcontrol = ["landcontrol","Contact Land Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_land_controller_contact},{(LHD_radio) and (ACEActionAdded) and ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
-		_aircontrol = ["aircontrol","Contact Controller","",{[] spawn airboss_fnc_atc_controller_contact},{(LHD_radio) and (ATC_ControllerActionAdded)}] call ace_interact_menu_fnc_createAction;
-		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
+		_gc = ["landcontrol","Contact Land Controller","",{[nil,nil,nil,[0]] spawn airboss_fnc_land_controller_contact},{(LHD_radio) && (AAA) && ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
+		_ac = ["aircontrol","Contact Controller","",{[] spawn airboss_fnc_atc_controller_contact},{(LHD_radio) && (ATC_AA)}] call ace_interact_menu_fnc_createAction;
+		_lc = ["lhdcontrol","Logistics Control","",{[] spawn airboss_fnc_ui_debarkationControl},{(getPosWorld player in LHD_Location)}] call ace_interact_menu_fnc_createAction;
 
 		{
 			[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
-		} foreach [_landcontrol,_aircontrol,_lhdcontrol];
+		} foreach [_gc, _ac, _lc];
 
 	} else { //no ACE
 		call airboss_fnc_system_controlRoom; //for pilots

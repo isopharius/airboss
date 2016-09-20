@@ -22,9 +22,9 @@
 		player removeaction LHD_Action_Weather;
 		LHD_Action_Weather = nil;
 	};
-	if (ATC_ControllerActionAdded) then {
-		ATC_ControllerActionAdded = false;
-		if (!acemod) then {
+	if (ATC_AA) then {
+		ATC_AA = false;
+		if (!am) then {
 			player removeaction LHD_Action_ContactControl;
 		};
 	};
@@ -56,9 +56,9 @@
 		player removeaction LHD_Action_Landing_Cancel;
 		LHD_Action_Landing_Cancel = nil;
 	};
-	if (!isnil "ATC_Action_VectorBase") then {
-		{player removeaction _x} forEach ATC_Action_VectorBase;
-		ATC_Action_VectorBase = nil;
+	if (!isnil "ATC_AV") then {
+		{player removeaction _x} forEach ATC_AV;
+		ATC_AV = nil;
 	};
 	if (!isnil "ATC_Homer_TrgGround") then {
 		player removeaction ATC_Homer_TrgGround;

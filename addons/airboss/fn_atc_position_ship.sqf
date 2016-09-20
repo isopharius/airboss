@@ -27,7 +27,7 @@ _dir = direction _vehicle;
 //	hintsilent format ["Ship is %1 o'clock, %2 meters",_clock,[_km,(_loon1 distance _loon2)]];
 
 //Say it
-	waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+	waitUntil{!LHD_RU};LHD_RU = true;
 	_vehicle vehicleRadio "flyco_word_roger";sleep 0.4;
 	_vehicle vehicleRadio "flyco_word_shipis";sleep 0.4;
 	_vehicle vehicleRadio format["flyco_digit_%1",_clock];sleep DIGITDELAY;
@@ -58,4 +58,4 @@ _dir = direction _vehicle;
 //End Transmission
 	_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.5;
 	_vehicle vehicleRadio "flyco_word_out";sleep 0.3;
-	LHD_RadioInUse = false;
+	LHD_RU = false;

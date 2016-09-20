@@ -29,15 +29,15 @@ _type = _initArray select 0; //0 = Priority landing
 	_distance = 0;
 	_prevdistance = 0;
 	_finals = markerpos "LHD_finals";
-	_landingPattern_array = LHDPatternLayout select 0;
+	_landingPattern_array = LHD_PL select 0;
 	_landingPattern = _landingPattern_array select 0;
-	LHD_CancelLanding = false;
+	LHD_CL = false;
 
 //Load in pattern Information
-	_numPatterns = count LHDPatternLayout;
+	_numPatterns = count LHD_PL;
 	_inPattern = count LHDPattern;
 	_maxVehicles = 0;
-	{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHDPatternLayout;
+	{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHD_PL;
 
 //### CHECK IF ROOM IN PATTERN ###
 if ((_inPattern < _maxVehicles) || {(_type isEqualTo 1)}) then {
@@ -47,11 +47,11 @@ if ((_inPattern < _maxVehicles) || {(_type isEqualTo 1)}) then {
 		{
 			_cursor =  _cursor + (_x select 1);
 			if (((_inPattern) < _cursor) && {(_pattern isEqualTo "alpha")}) then {_pattern = _x select 0};
-		} foreach LHDPatternLayout;
+		} foreach LHD_PL;
 		_alt = (_inPattern * LHDAlt) + LHDAlt; //this sets the next vehicles altitude
 		_alt1 = floor(_alt / 100) * 100;
 		_alt2 = (_alt - _alt1);
-		LHD_CurrentFlyAlt = _alt;
+		LHD_CFA = _alt;
 		LHDPattern set [_inPattern,_vehicle];
 	} else {
 		//Priority
@@ -71,12 +71,12 @@ if ((_inPattern < _maxVehicles) || {(_type isEqualTo 1)}) then {
 		_alt = (LHDAlt * 2); //this sets the next vehicles altitude
 		_alt1 = floor(_alt / 100) * 100;
 		_alt2 = (_alt - _alt1);
-		LHD_CurrentFlyAlt = _alt;
-		LHD_Emergency_Call = [ATC_callsign,ATC_callsignNo];
-		publicVariable "LHD_Emergency_Call";
+		LHD_CFA = _alt;
+		LHD_EC = [ATC_CS,ATC_CN];
+		publicVariable "LHD_EC";
 	};
 		publicVariable "LHDPattern";
-		LHD_Approach = true;
+		Land_APproach = true;
 
 	//calc heading to ship
 		_hdg = ((_loon1 Select 0) - (_loon2 Select 0)) ATan2 ((_loon1 Select 1) - (_loon2 Select 1));
@@ -129,13 +129,13 @@ if ((_inPattern < _maxVehicles) || {(_type isEqualTo 1)}) then {
 			_curVector = markerpos format ["LHD_%1_%2",_pattern,_curVectorNum];
 
 			_wp = group player addWaypoint [_curVector, _nearDistance];
-			_wp setWaypointStatements ["true", "LHD_PatternWaypointComp = true;"];
+			_wp setWaypointStatements ["true", "LHD_PW = true;"];
 
 	//Clear for approach into Pattern
-		waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+		waitUntil{!LHD_RU};LHD_RU = true;
 		_vehicle vehicleRadio "flyco_word_roger";sleep 0.1;
-		_vehicle vehicleRadio format["flyco_callsign_%1",ATC_callsign];
-		_vehicle vehicleRadio format["flyco_digit_%1",ATC_callsignNo];sleep 0.3;
+		_vehicle vehicleRadio format["flyco_callsign_%1",ATC_CS];
+		_vehicle vehicleRadio format["flyco_digit_%1",ATC_CN];sleep 0.3;
 		_vehicle vehicleRadio "flyco_word_enter";sleep 0.3;
 		_vehicle vehicleRadio format["flyco_ph_%1",_pattern];sleep 0.1;
 		_vehicle vehicleRadio "flyco_word_pattern";sleep 0.3;
@@ -184,45 +184,45 @@ if ((_inPattern < _maxVehicles) || {(_type isEqualTo 1)}) then {
 
 		//End Transmission
 		_vehicle vehicleRadio "flyco_word_over";sleep 0.3;
-		LHD_RadioInUse = false;
+		LHD_RU = false;
 		sleep 10;
 
 	// ### Wait for status to change ###
 		call airboss_fnc_atc_aliveapproach;
 
-		if (LHD_HasLanded) then {
+		if (LHD_HL) then {
 		//Radio Completed
-			waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+			waitUntil{!LHD_RU};LHD_RU = true;
 			_vehicle vehicleRadio "flyco_msg_landingcompleted";sleep 0.8;
 			_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.3;
 			_vehicle vehicleRadio "flyco_word_out";sleep 0.3;
-			LHD_RadioInUse = false;
+			LHD_RU = false;
 		};
 
 		//Perform post-landing actions to return to normal state
 			LHDPattern = LHDPattern - [_vehicle];
 			publicVariable "LHDPattern";
 		//Reset LHD Vehicle Variables
-			LHD_PatternWaypointComp = false;
-			LHD_Approach = false;
-			LHD_RadioInUse = false;
-			LHD_CurrentFlyAlt = 0; //This is the current ATC defined flying altitude
-			LHD_CurrentPattern = "alpha";
-			LHD_OnFinals = false;
-			LHD_IsLanding = false; //Set to True when turned on base
-			LHD_HasLanded = false; //Set to True when aircraft has landed
-			LHD_AtMAP = false;
+			LHD_PW = false;
+			Land_APproach = false;
+			LHD_RU = false;
+			LHD_CFA = 0; //This is the current ATC defined flying altitude
+			LHD_CP = "alpha";
+			LHD_OF = false;
+			LHD_IL = false; //Set to True when turned on base
+			LHD_HL = false; //Set to True when aircraft has landed
+			LHD_MAP = false;
 
 } else {
 	//Pattern is closed
-	waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+	waitUntil{!LHD_RU};LHD_RU = true;
 	_vehicle vehicleRadio "flyco_word_negative";sleep 0.8;
 	_vehicle vehicleRadio "flyco_word_clearancedenied";sleep 0.8;
 	_vehicle vehicleRadio "flyco_word_thepatternisfull";sleep 0.3;
 	//End Transmission
 	_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.5;
 	_vehicle vehicleRadio "flyco_word_out";sleep 0.3;
-	LHD_RadioInUse = false;
+	LHD_RU = false;
 };
 //Remove all old waypoints
 	{

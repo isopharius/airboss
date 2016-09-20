@@ -1,12 +1,12 @@
 disableSerialization;
 
 //Initate Debarkation Control
-	Dialog_DKC = createDialog DebarkDialog;
+	Dialog_DKC = createDialog "DebarkationControl";
 
 	WaitUntil {Dialog_DKC};
 
 	//Initialize Display Variables
-	_display=(findDisplay DebarkDisplay);
+	_display=(findDisplay DD);
 	_listBox = (_display displayCtrl 1006);
 	_TextVehicle = (_display displayCtrl 1004);
 	_TextDriver = (_display displayCtrl 1005);
@@ -25,7 +25,7 @@ disableSerialization;
 	_ctrlLoadPers ctrlEnable false;
 
 	[_listBox] call airboss_fnc_ui_UpdateListBox;
-	_radius = LHD_BayRadius;
+	_radius = LHD_BR;
 
 //BayWatch
 call airboss_fnc_ui_baywatch;

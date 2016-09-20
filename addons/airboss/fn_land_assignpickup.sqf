@@ -1,4 +1,4 @@
-					if (Land_AwaitingPickupAssign && {(Land_AwaitingDelivery)} && {(alive player)}) then {
+					if (Land_AP && {(Land_AD)} && {(alive player)}) then {
 						_counter = _this;
 						_cursor = 0;
 						//How long has it been?
@@ -20,7 +20,7 @@
 								//Check if been assigned
 								if ((count _AirCallsign) > 0) then {
 									//someone is on their way!
-									Land_AwaitingPickupAssign = false;
+									Land_AP = false;
 									player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Aircraft has been found for your transport request. %3 %4 is enroute to your location. Over",toUpper(callsign),callsignNo,toUpper(_AirCallsign select 0),(_AirCallsign select 1)];
 									Land_AirPickup_marker1 setMarkerTextLocal format ["PICKUP BY %1 %2",toUpper(_AirCallsign select 0),(_AirCallsign select 1)];
 									Land_AirPickup_marker2 setMarkerTextLocal format ["DELIVERY BY %1 %2",toUpper(_AirCallsign select 0),(_AirCallsign select 1)];
@@ -28,7 +28,7 @@
 							};
 							_cursor = _cursor + 1;
 
-						} forEach ATC_Tasks_Transport;
+						} forEach ATC_TT;
 						_counter = _counter + 1;
 						sleep 1;
 						_counter call airboss_fnc_land_assignpickup;

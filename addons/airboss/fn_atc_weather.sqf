@@ -19,7 +19,7 @@
 	_t2 = floor((daytime - _t1) * 60);
 
 //Initial Message
-	waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+	waitUntil{!LHD_RU};LHD_RU = true;
 	_vehicle vehicleRadio "flyco_msg_weather_1";sleep 1;
 
 //Say Time
@@ -128,4 +128,4 @@
 //End Transmission
 	_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.5;
 	_vehicle vehicleRadio "flyco_word_out";sleep 0.3;
-	LHD_RadioInUse = false;
+	LHD_RU = false;

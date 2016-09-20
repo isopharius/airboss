@@ -1,6 +1,6 @@
-						if ((LHD_TakeoffRequest) && (_notsafe)) then {
+						if ((LHD_TR) && (_notsafe)) then {
 							_counter = _this;
-							_baylist = [(LHD_BayPositions select 0),(LHD_BayPositions select 3),(LHD_BayPositions select 4),(LHD_BayPositions select 5),(LHD_BayPositions select 6),(LHD_BayPositions select 8)];
+							_baylist = [(LHD_BP select 0),(LHD_BP select 3),(LHD_BP select 4),(LHD_BP select 5),(LHD_BP select 6),(LHD_BP select 8)];
 							_bay1 = (_baylist select 0) call seven_fnc_lhd_checkpos;
 							_bay4 = (_baylist select 1) call seven_fnc_lhd_checkpos;
 							_bay5 = (_baylist select 2) call seven_fnc_lhd_checkpos;
@@ -29,17 +29,17 @@
 							};
 
 							if ((_deckClearFail) && (!_deckClearMsg) && (_notsafe)) then {
-								waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+								waitUntil{!LHD_RU};LHD_RU = true;
 								_vehicle vehicleRadio "flyco_msg_takeoff_standby_plane_3";
-								LHD_RadioInUse = false;
+								LHD_RU = false;
 								_deckClearMsg = true;
 							};
 
 							if ((_counter > _clearDelay) && !_deckClearFail) then {
 								//After this amount of time, computer will try automated clearance.
-								waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+								waitUntil{!LHD_RU};LHD_RU = true;
 								_vehicle vehicleRadio "flyco_msg_takeoff_standby_plane_2";
-								LHD_RadioInUse = false;
+								LHD_RU = false;
 								sleep 3;
 								_cursor = 0;
 								_stopDel = false;

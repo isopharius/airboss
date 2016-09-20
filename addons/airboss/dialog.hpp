@@ -313,14 +313,14 @@ class DebarkationControl: RscStandardDisplay
 			idc = 1010;
 			x = 0.403;
 			text = "+ Cargo";
-			onButtonClick = "LHD_ActiveObject call fnc_VehicleLoad;";
+			onButtonClick = "LHD_AO call fnc_VehicleLoad;";
 		};
 		class ButtonLoadPeople: ButtonSpawn
 		{
 			idc = 1011;
 			x = 0.592;
 			text = "+ Pers";
-			onButtonClick = "LHD_ActiveObject call fnc_VehicleLoadPeople;";
+			onButtonClick = "LHD_AO call fnc_VehicleLoadPeople;";
 		};
 		class Bay1PicBorder: Bay_RscPicture
 		{

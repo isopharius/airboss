@@ -11,7 +11,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				call airboss_fnc_land_RemoveActionsWatchdog;
 
 				//Select Pickup Location
-				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+				waitUntil{!LHD_RU};LHD_RU = true;
 				player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Air Transport Request Received. Mark pickup location through click on Map. Over",toUpper(callsign),callsignNo];
 				playsound format ["watchdog_callsign_%1",callsign];sleep 0.7;
 				playsound format ["watchdog_digit_%1",callsignNo];sleep 0.5;
@@ -19,7 +19,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				playsound "watchdog_callsign_watchdog";sleep 0.9;
 				playsound "watchdog_msg_transportrequest_1";sleep 4.55;
 				playsound "watchdog_word_over";sleep 0.5;
-				LHD_RadioInUse = false;
+				LHD_RU = false;
 
 				clickpickup = addMissionEventHandler ["MapSingleClick",{[0, 0, (_this select 1), [1]] spawn airboss_fnc_land_transport_air; removeMissionEventHandler ["MapSingleClick", clickpickup]}];
 				//onMapSingleClick "[0,0,_pos,[1]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;";
@@ -50,7 +50,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				_y2 = floor((_mapGridY - (_y1 * 100)) / 10);
 				_y3 = floor(_mapGridY - (_y2 * 10) - (_y1 * 100));
 
-				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+				waitUntil{!LHD_RU};LHD_RU = true;
 				player groupchat format["WATCHDOG: Roger, Pickup Location confirmed as Grid Figures %1%2%3 %4%5%6. Mark delivery location through another click on Map. Over",_x1,_x2,_x3,_y1,_y2,_y3];
 				playsound "watchdog_word_roger";sleep 0.5;
 				playsound "watchdog_msg_transportrequest_2";sleep 1.70;
@@ -63,7 +63,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				playsound format ["watchdog_digit_%1",_y3];sleep 0.5;
 				playsound "watchdog_msg_transportrequest_3";sleep 3;
 				playsound "watchdog_word_over";sleep 0.5;
-				LHD_RadioInUse = false;
+				LHD_RU = false;
 
 				call compile format ["clickdeliver = addMissionEventHandler ['MapSingleClick',{[0, (_this select 1), %1, [2]] spawn airboss_fnc_land_transport_air; removeMissionEventHandler ['MapSingleClick', clickdeliver]}]", _pickup];
 				//onMapSingleClick format ["[0,_pos,%1,[2]] execVM '\airboss\fn_land_transport_air.sqf'; onMapSingleClick ''; true;",_pickup];
@@ -92,7 +92,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				_y2 = floor((_mapGridY - (_y1 * 100)) / 10);
 				_y3 = floor(_mapGridY - (_y2 * 10) - (_y1 * 100));
 
-				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+				waitUntil{!LHD_RU};LHD_RU = true;
 				player groupchat format["WATCHDOG: Roger, Delivery Location confirmed as Grid Figures %1%2%3 %4%5%6. Advise number of passengers for pickup. Over",_x1,_x2,_x3,_y1,_y2,_y3];
 				playsound "watchdog_word_roger";sleep 0.5;
 				playsound "watchdog_msg_transportrequest_4";sleep 2;
@@ -105,7 +105,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				playsound format ["watchdog_digit_%1",_y3];sleep 0.5;
 				playsound "watchdog_msg_transportrequest_5";sleep 2.35;
 				playsound "watchdog_word_over";sleep 0.5;
-				LHD_RadioInUse = false;
+				LHD_RU = false;
 
 				_cursor = 0;
 				{
@@ -128,7 +128,7 @@ _type = _initArray select 0; //0 = Inital Contact
 				};
 
 				//Respond to player
-				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+				waitUntil{!LHD_RU};LHD_RU = true;
 				player groupchat format["WATCHDOG: Roger, Transport request received for %1 passengers. Standby for Confirmation. Over",_pax];
 				playsound "watchdog_word_roger";sleep 0.5;
 				playsound "watchdog_msg_transportrequest_6";sleep 1.9;
@@ -136,29 +136,29 @@ _type = _initArray select 0; //0 = Inital Contact
 				playsound "watchdog_word_passengers";sleep 0.8;
 				playsound "watchdog_msg_transportrequest_7";sleep 2.35;
 				playsound "watchdog_word_over";sleep 0.5;
-				LHD_RadioInUse = false;
+				LHD_RU = false;
 
 				call airboss_fnc_land_baseActionsWatchdog;
 
 				//Broadcast updated transport listing
-				ATC_Tasks_Transport pushBack [player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]];
-				publicVariable "ATC_Tasks_Transport";
+				ATC_TT pushBack [player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]];
+				publicVariable "ATC_TT";
 
 				player removeaction Land_RequestAirPickup;
 				Land_RequestAirPickup_Cancel = player addAction ["WATCHDOG > Cancel Air Transport Request", airboss_fnc_land_transport_air, [4], 19, false, true, "", "true", -1];
 
-				Land_AwaitingPickupAssign = true;
-				Land_AwaitingDelivery = true;
+				Land_AP = true;
+				Land_AD = true;
 				_counter = 0;
 				_counter call airboss_fnc_land_assignpickup;
 
-				if (Land_AwaitingDelivery) then {
+				if (Land_AD) then {
 					//Heading to Waypoint
 					_IsThere = false;
 					call airboss_fnc_land_alivedelivery;
 				};
 
-				if (Land_AwaitingDelivery) then {
+				if (Land_AD) then {
 					player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Your have been delivered to your destination. WATCHDOG Out",toUpper(callsign),callsignNo];
 				} else {
 					player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Your cancellation has been received. WATCHDOG Out",toUpper(callsign),callsignNo];
@@ -173,25 +173,25 @@ _type = _initArray select 0; //0 = Inital Contact
 					if ((_Callsign isEqualTo callsign) && {(_CallsignNo isEqualTo callsignNo)}) then {
 						//Have right one!
 						// Publish Task Cancel
-						ATC_Tasks_Transport set [_cursor,"deleteme"];
-						ATC_Tasks_Transport = ATC_Tasks_Transport - ["deleteme"];
-						publicVariable "ATC_Tasks_Transport";
-						ATC_onTask = false;
-						ATC_CancelTask = false;
+						ATC_TT set [_cursor,"deleteme"];
+						ATC_TT = ATC_TT - ["deleteme"];
+						publicVariable "ATC_TT";
+						ATC_T = false;
+						ATC_CT = false;
 						//Cleanup Task markers (For Pilots on tasks)
 						deletemarkerlocal Land_AirPickup_marker1;
 						deletemarkerlocal Land_AirPickup_marker2;
 					};
 					_cursor = _cursor + 1;
-				} forEach ATC_Tasks_Transport;
+				} forEach ATC_TT;
 
-				Land_AwaitingPickupAssign = false;
-				Land_AwaitingDelivery = false;
+				Land_AP = false;
+				Land_AD = false;
 				player removeaction Land_RequestAirPickup_Cancel;
 				call airboss_fnc_land_RemoveActionsWatchdog;
 				call airboss_fnc_land_baseActionsWatchdog;
 		};
 
 		if (_type isEqualTo 4) exitwith {
-			Land_AwaitingDelivery = false;
+			Land_AD = false;
 		};

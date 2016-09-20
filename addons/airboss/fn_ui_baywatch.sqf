@@ -4,7 +4,7 @@ disableSerialization;
 	//Update Bay Status
 	{
 		_CheckPos = (lhd modeltoworld _x);
-		_bayStatus = LHD_BayStatus select (_bay - 1);
+		_bayStatus = LHD_BS select (_bay - 1);
 		_allObjects = (_CheckPos nearObjects ["Air", _radius]);
 		_NearObjectsLand1 = (_CheckPos nearObjects ["Land", _radius]);
 		_NearObjectsLand2 = (_CheckPos nearObjects ["WeaponHolder", _radius]);
@@ -26,29 +26,29 @@ disableSerialization;
 			if (_bayStatus) then {
 				[_bay,false] call airboss_fnc_ui_BayStatusUpdate;
 			};
-			if (LHD_SelectedBay isEqualTo _bay) then {
-				LHD_ActiveObject = _allObjects select 0;
+			if (LHD_SB isEqualTo _bay) then {
+				LHD_AO = _allObjects select 0;
 			};
 			_icon = getText (configfile >> "CfgVehicles" >> (TypeOf (_allObjects select 0)) >> "Picture");
 			_picture ctrlSetText format ["%1",_icon];
 		} else {
 			_picture ctrlSetText "";
-			LHD_BayStatus set [(_bay - 1),true];
+			LHD_BS set [(_bay - 1),true];
 		};
 		_bay = _bay + 1;
-	} foreach LHD_BayPositions;
+	} foreach LHD_BP;
 
-	if(LHD_SelectedBay > 0) then {
+	if(LHD_SB > 0) then {
 		//Update Active Bay details
-		if(LHD_ActiveObject != Player) then {
+		if(LHD_AO != Player) then {
 			//Update Details
-			_TypeOfV = TypeOf LHD_ActiveObject;
+			_TypeOfV = TypeOf LHD_AO;
 			_vehName = getText (configfile >> "CfgVehicles" >> _TypeOfV >> "displayName");
 
 			_TextVehicle ctrlSetText format ["%1",_vehName];
 			_icon = getText (configfile >> "CfgVehicles" >> _TypeOfV >> "Picture");
 			_IconVehicle ctrlSetText format ["%1",_icon];
-			if (format ["%1",driver LHD_ActiveObject] != "<NULL-object>") then {_TextDriver ctrlSetText format ["%1",driver LHD_ActiveObject];} else {_TextDriver ctrlSetText "None";	};
+			if (format ["%1",driver LHD_AO] != "<NULL-object>") then {_TextDriver ctrlSetText format ["%1",driver LHD_AO];} else {_TextDriver ctrlSetText "None";	};
 		} else {
 			_IconVehicle ctrlSetText "";
 			_TextVehicle ctrlSetText "None";
@@ -57,8 +57,8 @@ disableSerialization;
 
 		//Check if Issuing button should be shown
 
-		_baySelected = (LHD_SelectedBay > 0);
-		_bayStatus = LHD_BayStatus select (LHD_SelectedBay - 1);
+		_baySelected = (LHD_SB > 0);
+		_bayStatus = LHD_BS select (LHD_SB - 1);
 
 		_display = (findDisplay 50001);
 		_vehList = (_display displayCtrl 1006);

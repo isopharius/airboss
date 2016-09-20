@@ -7,9 +7,9 @@ _vehicle = vehicle player;
 	_initArray = _this select 3;
 	_type = _initArray select 0; //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
-	if (ATC_ControllerActionAdded) then {
-		ATC_ControllerActionAdded = false;
-		if (!acemod) then {
+	if (ATC_AA) then {
+		ATC_AA = false;
+		if (!am) then {
 			player removeaction LHD_Action_ContactControl;
 		};
 	};
@@ -30,24 +30,24 @@ _vehicle = vehicle player;
 				_raisedBy = _x select 0;
 				_actionedBy = _x select 5;
 				if (alive _raisedBy) then {
-					if ((!ATC_onTask) && {(count _actionedBy isEqualTo 0)}) then {
+					if ((!ATC_T) && {(count _actionedBy isEqualTo 0)}) then {
 						//Task has not been actioned by anyone
 
 						player removeaction ATC_ChangeIntentions;
 
 						// Get Variables
-						ATC_CancelTask = false;
+						ATC_CT = false;
 
 						_pickup = _x select 1;
 						_delivery = _x select 2;
 						_pax = _x select 3;
 						_LandCallsign = _x select 4;
-						_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[ATC_callsign,ATC_callsignNo]];
-						ATC_onTask = true;
+						_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[ATC_CS,ATC_CN]];
+						ATC_T = true;
 
 						// Publish Task Taken
-						ATC_Tasks_Transport set [_cursor,_newTask];
-						publicVariable "ATC_Tasks_Transport";
+						ATC_TT set [_cursor,_newTask];
+						publicVariable "ATC_TT";
 
 						// Create markers
 						Air_TaskMarker1 = createMarkerLocal ["Air_TaskMarker1", _pickup];
@@ -65,9 +65,9 @@ _vehicle = vehicle player;
 						Air_TaskMarker2 setMarkerTextLocal format ["DROP OFF : %1 %2",toUpper(_LandCallsign select 0),(_LandCallsign select 1)];
 
 						//Inform Pilot
-						waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
-						_vehicle vehicleRadio format ["homer_callsign_%1",ATC_callsign];
-						_vehicle vehicleRadio format ["homer_digit_%1",ATC_callsignNo];sleep 0.5;
+						waitUntil{!LHD_RU};LHD_RU = true;
+						_vehicle vehicleRadio format ["homer_callsign_%1",ATC_CS];
+						_vehicle vehicleRadio format ["homer_digit_%1",ATC_CN];sleep 0.5;
 						_vehicle vehicleRadio "homer_word_thisis";sleep 0.3;
 						_vehicle vehicleRadio "homer_callsign_homer";sleep 0.5;
 						_vehicle vehicleRadio "homer_msg_transporttasking_1";sleep 3;
@@ -119,20 +119,20 @@ _vehicle = vehicle player;
 						};
 						_vehicle vehicleRadio "homer_word_markersplacedonmap";sleep 1;
 						_vehicle vehicleRadio "homer_word_over";sleep 0.5;
-						LHD_RadioInUse = false;
+						LHD_RU = false;
 					};
 					_cursor = _cursor + 1;
 				} else {
 					//The creator is dead!  Remove the tasking
-					ATC_Tasks_Transport set [_cursor,"deleteme"];
-					ATC_Tasks_Transport = ATC_Tasks_Transport - ["deleteme"];
-					publicVariable "ATC_Tasks_Transport";
-					ATC_onTask = false;
-					ATC_CancelTask = false;
+					ATC_TT set [_cursor,"deleteme"];
+					ATC_TT = ATC_TT - ["deleteme"];
+					publicVariable "ATC_TT";
+					ATC_T = false;
+					ATC_CT = false;
 				};
-			} foreach ATC_Tasks_Transport;
+			} foreach ATC_TT;
 
-			if (ATC_onTask) then {
+			if (ATC_T) then {
 
 				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_transport, [1], 18, false, true, "", "true", -1];
 
@@ -148,7 +148,7 @@ _vehicle = vehicle player;
 				_IsThere = false;
 				call airboss_fnc_atc_taskalive;
 
-				if (!ATC_CancelTask) then {
+				if (!ATC_CT) then {
 					player vehiclechat "HOMER: Units have been delivered to their location, task completed. HOMER Out";
 				};
 
@@ -156,7 +156,7 @@ _vehicle = vehicle player;
 				sleep 1;
 				{deletewaypoint _x;} foreach waypoints group player;
 
-				ATC_onTask = false;
+				ATC_T = false;
 
 				deletemarkerlocal Air_TaskMarker1;
 				deletemarkerlocal Air_TaskMarker2;
@@ -166,7 +166,7 @@ _vehicle = vehicle player;
 
 		} else { //Task Cancellation
 			player removeaction ATC_Action_CancelTask;
-			ATC_CancelTask = true;
+			ATC_CT = true;
 			_cursor = 0;
 			_raisedBy = player;
 			_pickup = getPosWorld player;
@@ -178,7 +178,7 @@ _vehicle = vehicle player;
 			//REMOVE FROM TASKING
 			{
 				_AirCallsign2 = _x select 5;
-				if (((_AirCallsign2 select 0) isEqualTo ATC_callsign) &&{ ((_AirCallsign2 select 1) isEqualTo ATC_callsignNo)}) then {
+				if (((_AirCallsign2 select 0) isEqualTo ATC_CS) &&{ ((_AirCallsign2 select 1) isEqualTo ATC_CN)}) then {
 					//Have right one!
 					_raisedBy = _x select 0;
 					_pickup = _x select 1;
@@ -187,13 +187,13 @@ _vehicle = vehicle player;
 					_LandCallsign = _x select 4;
 					_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[]];
 					// Publish Task Cancel
-					ATC_Tasks_Transport set [_cursor,_newTask];
-					publicVariable "ATC_Tasks_Transport";
+					ATC_TT set [_cursor,_newTask];
+					publicVariable "ATC_TT";
 				};
 				_cursor = _cursor + 1;
-			} forEach ATC_Tasks_Transport;
+			} forEach ATC_TT;
 
-			//ATC_onTask = false;
+			//ATC_T = false;
 			deletemarkerlocal Air_TaskMarker1;
 			deletemarkerlocal Air_TaskMarker2;
 

@@ -100,24 +100,24 @@ _type = _initArray select 0; //0 = Inital Contact
 					call airboss_fnc_land_baseActionsWatchdog;
 
 					//Broadcast updated transport listing
-					ATC_Tasks_CloseAirSupport pushBack [player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]];
-					publicVariable "ATC_Tasks_CloseAirSupport";
+					ATC_TC pushBack [player,_pickup,_delivery,_pax,[Callsign,CallsignNo],[]];
+					publicVariable "ATC_TC";
 
 					player removeaction Land_RequestCAS;
 					Land_RequestCloseAirSupport_Cancel = player addAction ["WATCHDOG > Cancel Air Strike", airboss_fnc_land_closeairsupport, [4], 19, false, true, "", "true", -1];
 
-					Land_AwaitingCASAssign = true;
-					Land_AwaitingCASRun = true;
+					Land_ACA = true;
+					Land_ACR = true;
 					_counter = 0;
 					_counter call airboss_fnc_land_cascallsign;
 
-					if (Land_AwaitingCASRun) then {
+					if (Land_ACR) then {
 						//Heading to Waypoint
 						_IsThere = false;
 						call airboss_fnc_land_aliveplayer;
 					};
 
-					if (Land_AwaitingCASRun) then {
+					if (Land_ACR) then {
 						player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Attack Complete. WATCHDOG Out",toUpper(callsign),callsignNo];
 					} else {
 						player groupchat format["WATCHDOG: %1 %2. This is WATCHDOG. Your cancellation has been received. WATCHDOG Out",toUpper(callsign),callsignNo];
@@ -135,27 +135,27 @@ _type = _initArray select 0; //0 = Inital Contact
 						if ((_Callsign isEqualTo callsign) && {(_CallsignNo isEqualTo callsignNo)}) then {
 							//Have right one!
 							// Publish Task Cancel
-							ATC_Tasks_CloseAirSupport set [_cursor,"deleteme"];
-							ATC_Tasks_CloseAirSupport = ATC_Tasks_CloseAirSupport - ["deleteme"];
-							publicVariable "ATC_Tasks_CloseAirSupport";
-							ATC_onTask = false;
-							ATC_CancelTask = false;
+							ATC_TC set [_cursor,"deleteme"];
+							ATC_TC = ATC_TC - ["deleteme"];
+							publicVariable "ATC_TC";
+							ATC_T = false;
+							ATC_CT = false;
 							//Cleanup Task markers (For Pilots on tasks)
 							deletemarkerlocal Land_CloseAirSupport_marker1;
 							deletemarkerlocal Land_CloseAirSupport_marker2;
 						};
 						_cursor = _cursor + 1;
-					} forEach ATC_Tasks_CloseAirSupport;
+					} forEach ATC_TC;
 
-					Land_AwaitingCASAssign = false;
-					Land_AwaitingCASRun = false;
+					Land_ACA = false;
+					Land_ACR = false;
 					player removeaction Land_RequestCloseAirSupport_Cancel;
 					call airboss_fnc_land_RemoveActionsWatchdog;
 					call airboss_fnc_land_baseActionsWatchdog;
 				} else {
 					player groupchat format["WATCHDOG: %1 %2. Roger, air strike request cancelled. WATCHDOG Out",toUpper(callsign),callsignNo];
-					Land_AwaitingCASAssign = false;
-					Land_AwaitingCASRun = false;
+					Land_ACA = false;
+					Land_ACR = false;
 					player removeAction Land_RequestCAS_Confirm;
 					player removeAction Land_RequestCAS_Cancel;
 					call airboss_fnc_land_RemoveActionsWatchdog;
@@ -165,6 +165,6 @@ _type = _initArray select 0; //0 = Inital Contact
 				};
 		};
 		if (_type isEqualTo 4) exitwith {
-			Land_AwaitingCASAssign = false;
-			Land_AwaitingCASRun = false;
+			Land_ACA = false;
+			Land_ACR = false;
 		};

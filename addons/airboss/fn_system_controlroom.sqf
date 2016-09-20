@@ -2,8 +2,8 @@
 		call airboss_fnc_system_playeralive;
 
 		//Player has died!
-			ControllerActionAdded = false;
-			ACEActionAdded = false;
+			CAA = false;
+			AAA = false;
 
 		//Cleanup Air Transport Pickup markers (for soldiers)
 			if (!isnil "Land_AirPickup_marker1") then {

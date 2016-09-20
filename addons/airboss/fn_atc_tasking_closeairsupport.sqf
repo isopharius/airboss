@@ -6,9 +6,9 @@ _dir = direction _vehicle;
 _initArray = _this select 3;
 _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set // 2 = Transfer to FLYCO // 3 = Transfer to HOMER
 
-	if (ATC_ControllerActionAdded) then {
-		ATC_ControllerActionAdded = false;
-		if (!acemod) then {
+	if (ATC_AA) then {
+		ATC_AA = false;
+		if (!am) then {
 			player removeaction LHD_Action_ContactControl;
 		};
 	};
@@ -30,24 +30,24 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 				_raisedBy = _x select 0;
 				_actionedBy = _x select 5;
 				if (alive _raisedBy) then {
-					if ((!ATC_onTask) && {(count _actionedBy isEqualTo 0)}) then {
+					if ((!ATC_T) && {(count _actionedBy isEqualTo 0)}) then {
 						//Task has not been actioned by anyone
 
 						player removeaction ATC_ChangeIntentions;
 
 						// Get Variables
-						ATC_CancelTask = false;
+						ATC_CT = false;
 
 						_pickup = _x select 1;
 						_delivery = _x select 2;
 						_pax = _x select 3;
 						_LandCallsign = _x select 4;
-						_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[ATC_callsign,ATC_callsignNo,_vehicle]];
-						ATC_onTask = true;
+						_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[ATC_CS,ATC_CN,_vehicle]];
+						ATC_T = true;
 
 						// Publish Task Taken
-						ATC_Tasks_CloseAirSupport set [_cursor,_newTask];
-						publicVariable "ATC_Tasks_CloseAirSupport";
+						ATC_TC set [_cursor,_newTask];
+						publicVariable "ATC_TC";
 
 						// Create markers
 						Air_TaskMarker1 = createMarkerLocal ["Air_TaskMarker1", _pickup];
@@ -74,9 +74,9 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 						Air_TaskMarker2 setMarkerDirLocal _hdg;
 
 						//Inform Pilot
-						waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
-						_vehicle vehicleRadio format ["homer_callsign_%1",ATC_callsign];
-						_vehicle vehicleRadio format ["homer_digit_%1",ATC_callsignNo];sleep 0.5;
+						waitUntil{!LHD_RU};LHD_RU = true;
+						_vehicle vehicleRadio format ["homer_callsign_%1",ATC_CS];
+						_vehicle vehicleRadio format ["homer_digit_%1",ATC_CN];sleep 0.5;
 						_vehicle vehicleRadio "homer_word_thisis";sleep 0.3;
 						_vehicle vehicleRadio "homer_callsign_homer";sleep 0.5;
 						//_vehicle vehicleRadio "homer_msg_transporttasking_1";sleep 3;
@@ -120,20 +120,20 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 
 						_vehicle vehicleRadio "homer_word_markersplacedonmap";sleep 1;
 						_vehicle vehicleRadio "homer_word_over";sleep 0.5;
-						LHD_RadioInUse = false;
+						LHD_RU = false;
 					};
 					_cursor = _cursor + 1;
 				} else {
 					//The creator is dead!  Remove the tasking
-					ATC_Tasks_CloseAirSupport set [_cursor,"deleteme"];
-					ATC_Tasks_CloseAirSupport = ATC_Tasks_CloseAirSupport - ["deleteme"];
-					publicVariable "ATC_Tasks_CloseAirSupport";
-					ATC_onTask = false;
-					ATC_CancelTask = false;
+					ATC_TC set [_cursor,"deleteme"];
+					ATC_TC = ATC_TC - ["deleteme"];
+					publicVariable "ATC_TC";
+					ATC_T = false;
+					ATC_CT = false;
 				};
-			} foreach ATC_Tasks_CloseAirSupport;
+			} foreach ATC_TC;
 
-			if (ATC_onTask) then {
+			if (ATC_T) then {
 
 				ATC_Action_CancelTask = player addAction ["HOMER > Cancel Current Task", airboss_fnc_atc_tasking_closeairsupport, [1], 18, false, true, "", "true", -1];
 
@@ -166,7 +166,7 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 				sleep 1;
 				{deletewaypoint _x;} foreach waypoints group player;
 
-				ATC_onTask = false;
+				ATC_T = false;
 
 				deletemarkerlocal Air_TaskMarker1;
 				deletemarkerlocal Air_TaskMarker2;
@@ -175,7 +175,7 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 
 		} else { //Task Cancellation
 			player removeaction ATC_Action_CancelTask;
-			ATC_CancelTask = true;
+			ATC_CT = true;
 			_cursor = 0;
 			_raisedBy = player;
 			_pickup = getPosWorld player;
@@ -187,7 +187,7 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 			//REMOVE FROM TASKING
 			{
 				_AirCallsign2 = _x select 5;
-				if (((_AirCallsign2 select 0) isEqualTo ATC_callsign) && {((_AirCallsign2 select 1) isEqualTo ATC_callsignNo)}) then {
+				if (((_AirCallsign2 select 0) isEqualTo ATC_CS) && {((_AirCallsign2 select 1) isEqualTo ATC_CN)}) then {
 					//Have right one!
 					_raisedBy = _x select 0;
 					_pickup = _x select 1;
@@ -196,13 +196,13 @@ _type = _initArray select 0;  //0 = Inital Contact, //1 = Initial Intentions set
 					_LandCallsign = _x select 4;
 					_newTask = [_raisedBy,_pickup,_delivery,_pax,_LandCallsign,[]];
 					// Publish Task Cancel
-					ATC_Tasks_CloseAirSupport set [_cursor,_newTask];
-					publicVariable "ATC_Tasks_CloseAirSupport";
+					ATC_TC set [_cursor,_newTask];
+					publicVariable "ATC_TC";
 				};
 				_cursor = _cursor + 1;
-			} forEach ATC_Tasks_CloseAirSupport;
+			} forEach ATC_TC;
 
-			//ATC_onTask = false;
+			//ATC_T = false;
 			deletemarkerlocal Air_TaskMarker1;
 			deletemarkerlocal Air_TaskMarker2;
 

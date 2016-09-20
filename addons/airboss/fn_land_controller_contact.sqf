@@ -3,10 +3,10 @@ _vehicle = vehicle player;
 
 //Player is making initial contact with controller, assign callsign
 
-				if (!acemod) then {
+				if (!am) then {
 					player removeaction Action_ContactControl;
 				} else {
-					ACEActionAdded = false;
+					AAA = false;
 				};
 
 				_cursor = 0;
@@ -43,7 +43,7 @@ _vehicle = vehicle player;
 
 				Controlled = true; //Vehicle is now controlled
 
-				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+				waitUntil{!LHD_RU};LHD_RU = true;
 				player groupchat format["WATCHDOG: This is WATCHDOG, you have been assigned callsign %1 %2. Standing By. Over",toUpper(callsign),callsignNo];
 				playsound "watchdog_word_thisis";sleep 0.4;
 				playsound "watchdog_callsign_watchdog";sleep 0.8;
@@ -52,6 +52,6 @@ _vehicle = vehicle player;
 				playsound format ["watchdog_digit_%1",callsignNo];sleep 0.5;
 				playsound "watchdog_word_standingby";sleep 0.95;
 				playsound "watchdog_word_over";sleep 0.5;
-				LHD_RadioInUse = false;
+				LHD_RU = false;
 
 				call airboss_fnc_land_baseActionsWatchdog;

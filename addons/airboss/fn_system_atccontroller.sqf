@@ -1,16 +1,16 @@
 _vehicle = vehicle player;
 
-	if ((LHD_Controlled) && {(alive _vehicle)}) then { //Player is controlled
+	if ((LHD_C) && {(alive _vehicle)}) then { //Player is controlled
 
 		// --- EMERGENCY NOTIFICATION --- //
-		if (((LHD_Emergency_Call select 1) != 0) && {(getPosWorld player in LHD_ControlArea)}) then {
+		if (((LHD_EC select 1) != 0) && {(getPosWorld player in LHD_ControlArea)}) then {
 			//Someone has declared an emergency, let's face it, its probably Walker
-			_em_callsign = LHD_Emergency_Call select 0;
-			_em_callsignNo = LHD_Emergency_Call select 1;
+			_em_callsign = LHD_EC select 0;
+			_em_callsignNo = LHD_EC select 1;
 
-			if !((_em_callsign isEqualTo ATC_callsign) && {(_em_callsignNo isEqualTo ATC_callsignNo)}) then {
+			if !((_em_callsign isEqualTo ATC_CS) && {(_em_callsignNo isEqualTo ATC_CN)}) then {
 				//Radio
-				waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+				waitUntil{!LHD_RU};LHD_RU = true;
 				_vehicle vehicleRadio "flyco_word_alltraffic";sleep 0.3;
 				_vehicle vehicleRadio "flyco_word_thisis";sleep 0.3;
 				_vehicle vehicleRadio "flyco_callsign_flyco";sleep 1;
@@ -25,21 +25,21 @@ _vehicle = vehicle player;
 				_vehicle vehicleRadio "flyco_msg_emergency_2";sleep 3;
 				_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.1;
 				_vehicle vehicleRadio "flyco_word_out";sleep 0.1;
-				LHD_RadioInUse = false;
+				LHD_RU = false;
 			};
 
-			LHD_Emergency_Call = ["none",0];
+			LHD_EC = ["none",0];
 		};
 		// ------------------------------- //
 
 		// --- TASK CHECKING NOTIFICATION --- //
-		if (!ATC_onTask) then {
-			if (LHD_Intention isEqualTo 3) then {
-				sleep (ATC_callsignNo / 4); //So not everyone responds at the same time!
+		if (!ATC_T) then {
+			if (LHD_I isEqualTo 3) then {
+				sleep (ATC_CN / 4); //So not everyone responds at the same time!
 				[0,0,0,[0]] call airboss_fnc_atc_tasking_transport;
 			};
-			if (LHD_Intention isEqualTo 6) then {
-				sleep (ATC_callsignNo / 4);
+			if (LHD_I isEqualTo 6) then {
+				sleep (ATC_CN / 4);
 				[0,0,0,[0]] call airboss_fnc_atc_tasking_closeairsupport;
 			};
 		};

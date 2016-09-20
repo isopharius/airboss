@@ -5,7 +5,7 @@ disableSerialization;
 		lbClear _listBox;
 
 		//Add stuff to list
-		private _list = LHD_SpawnableVehicles;
+		private _list = LHD_SV;
 		{
 			private _vehName = getText (configfile >> "CfgVehicles" >> _x >> "displayName");
 			_listBox lbAdd _vehName;

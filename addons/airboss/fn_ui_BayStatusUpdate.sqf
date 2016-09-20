@@ -8,7 +8,7 @@ disableSerialization;
 		_control = (_display displayCtrl _ctrl);
 		_picture = (_display displayCtrl _pic);
 		_button = (_display displayCtrl 1007);
-		_baySelected = LHD_SelectedBay > 0;
+		_baySelected = LHD_SB > 0;
 
 		if (_IsSafe) then {
 			_r = 0.60;
@@ -21,10 +21,10 @@ disableSerialization;
 		};
 		_control ctrlSetTextColor [_r,_g,_b,1.0];
 		_picture ctrlSetTextColor [_r,_g,_b,1.0];
-		LHD_BayStatus set [(_bay - 1),_IsSafe];
+		LHD_BS set [(_bay - 1),_IsSafe];
 
 		//Check if bay currently selected, if so, disable issuing
-		if (_bay isEqualTo LHD_SelectedBay) then {
+		if (_bay isEqualTo LHD_SB) then {
 			if (_IsSafe) then {
 				_control ctrlEnable true;
 			} else {

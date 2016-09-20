@@ -25,17 +25,17 @@ _vehicle = vehicle player;
 	_distance = 0;
 	_prevdistance = 0;
 	_finals = markerpos "LHD_finals";
-	_landingPattern_array = LHDPatternLayout select 0;
+	_landingPattern_array = LHD_PL select 0;
 	_landingPattern = _landingPattern_array select 0;
 	_Position = 0;
 	_PrevPosition = 0;
 	_clearDelay = 20;
 
 //Load in pattern Information
-	_numPatterns = count LHDPatternLayout;
+	_numPatterns = count LHD_PL;
 	_inPattern = count LHDPattern;
 	_maxVehicles = 0;
-	{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHDPatternLayout;
+	{_maxVehicles = _maxVehicles + (_x select 1)} foreach LHD_PL;
 
 //Check pattern
 	_array = LHDPattern;
@@ -44,7 +44,7 @@ _vehicle = vehicle player;
 		{
 			_cursor =  _cursor + (_x select 1);
 			if (((_inPattern) < _cursor) && {(_pattern isEqualTo "alpha")}) then {_pattern = _x select 0};
-		} foreach LHDPatternLayout;
+		} foreach LHD_PL;
 		LHDPattern set [_inPattern,_vehicle];
 	} else {
 		//Priority
@@ -60,39 +60,39 @@ _vehicle = vehicle player;
 		} else {
 			LHDPattern = [_vehicle];
 		};
-		LHD_Emergency_Call = [ATC_callsign,ATC_callsignNo];
-		publicVariable "LHD_Emergency_Call";
+		LHD_EC = [ATC_CS,ATC_CN];
+		publicVariable "LHD_EC";
 		_clearDelay = 0;
 	};
 
 	//Broadcast Request
 	publicVariable "LHDPattern";
-	LHD_TakeoffRequest = true;
+	LHD_TR = true;
 	_Position = LHDPattern find _vehicle;
 
 	if (_Position > 1) then {
 		//Wait for clearance, will be a while
-		waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+		waitUntil{!LHD_RU};LHD_RU = true;
 		_vehicle vehicleRadio "flyco_word_roger";sleep 0.8;
-		_vehicle vehicleRadio format["flyco_callsign_%1",ATC_callsign];
-		_vehicle vehicleRadio format["flyco_digit_%1",ATC_callsignNo];sleep 0.3;
+		_vehicle vehicleRadio format["flyco_callsign_%1",ATC_CS];
+		_vehicle vehicleRadio format["flyco_digit_%1",ATC_CN];sleep 0.3;
 		_vehicle vehicleRadio "flyco_msg_takeoff_que_1";sleep 0.3;
 		_vehicle vehicleRadio format["flyco_digit_%1",(_Position + 1)];sleep _digitDelay;
 		_vehicle vehicleRadio "flyco_msg_takeoff_que_2";sleep 1;
 		_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.8;
 		_vehicle vehicleRadio "flyco_word_out";sleep 0.8;
-		LHD_RadioInUse = false;
+		LHD_RU = false;
 	};
 
 	call airboss_fnc_atc_alivetakeoff;
 	call airboss_fnc_atc_distancetakeoff;
 
-	if (LHD_Takeoff) then {
-		waitUntil{!LHD_RadioInUse};LHD_RadioInUse = true;
+	if (LHD_TO) then {
+		waitUntil{!LHD_RU};LHD_RU = true;
 		_vehicle vehicleRadio "flyco_msg_takeoff_safe";sleep 0.4;
 		_vehicle vehicleRadio "flyco_callsign_flyco";sleep 0.8;
 		_vehicle vehicleRadio "flyco_word_out";sleep 0.8;
-		LHD_RadioInUse = false;
+		LHD_RU = false;
 	};
 
 	//Make sure vehicle not in landing pattern
@@ -100,9 +100,9 @@ _vehicle = vehicle player;
 	publicVariable "LHDPattern";
 
 	//Takeoff Reset Variables
-	LHD_TakeoffRequest =  false;
-	LHD_TakeoffStandby = false;
-	LHD_Takeoff = false;
+	LHD_TR =  false;
+	LHD_TS = false;
+	LHD_TO = false;
 
 	call airboss_fnc_atc_removePilotActions;
 	call airboss_fnc_atc_baseActionsFlyco;
