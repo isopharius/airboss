@@ -1,7 +1,7 @@
 # airboss
 ArmA3 LHD airboss - CUP LHD required
 
-Airboss adds LHD Logistics and Radio controllers for Air/Ground coordination and traffic
+Airboss adds LHD Logistics and Radio controllers for Air/Ground traffic coordination
 
 HOMER controls LHD operations
 - initial contact with aircraft within airspace
